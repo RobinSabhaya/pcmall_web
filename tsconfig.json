@@ -1,27 +1,155 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    // Language and Environment
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "module": "ESNext",
     "moduleResolution": "bundler",
+    "jsx": "preserve",
+    "jsxImportSource": "react",
+    
+    // Module Resolution
+    "allowJs": false,
+    "checkJs": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": false,
+    
+    // Type Checking - Maximum Strictness
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": true,
+    
+    // Additional Checks for Large Teams
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noImplicitUseStrict": false,
+    "useUnknownInCatchVariables": true,
+    
+    // Emit
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": true,
+    "removeComments": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "preserveConstEnums": true,
+    
+    // Interop Constraints
+    "skipLibCheck": false,
+    "skipDefaultLibCheck": false,
+    
+    // Performance Optimizations
     "incremental": true,
+    "tsBuildInfoFile": ".next/.tsbuildinfo",
+    "assumeChangesOnlyAffectDirectDependencies": true,
+    
+    // Path Mapping
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/public/*": ["./public/*"],
+      "@/config/*": ["./src/config/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/providers/*": ["./src/providers/*"],
+      "@/middleware/*": ["./src/middleware/*"],
+      "@/schemas/*": ["./src/schemas/*"],
+      "~/test-utils": ["./src/__tests__/utils/index.ts"]
+    },
+    
+    // Next.js Plugin
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  
+  // Include patterns - organized for large codebases
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.mts",
+    "**/*.cts",
+    ".next/types/**/*.ts",
+    "src/**/*",
+    "pages/**/*",
+    "app/**/*",
+    "components/**/*",
+    "lib/**/*",
+    "types/**/*",
+    "tests/**/*",
+    "__tests__/**/*",
+    "e2e/**/*",
+    "cypress/**/*",
+    "playwright/**/*"
+  ],
+  
+  // Exclude patterns - optimized for performance
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "build",
+    "dist",
+    "coverage",
+    "*.config.js",
+    "*.config.mjs",
+    "public",
+    ".git",
+    ".vscode",
+    "docs",
+    "scripts/build",
+    "tmp",
+    "temp",
+    "**/*.spec.js",
+    "**/*.test.js",
+    "**/node_modules",
+    "**/.next",
+    "**/dist",
+    "**/build"
+  ],
+  
+  // TypeScript 5.0+ options for enterprise
+  "compileOnSave": false,
+  "buildOptions": {
+    "assumeChangesOnlyAffectDirectDependencies": true
+  },
+  
+  // Watch options for development performance
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": ["**/node_modules", "**/.git", "**/.next"]
+  },
+  
+  // References for project splitting (optional for monorepos)
+  "references": []
 }
