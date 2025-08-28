@@ -10,19 +10,23 @@ import Title from "@/components/ui/Title/Title";
 import musicBannerImage from '@/public/music_banner.svg'
 
 export default function Home() {
+
+  let endDate:Date = new Date();
   // Set end date to 3 days, 23 hours, 19 minutes, 56 seconds from now
-  const endDate = new Date(
-    Date.now() +
-      3 * 24 * 60 * 60 * 1000 +
-      23 * 60 * 60 * 1000 +
-      19 * 60 * 1000 +
-      56 * 1000
-  );
+  if (typeof window !== 'undefined') { 
+    endDate = new Date(
+      Date.now() +
+        3 * 24 * 60 * 60 * 1000 +
+        23 * 60 * 60 * 1000 +
+        19 * 60 * 1000 +
+        56 * 1000
+    );
+  }
 
   return (
     <>
-      <div className="flex justify-center items-center flex-row my-3 mx-6">
-        <div className="w-[20%]">
+      <div className="flex justify-center items-center flex-col-reverse my-3 mx-6 lg:flex-row">
+        <div className="w-[20%] hidden lg:visible">
           <Sidebar />
         </div>
 
@@ -36,7 +40,7 @@ export default function Home() {
 
       <FlashSales endDate={endDate} className="mx-6" />
 
-      <div className="flex gap-4 mx-6 my-4">
+      <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-col lg:flex-row">
         <ProductList />
       </div>
 

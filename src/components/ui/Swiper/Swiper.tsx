@@ -63,8 +63,8 @@ export default function Swiper({
                 <Image 
                   src={slide.image} 
                   alt={slide.title}
-                  height={300}
-                  width={300}
+                  height={800}
+                  width={800}
                   className="max-w-md h-auto object-contain"
                 />
               </div>

@@ -45,7 +45,7 @@ export default function CategoryBrowser() {
         </div>
       </div>
 
-      <div className="grid grid-cols-6 gap-4 mx-6">
+      <div className="grid grid-cols-2 gap-4 mx-6 lg:grid-cols-6">
         {visibleCategories.map((category) => (
           <button
             key={category.id}
