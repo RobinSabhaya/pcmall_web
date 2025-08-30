@@ -8,7 +8,33 @@
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "lint:check": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:staged": "eslint --fix --max-warnings=0"
+    "lint:staged": "eslint --fix --max-warnings=0",
+    "prettier": "npx prettier --write src/**/*.{js,ts,json,md}",
+    "prettier:check": "npx prettier --check src/**/*.{js,ts,json,md}",
+    "type-check": "tsc --noEmit",
+    "audit:security": "npm audit --audit-level=moderate",
+    "prepare": "husky",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npx eslint --fix",
+      "npx prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "npx prettier --write"
+    ],
+    "package*.json": [
+      "npm audit --audit-level=moderate"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "pre-push": "npm run type-check && npm run lint:check",
+      "commit-msg": "npx commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git log -1 --pretty=format:'✅ Committed: %h - %s (%an)'"
+    }
   },
   "dependencies": {
     "next": "15.5.0",
@@ -16,6 +42,7 @@
     "react-dom": "19.1.0"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/eslintrc": "^3",
     "@next/eslint-plugin-next": "^15.5.2",
     "@tailwindcss/postcss": "^4",
@@ -31,6 +58,8 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-unused-imports": "^4.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
