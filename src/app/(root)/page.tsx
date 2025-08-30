@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-import CategoryBrowser from "@/components/features/Category";
-import ProductList from "@/components/features/Product/ProductList";
-import Services from "@/components/features/Services";
-import FlashSales from "@/components/ui/FlashSale";
-import Sidebar from "@/components/ui/Sidebar";
-import Swiper, { SAMPLE_SLIDES } from "@/components/ui/Swiper";
-import Title from "@/components/ui/Title/Title";
+import CategoryBrowser from '@/components/features/Category';
+import ProductList from '@/components/features/Product/ProductList';
+import Services from '@/components/features/Services';
+import FlashSales from '@/components/ui/FlashSale';
+import Sidebar from '@/components/ui/Sidebar';
+import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
+import Title from '@/components/ui/Title/Title';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
 import PageWrapper from '../../components/ui/Common/PageWrapper';
@@ -36,30 +36,30 @@ export default function Home() {
         </div>
       </div>
 
-      <PageWrapper className='lg:mx-20'>
-      {/* Sample products */}
-      <Title title="All Products" />
+      <PageWrapper className="lg:mx-20">
+        {/* Sample products */}
+        <Title title="All Products" />
 
-      <FlashSales endDate={endDate} className="mx-6" />
+        <FlashSales endDate={endDate} className="mx-6" />
 
-      <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-wrap md:justify-start">
-        <ProductList />
-      </div>
+        <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-wrap md:justify-start">
+          <ProductList />
+        </div>
 
-      {/* Category browser section */}
-      <CategoryBrowser />
+        {/* Category browser section */}
+        <CategoryBrowser />
 
-      {/* Banner image */}
-      <div className="flex justify-center items-center my-4">
-        <Image
-          src={musicBannerImage}
-          alt="music_banner"
-          className="aspect-auto border rounded-xl"
-        />
-      </div>
+        {/* Banner image */}
+        <div className="flex justify-center items-center my-4">
+          <Image
+            src={musicBannerImage}
+            alt="music_banner"
+            className="aspect-auto border rounded-xl"
+          />
+        </div>
 
-      {/* services */}
-      <Services className="py-8" />
+        {/* services */}
+        <Services className="py-8" />
       </PageWrapper>
     </>
   );

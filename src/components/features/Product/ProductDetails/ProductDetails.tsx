@@ -1,79 +1,77 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import { BreadCrumb } from "@/components/ui/BreadCrumb";
-import ProductImage1 from '@/public/svg/products/product_1.svg'
-import ProductImage2 from '@/public/svg/products/product_2.svg'
-import ProductImage3 from '@/public/svg/products/product_3.svg'
-import ProductImage4 from '@/public/svg/products/product_4.svg'
+import { BreadCrumb } from '@/components/ui/BreadCrumb';
+import ProductImage1 from '@/public/svg/products/product_1.svg';
+import ProductImage2 from '@/public/svg/products/product_2.svg';
+import ProductImage3 from '@/public/svg/products/product_3.svg';
+import ProductImage4 from '@/public/svg/products/product_4.svg';
 
-import Button from "../../../ui/Button/Button";
+import Button from '../../../ui/Button/Button';
 
 export default function ProductDetails() {
-
   const breadCrumbList = [
-    { label: "Home", href: "/" },
-    { label: "product", href: "/product" },
-    { label: "Havic HV G-92 Gamepad", href: "/" },
+    { label: 'Home', href: '/' },
+    { label: 'product', href: '/product' },
+    { label: 'Havic HV G-92 Gamepad', href: '/' },
   ];
 
-
   const mockProduct = {
-    id: "havic-hv-g92",
-    name: "Havic HV G-92 Gamepad",
+    id: 'havic-hv-g92',
+    name: 'Havic HV G-92 Gamepad',
     price: 192.0,
     originalPrice: 240.0,
     rating: { rating: 4, count: 150 },
     inStock: true,
     description:
-      "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
+      'PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.',
     images: [
       {
-        id: "1",
+        id: '1',
         url: ProductImage1,
-        alt: "Havic HV G-92 Gamepad",
+        alt: 'Havic HV G-92 Gamepad',
       },
       {
-        id: "2",
+        id: '2',
         url: ProductImage2,
-        alt: "Havic HV G-92 Gamepad Side View",
+        alt: 'Havic HV G-92 Gamepad Side View',
       },
       {
-        id: "3",
+        id: '3',
         url: ProductImage3,
-        alt: "Havic HV G-92 Gamepad Back View",
+        alt: 'Havic HV G-92 Gamepad Back View',
       },
       {
-        id: "4",
+        id: '4',
         url: ProductImage4,
-        alt: "Havic HV G-92 Gamepad Detail",
+        alt: 'Havic HV G-92 Gamepad Detail',
       },
     ],
     colors: [
-      { id: "black", name: "Black", value: "#000000", available: true },
-      { id: "red", name: "Red", value: "#ef4444", available: true },
+      { id: 'black', name: 'Black', value: '#000000', available: true },
+      { id: 'red', name: 'Red', value: '#ef4444', available: true },
     ],
     sizes: [
-      { id: "xs", name: "XS", value: "XS", available: true },
-      { id: "s", name: "S", value: "S", available: true },
-      { id: "m", name: "M", value: "M", available: true },
-      { id: "l", name: "L", value: "L", available: true },
-      { id: "xl", name: "XL", value: "XL", available: true },
+      { id: 'xs', name: 'XS', value: 'XS', available: true },
+      { id: 's', name: 'S', value: 'S', available: true },
+      { id: 'm', name: 'M', value: 'M', available: true },
+      { id: 'l', name: 'L', value: 'L', available: true },
+      { id: 'xl', name: 'XL', value: 'XL', available: true },
     ],
 
     deliveryInfo: [
       {
-        type: "free" as const,
-        description: "Free Delivery",
-        details: "Enter your postal code for Delivery Availability",
+        type: 'free' as const,
+        description: 'Free Delivery',
+        details: 'Enter your postal code for Delivery Availability',
       },
       {
-        type: "paid" as const,
-        description: "Return Delivery",
-        details: "Free 30 Days Delivery Returns. Details",
+        type: 'paid' as const,
+        description: 'Return Delivery',
+        details: 'Free 30 Days Delivery Returns. Details',
       },
     ],
   };
@@ -128,8 +126,8 @@ export default function ProductDetails() {
                 onClick={() => setSelectedImage(index)}
                 className={`aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 ${
                   selectedImage === index
-                    ? "border-red-500"
-                    : "border-transparent"
+                    ? 'border-red-500'
+                    : 'border-transparent'
                 }`}
               >
                 <Image
@@ -157,8 +155,8 @@ export default function ProductDetails() {
                     key={i}
                     className={`w-5 h-5 ${
                       i < Math.floor(rating.rating)
-                        ? "text-yellow-400"
-                        : "text-gray-300"
+                        ? 'text-yellow-400'
+                        : 'text-gray-300'
                     }`}
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -173,11 +171,11 @@ export default function ProductDetails() {
               <span
                 className={`text-sm px-2 py-1 rounded ${
                   inStock
-                    ? "bg-green-100 text-green-800"
-                    : "bg-red-100 text-red-800"
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-red-100 text-red-800'
                 }`}
               >
-                {inStock ? "In Stock" : "Out of Stock"}
+                {inStock ? 'In Stock' : 'Out of Stock'}
               </span>
             </div>
 
@@ -203,17 +201,17 @@ export default function ProductDetails() {
                 Colours:
               </h3>
               <div className="flex gap-2">
-                {colors.map((color) => (
+                {colors.map(color => (
                   <button
                     key={color.id}
                     onClick={() => setSelectedColor(color.id)}
                     disabled={!color.available}
                     className={`w-8 h-8 rounded-full border-2 ${
                       selectedColor === color.id
-                        ? "border-gray-900"
-                        : "border-gray-300"
+                        ? 'border-gray-900'
+                        : 'border-gray-300'
                     } ${
-                      !color.available ? "opacity-50 cursor-not-allowed" : ""
+                      !color.available ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                     style={{ backgroundColor: color.value }}
                     title={color.name}
@@ -228,17 +226,17 @@ export default function ProductDetails() {
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">Size:</h3>
               <div className="flex gap-2">
-                {sizes.map((size) => (
+                {sizes.map(size => (
                   <button
                     key={size.id}
                     onClick={() => setSelectedSize(size.id)}
                     disabled={!size.available}
                     className={`px-4 py-2 border rounded-md text-sm font-medium ${
                       selectedSize === size.id
-                        ? "border-red-500 bg-red-500 text-white"
-                        : "border-gray-300 text-gray-700 hover:border-gray-400"
+                        ? 'border-red-500 bg-red-500 text-white'
+                        : 'border-gray-300 text-gray-700 hover:border-gray-400'
                     } ${
-                      !size.available ? "opacity-50 cursor-not-allowed" : ""
+                      !size.available ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                   >
                     {size.value}
@@ -301,7 +299,7 @@ export default function ProductDetails() {
             {deliveryInfo.map((info, index) => (
               <div key={index} className="flex items-start gap-3">
                 <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  {info.type === "free" ? (
+                  {info.type === 'free' ? (
                     <svg
                       className="w-4 h-4"
                       fill="none"

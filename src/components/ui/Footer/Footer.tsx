@@ -16,7 +16,10 @@ const footerSections: FooterSection[] = [
     links: [
       { label: 'test address,', href: '#' },
       { label: 'test address', href: '#' },
-      { label: 'test_address@gmail.com', href: 'mailto:test_address@gmail.com' },
+      {
+        label: 'test_address@gmail.com',
+        href: 'mailto:test_address@gmail.com',
+      },
       { label: '+1234567891', href: 'tel:+1234567891' },
     ],
   },

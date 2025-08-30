@@ -9,15 +9,15 @@ import type { TeamSectionProps } from './TeamSection.type';
 
 export default function TeamSection({
   members,
-  title = "Our Team",
-  className = ''
+  title = 'Our Team',
+  className = '',
 }: TeamSectionProps) {
   const itemsPerPage = 3;
   const totalPages = Math.ceil(members.length / itemsPerPage);
 
   const { setSelectItem, selectItem } = useSlider({
     maxShowItems: itemsPerPage,
-    itemsLength: members.length
+    itemsLength: members.length,
   });
 
   const visibleMembers = useMemo(() => {
@@ -41,7 +41,7 @@ export default function TeamSection({
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {visibleMembers.map((member) => (
+          {visibleMembers.map(member => (
             <TeamMemberCard key={member.id} member={member} />
           ))}
         </div>

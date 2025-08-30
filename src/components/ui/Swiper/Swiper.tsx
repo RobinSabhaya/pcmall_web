@@ -54,8 +54,12 @@ export default function Swiper({
                     <span className="text-sm">{slide.subtitle}</span>
                   </div>
                 )}
-                <h2 className="text-sm lg:text-4xl font-bold mb-4">{slide.title}</h2>
-                <p className="text-sm lg:text-lg md:mb-6">{slide.description}</p>
+                <h2 className="text-sm lg:text-4xl font-bold mb-4">
+                  {slide.title}
+                </h2>
+                <p className="text-sm lg:text-lg md:mb-6">
+                  {slide.description}
+                </p>
                 <button className="inline-flex items-center gap-2 text-white border-b border-white pb-1 hover:opacity-80 transition-opacity">
                   {slide.buttonText}
                   <svg

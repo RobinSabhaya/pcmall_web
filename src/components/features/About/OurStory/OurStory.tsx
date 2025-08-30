@@ -3,31 +3,28 @@ import Image from 'next/image';
 import type { OurStoryProps } from './OurStory.type';
 
 const defaultContent = {
-  title: "Our Story",
+  title: 'Our Story',
   descriptions: [
     "Launched in 2015, Exclusive is South Asia's premier online shopping marketplace with an active presence in Bangladesh. Supported by wide range of tailored marketing, data and service solutions, Exclusive has 10,500 sellers and 300 brands and serves 3 millions customers across the region.",
-    "Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assortment in categories ranging from consumer."
-  ]
+    'Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assortment in categories ranging from consumer.',
+  ],
 };
 
 const defaultImage = {
-  url: "/our-story-image.jpg",
-  alt: "Two women shopping with colorful bags"
+  url: '/our-story-image.jpg',
+  alt: 'Two women shopping with colorful bags',
 };
 
 export default function OurStory({
-  className = "",
+  className = '',
   style = {},
   title = defaultContent.title,
   descriptions = defaultContent.descriptions,
   imageUrl = defaultImage.url,
-  imageAlt = defaultImage.alt
+  imageAlt = defaultImage.alt,
 }: OurStoryProps) {
   return (
-    <section 
-      className={`py-16 px-6 lg:px-20 ${className}`}
-      style={style}
-    >
+    <section className={`py-16 px-6 lg:px-20 ${className}`} style={style}>
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content Section */}
@@ -37,7 +34,7 @@ export default function OurStory({
             </h2>
             <div className="space-y-6">
               {descriptions.map((description, index) => (
-                <p 
+                <p
                   key={index}
                   className="text-gray-700 leading-relaxed text-base lg:text-lg"
                 >
