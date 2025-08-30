@@ -1,19 +1,18 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import CategoryBrowser from "@/components/ui/Category";
-import FlashSales from "@/components/ui/FlashSale";
-import ProductList from "@/components/ui/Product/ProductList";
-import Services from "@/components/ui/Services";
-import Sidebar from "@/components/ui/Sidebar";
-import Swiper, { SAMPLE_SLIDES } from "@/components/ui/Swiper";
-import Title from "@/components/ui/Title/Title";
-import musicBannerImage from '@/public/music_banner.svg'
+import CategoryBrowser from '@/components/ui/Category';
+import FlashSales from '@/components/ui/FlashSale';
+import ProductList from '@/components/ui/Product/ProductList';
+import Services from '@/components/ui/Services';
+import Sidebar from '@/components/ui/Sidebar';
+import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
+import Title from '@/components/ui/Title/Title';
+import musicBannerImage from '@/public/music_banner.svg';
 
 export default function Home() {
-
-  let endDate:Date = new Date();
+  let endDate: Date = new Date();
   // Set end date to 3 days, 23 hours, 19 minutes, 56 seconds from now
-  if (typeof window !== 'undefined') { 
+  if (typeof window !== 'undefined') {
     endDate = new Date(
       Date.now() +
         3 * 24 * 60 * 60 * 1000 +
@@ -49,11 +48,11 @@ export default function Home() {
 
       {/* Banner image */}
       <div className="flex justify-center items-center my-4">
-      <Image
-        src={musicBannerImage}
-        alt="music_banner"
-        className="aspect-auto border rounded-xl"
-      />
+        <Image
+          src={musicBannerImage}
+          alt="music_banner"
+          className="aspect-auto border rounded-xl"
+        />
       </div>
 
       {/* services */}

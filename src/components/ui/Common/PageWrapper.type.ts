@@ -1,7 +1,7 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ReactNode } from 'react';
 
-export interface PageWrapperProps { 
-    children: ReactNode;
-    className?: string;
-    style?: CSSProperties;
+export interface PageWrapperProps {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
 }

@@ -1,4 +1,4 @@
-export interface useSliderProps { 
-    maxShowItems?: number;
-    itemsLength?: number;
+export interface useSliderProps {
+  maxShowItems?: number;
+  itemsLength?: number;
 }
