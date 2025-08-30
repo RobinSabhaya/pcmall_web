@@ -2,52 +2,28 @@
 
 import { useState } from 'react';
 
+import Link from 'next/link';
+
+import { UserAccountDropdown } from '../../Dropdown';
+import { DEFAULT_MENU_ITEMS } from '../../Dropdown/Dropdown';
+import TopBanner from '../Banner/TopBanner/TopBanner';
+
 import type { NavbarProps } from './Navbar.type';
 
-const NAV_ITEMS = [
+export default function Navbar({ className = '' }: NavbarProps) {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Contact', href: '/contact' },
   { label: 'About', href: '/about' },
   { label: 'Sign Up', href: '/signup' },
 ];
 
-export default function Navbar({ className = '' }: NavbarProps) {
-  const [isLangOpen, setIsLangOpen] = useState(false);
-
   return (
     <>
       {/* Top Banner */}
-      <div className="bg-black text-white text-sm py-2 px-4 flex justify-between items-center">
-        <div className="flex-1 text-center">
-          Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!{' '}
-          <button className="underline font-medium">ShopNow</button>
-        </div>
-        <div className="relative">
-          <button
-            onClick={() => setIsLangOpen(!isLangOpen)}
-            className="flex items-center gap-1"
-          >
-            English
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-          {isLangOpen && (
-            <div className="absolute right-0 mt-1 bg-white text-black rounded shadow-lg py-1 min-w-24">
-              <button className="block px-3 py-1 hover:bg-gray-100 w-full text-left">
-                English
-              </button>
-              <button className="block px-3 py-1 hover:bg-gray-100 w-full text-left">
-                Spanish
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
+      <TopBanner />
 
       {/* Main Navbar */}
       <nav className={`bg-white border-b px-4 py-4 ${className}`}>
@@ -58,13 +34,13 @@ export default function Navbar({ className = '' }: NavbarProps) {
           {/* Navigation Links */}
           <div className="hidden md:flex space-x-8">
             {NAV_ITEMS.map(item => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="text-gray-700 hover:text-black transition-colors"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -92,9 +68,10 @@ export default function Navbar({ className = '' }: NavbarProps) {
                 </svg>
               </button>
             </div>
+            </div>
 
             <div className="flex">
-              <button className="p-2">
+              <button className="p-2" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -110,25 +87,14 @@ export default function Navbar({ className = '' }: NavbarProps) {
                 </svg>
               </button>
 
-              <button className="p-2">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293A1 1 0 005 16h12M7 13v4a2 2 0 002 2h6a2 2 0 002-2v-4"
-                  />
-                </svg>
-              </button>
-            </div>
           </div>
         </div>
       </nav>
+    <div className='flex w-full justify-end items-center z-10 absolute -mt-5'>
+        {
+        isDropdownOpen && <UserAccountDropdown menuItems={DEFAULT_MENU_ITEMS} isOpen={isDropdownOpen} onClose={() => setIsDropdownOpen(true)} onToggle={() => {setIsDropdownOpen(!isDropdownOpen)}} />
+      }
+    </div>
     </>
   );
 }

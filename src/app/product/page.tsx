@@ -1,5 +1,9 @@
-const page = () => {
-  return <div>page</div>;
-};
+import ProductDetails from "@/components/features/Product/ProductDetails/ProductDetails"
 
-export default page;
+
+export default function ProductPage() {
+
+  return (
+    <ProductDetails />
+  )
+}

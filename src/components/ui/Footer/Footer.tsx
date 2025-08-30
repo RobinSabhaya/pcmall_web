@@ -14,10 +14,10 @@ const footerSections: FooterSection[] = [
   {
     title: 'Support',
     links: [
-      { label: 'Ill Bijoy Sarani, Dhaka,', href: '#' },
-      { label: 'Old Dhk, Bangladesh.', href: '#' },
-      { label: 'exclusive@gmail.com', href: 'mailto:exclusive@gmail.com' },
-      { label: '+88016-88888-9999', href: 'tel:+8801688888999' },
+      { label: 'test address,', href: '#' },
+      { label: 'test address', href: '#' },
+      { label: 'test_address@gmail.com', href: 'mailto:test_address@gmail.com' },
+      { label: '+1234567891', href: 'tel:+1234567891' },
     ],
   },
   {
@@ -43,7 +43,7 @@ const footerSections: FooterSection[] = [
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-16">
+    <footer className="bg-black text-white py-16 pb-5">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Exclusive Section */}
@@ -97,7 +97,7 @@ export default function Footer() {
           ))}
 
           {/* Download App Section */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">Download App</h3>
             <p className="text-xs text-gray-400 mb-4">
               Save $3 with App New User Only
@@ -109,10 +109,6 @@ export default function Footer() {
                     <div key={i} className="bg-white rounded-sm" />
                   ))}
                 </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                {/* <img src="/google-play.png" alt="Google Play" className="h-10" />
-                <img src="/app-store.png" alt="App Store" className="h-10" /> */}
               </div>
             </div>
             <div className="flex gap-4">
@@ -132,12 +128,12 @@ export default function Footer() {
                 </Link>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+        <div className="border-t border-gray-800 mt-5 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © Copyright Rimel 2022. All right reserved
+            © Copyright PCMall {new Date().getFullYear()}. All right reserved
           </p>
         </div>
       </div>

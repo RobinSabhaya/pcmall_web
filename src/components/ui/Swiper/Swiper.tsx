@@ -40,7 +40,7 @@ export default function Swiper({
             className="w-full flex-shrink-0 relative"
             style={{ backgroundColor: slide.backgroundColor ?? '#000' }}
           >
-            <div className="flex items-center justify-between p-12 min-h-[400px]">
+            <div className="flex items-center justify-between h-[35vh] p-3 py-5 md:p-12 md:min-h-[400px]">
               <div className="text-white max-w-md">
                 {slide.subtitle && (
                   <div className="flex items-center gap-2 mb-4">
@@ -54,8 +54,8 @@ export default function Swiper({
                     <span className="text-sm">{slide.subtitle}</span>
                   </div>
                 )}
-                <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
-                <p className="text-lg mb-6">{slide.description}</p>
+                <h2 className="text-sm lg:text-4xl font-bold mb-4">{slide.title}</h2>
+                <p className="text-sm lg:text-lg md:mb-6">{slide.description}</p>
                 <button className="inline-flex items-center gap-2 text-white border-b border-white pb-1 hover:opacity-80 transition-opacity">
                   {slide.buttonText}
                   <svg
@@ -73,7 +73,7 @@ export default function Swiper({
                   </svg>
                 </button>
               </div>
-              <div className="flex-1 flex justify-end">
+              <div className="flex-1 justify-end hidden md:visible md:flex">
                 <Image
                   src={slide.image}
                   alt={slide.title}

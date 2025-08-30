@@ -1,5 +1,5 @@
-import slide1 from '@/public/iphone14.svg';
-import slide2 from '@/public/music_banner.svg';
+import slide1 from '@/public/svg/banners/iphone14.svg';
+import slide2 from '@/public/svg/banners/music_banner.svg';
 
 import type { SlideData } from './Swiper.type';
 

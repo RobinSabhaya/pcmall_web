@@ -1,13 +1,15 @@
 import Image from 'next/image';
 
-import CategoryBrowser from '@/components/ui/Category';
-import FlashSales from '@/components/ui/FlashSale';
-import ProductList from '@/components/ui/Product/ProductList';
-import Services from '@/components/ui/Services';
-import Sidebar from '@/components/ui/Sidebar';
-import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
-import Title from '@/components/ui/Title/Title';
-import musicBannerImage from '@/public/music_banner.svg';
+import CategoryBrowser from "@/components/features/Category";
+import ProductList from "@/components/features/Product/ProductList";
+import Services from "@/components/features/Services";
+import FlashSales from "@/components/ui/FlashSale";
+import Sidebar from "@/components/ui/Sidebar";
+import Swiper, { SAMPLE_SLIDES } from "@/components/ui/Swiper";
+import Title from "@/components/ui/Title/Title";
+import musicBannerImage from '@/public/svg/banners/music_banner.svg';
+
+import PageWrapper from '../../components/ui/Common/PageWrapper';
 
 export default function Home() {
   let endDate: Date = new Date();
@@ -25,21 +27,22 @@ export default function Home() {
   return (
     <>
       <div className="flex justify-center items-center flex-col-reverse my-3 mx-6 lg:flex-row">
-        <div className="w-[20%] hidden lg:visible">
+        <div className="w-[20%] hidden lg:flex">
           <Sidebar />
         </div>
 
-        <div className="w-[80%]">
+        <div className="w-[70%]">
           <Swiper slides={SAMPLE_SLIDES} />
         </div>
       </div>
 
+      <PageWrapper className='lg:mx-20'>
       {/* Sample products */}
       <Title title="All Products" />
 
       <FlashSales endDate={endDate} className="mx-6" />
 
-      <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-col lg:flex-row">
+      <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-wrap md:justify-start">
         <ProductList />
       </div>
 
@@ -56,7 +59,8 @@ export default function Home() {
       </div>
 
       {/* services */}
-      <Services className="py-8 bg-gray-100" />
+      <Services className="py-8" />
+      </PageWrapper>
     </>
   );
 }
