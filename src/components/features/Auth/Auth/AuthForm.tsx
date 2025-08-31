@@ -15,7 +15,6 @@ export default function AuthForm({ mode }: AuthFormProps) {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    console.log('🚀 ~ handleSubmit ~ formData:', formData);
   };
 
   return (
