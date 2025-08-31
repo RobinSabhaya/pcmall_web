@@ -1,10 +1,5 @@
-import type { NextConfig } from "next";
-import { URL } from "url";
+import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [new URL("https://picsum.photos/**")],
-  },
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

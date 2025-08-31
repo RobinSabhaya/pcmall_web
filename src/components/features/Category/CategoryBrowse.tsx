@@ -3,6 +3,8 @@
 import Title from '@/components/ui/Title/Title';
 import useSlider from '@/hooks/useSlider';
 
+import Slider from '../../ui/Slider';
+
 import { SAMPLE_CATEGORIES } from './SampleData';
 
 export default function CategoryBrowser() {
@@ -22,46 +24,13 @@ export default function CategoryBrowser() {
 
       <div className="flex items-center justify-between mb-8 mx-6">
         <h2 className="text-3xl font-semibold">Browse By Category</h2>
-        <div className="flex gap-2">
-          <button
-            onClick={prev}
-            disabled={currentIndex === 0}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={next}
-            disabled={currentIndex >= maxIndex}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
+        {/* Category slider */}
+        <Slider
+          currentIndex={currentIndex}
+          maxIndex={maxIndex}
+          prev={prev}
+          next={next}
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4 mx-6 lg:grid-cols-6">

@@ -3,9 +3,11 @@ import ProductImage2 from '@/public/svg/products/product_2.svg';
 import ProductImage3 from '@/public/svg/products/product_3.svg';
 import ProductImage4 from '@/public/svg/products/product_4.svg';
 
-import ProductCard from './ProductCard/ProductCard';
+import ProductCard from '../ProductCard/ProductCard';
 
-export default function ProductList() {
+import type { ProductListProps } from './ProductList.type';
+
+export default function ProductList({ start, end }: ProductListProps) {
   const sampleProducts = [
     {
       id: '1',
@@ -39,7 +41,7 @@ export default function ProductList() {
       reviewCount: 145,
       image: ProductImage4,
     },
-  ];
+  ].slice(start, end);
 
   return sampleProducts.map((product, index) => (
     <ProductCard
