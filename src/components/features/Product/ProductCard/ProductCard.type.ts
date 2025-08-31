@@ -1,3 +1,5 @@
+import type { StaticImageData } from 'next/image';
+
 export interface ProductCardProps {
   id: string;
   name: string;
@@ -5,7 +7,7 @@ export interface ProductCardProps {
   originalPrice?: number;
   rating: number;
   reviewCount: number;
-  image: string;
+  image: string | StaticImageData;
   badge?: string;
   colors?: string[];
   onAddToCart?: (id: string) => void;

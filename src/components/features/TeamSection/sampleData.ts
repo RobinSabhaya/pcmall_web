@@ -1,3 +1,7 @@
+import founderImage from '@/public/images/about/founder.png';
+import managerDirectorImage from '@/public/images/about/managing_director.png';
+import productDesignerImage from '@/public/images/about/product_designer.png';
+
 import type { TeamMember } from './TeamSection.type';
 
 export const sampleTeamMembers: TeamMember[] = [
@@ -5,7 +9,7 @@ export const sampleTeamMembers: TeamMember[] = [
     id: '1',
     name: 'Tom Cruise',
     position: 'Founder & Chairman',
-    image: '/api/placeholder/300/400',
+    image: founderImage,
     socialLinks: [
       { platform: 'twitter', url: 'https://twitter.com/tomcruise' },
       { platform: 'instagram', url: 'https://instagram.com/tomcruise' },
@@ -16,7 +20,7 @@ export const sampleTeamMembers: TeamMember[] = [
     id: '2',
     name: 'Emma Watson',
     position: 'Managing Director',
-    image: '/api/placeholder/300/400',
+    image: managerDirectorImage,
     socialLinks: [
       { platform: 'twitter', url: 'https://twitter.com/emmawatson' },
       { platform: 'instagram', url: 'https://instagram.com/emmawatson' },
@@ -27,7 +31,7 @@ export const sampleTeamMembers: TeamMember[] = [
     id: '3',
     name: 'Will Smith',
     position: 'Product Designer',
-    image: '/api/placeholder/300/400',
+    image: productDesignerImage,
     socialLinks: [
       { platform: 'twitter', url: 'https://twitter.com/willsmith' },
       { platform: 'instagram', url: 'https://instagram.com/willsmith' },
@@ -45,29 +49,29 @@ export const sampleTeamMembers: TeamMember[] = [
       { platform: 'linkedin', url: 'https://linkedin.com/in/jenniferlawrence' },
     ],
   },
-  {
-    id: '5',
-    name: 'Ryan Reynolds',
-    position: 'Marketing Director',
-    image: '/api/placeholder/300/400',
-    socialLinks: [
-      { platform: 'twitter', url: 'https://twitter.com/ryanreynolds' },
-      { platform: 'instagram', url: 'https://instagram.com/ryanreynolds' },
-      { platform: 'linkedin', url: 'https://linkedin.com/in/ryanreynolds' },
-    ],
-  },
-  {
-    id: '6',
-    name: 'Scarlett Johansson',
-    position: 'Creative Director',
-    image: '/api/placeholder/300/400',
-    socialLinks: [
-      { platform: 'twitter', url: 'https://twitter.com/scarlettjohansson' },
-      { platform: 'instagram', url: 'https://instagram.com/scarlettjohansson' },
-      {
-        platform: 'linkedin',
-        url: 'https://linkedin.com/in/scarlettjohansson',
-      },
-    ],
-  },
+  // {
+  //   id: '5',
+  //   name: 'Ryan Reynolds',
+  //   position: 'Marketing Director',
+  //   image: '/api/placeholder/300/400',
+  //   socialLinks: [
+  //     { platform: 'twitter', url: 'https://twitter.com/ryanreynolds' },
+  //     { platform: 'instagram', url: 'https://instagram.com/ryanreynolds' },
+  //     { platform: 'linkedin', url: 'https://linkedin.com/in/ryanreynolds' },
+  //   ],
+  // },
+  // {
+  //   id: '6',
+  //   name: 'Scarlett Johansson',
+  //   position: 'Creative Director',
+  //   image: '/api/placeholder/300/400',
+  //   socialLinks: [
+  //     { platform: 'twitter', url: 'https://twitter.com/scarlettjohansson' },
+  //     { platform: 'instagram', url: 'https://instagram.com/scarlettjohansson' },
+  //     {
+  //       platform: 'linkedin',
+  //       url: 'https://linkedin.com/in/scarlettjohansson',
+  //     },
+  //   ],
+  // },
 ];

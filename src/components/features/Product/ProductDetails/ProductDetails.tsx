@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 
+import type { StaticImageData } from 'next/image';
+// eslint-disable-next-line no-duplicate-imports
 import Image from 'next/image';
 
 import { BreadCrumb } from '@/components/ui/BreadCrumb';
-import ProductImage1 from '@/public/svg/products/product_1.svg';
-import ProductImage2 from '@/public/svg/products/product_2.svg';
-import ProductImage3 from '@/public/svg/products/product_3.svg';
-import ProductImage4 from '@/public/svg/products/product_4.svg';
+import ProductImage1 from '@/public/images/products/product1.png';
+import ProductImage2 from '@/public/images/products/product2.png';
+import ProductImage3 from '@/public/images/products/product3.png';
+import ProductImage4 from '@/public/images/products/product4.png';
 
 import Button from '../../../ui/Button/Button';
 import StarRating from '../../../ui/StarRating/StarRating';
@@ -114,7 +116,7 @@ export default function ProductDetails() {
           {/* Main image */}
           <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
             <Image
-              src={images[selectedImage]?.url as string}
+              src={images[selectedImage]?.url as StaticImageData}
               alt={images[selectedImage]?.alt as string}
               width={600}
               height={600}

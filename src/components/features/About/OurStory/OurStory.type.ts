@@ -1,11 +1,13 @@
 import type { CSSProperties } from 'react';
 
+import type { StaticImageData } from 'next/image';
+
 export interface OurStoryProps {
   className?: string;
   style?: CSSProperties;
   title?: string;
   descriptions?: string[];
-  imageUrl?: string;
+  imageUrl?: StaticImageData;
   imageAlt?: string;
 }
 

@@ -1,7 +1,7 @@
-import ProductImage1 from '@/public/svg/products/product_1.svg';
-import ProductImage2 from '@/public/svg/products/product_2.svg';
-import ProductImage3 from '@/public/svg/products/product_3.svg';
-import ProductImage4 from '@/public/svg/products/product_4.svg';
+import ProductImage1 from '@/public/images/products/product1.png';
+import ProductImage2 from '@/public/images/products/product2.png';
+import ProductImage3 from '@/public/images/products/product3.png';
+import ProductImage4 from '@/public/images/products/product4.png';
 
 import ProductCard from '../ProductCard/ProductCard';
 

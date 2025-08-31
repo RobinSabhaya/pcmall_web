@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import AboutImage from '@/public/images/about/about.png';
+
 import type { OurStoryProps } from './OurStory.type';
 
 const defaultContent = {
@@ -11,7 +13,7 @@ const defaultContent = {
 };
 
 const defaultImage = {
-  url: '/our-story-image.jpg',
+  url: AboutImage,
   alt: 'Two women shopping with colorful bags',
 };
 
