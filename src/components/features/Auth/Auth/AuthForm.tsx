@@ -14,7 +14,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
+    // const formData = new FormData(e.currentTarget);
   };
 
   return (
