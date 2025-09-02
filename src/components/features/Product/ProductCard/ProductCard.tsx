@@ -22,6 +22,11 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <div className="flex justify-center items-center flex-col group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 h-1/4 gap-2 w-fit">
+      <div className="absolute top-2 left-2 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <p className="px-3 py-1 bg-radium rounded-md shadow-md text-white">
+          New
+        </p>
+      </div>
       <div className="absolute top-2 right-2 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={() => onWishlist?.(id)}

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
-import { UserAccountDropdown } from '../../Dropdown';
+import { UserAccountDropdown, UserIcon } from '../../Dropdown';
 import { DEFAULT_MENU_ITEMS } from '../../Dropdown/Dropdown';
 import TopBanner from '../Banner/TopBanner/TopBanner';
 
@@ -71,10 +71,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
           </div>
 
           <div className="flex">
-            <button
-              className="p-2"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
+            <button className="p-2" onClick={() => {}}>
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -88,6 +85,12 @@ export default function Navbar({ className = '' }: NavbarProps) {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 />
               </svg>
+            </button>
+            <button
+              className="p-2"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <UserIcon />
             </button>
           </div>
         </div>
