@@ -5,6 +5,7 @@ import useSlider from '@/hooks/useSlider';
 
 import Slider from '../../ui/Slider';
 
+import CategoryList from './CategoryList';
 import { SAMPLE_CATEGORIES } from './SampleData';
 
 export default function CategoryBrowser() {
@@ -34,23 +35,11 @@ export default function CategoryBrowser() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 mx-6 lg:grid-cols-6">
-        {visibleCategories.map(category => (
-          <button
-            key={category.id}
-            onClick={() => setSelectItem(category.id)}
-            className={`
-              flex flex-col items-center justify-center p-6 border rounded-lg transition-all hover:shadow-md
-              ${
-                category.id === selectItem
-                  ? 'bg-red-500 text-white border-red-500'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
-              }
-            `}
-          >
-            <div className="mb-3 text-3xl">{category.icon}</div>
-            <span className="text-sm font-medium">{category.name}</span>
-          </button>
-        ))}
+        <CategoryList
+          categoryList={visibleCategories}
+          selectItem={selectItem}
+          setSelectItem={setSelectItem}
+        />
       </div>
     </section>
   );

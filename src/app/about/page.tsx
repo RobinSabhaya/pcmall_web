@@ -1,23 +1,28 @@
+'use client';
+
 import OurStory from '@/components/features/About/OurStory';
 import {
   sampleTeamMembers,
   TeamSection,
 } from '@/components/features/TeamSection';
-import Stats from '@/components/ui/Stats';
 import { statsData } from '@/components/ui/Stats/sampleData';
+
+import PageWrapper from '../../components/ui/Common/PageWrapper';
+import Stats from '../../components/ui/Stats';
 
 export default function AboutPage() {
   return (
     <>
-      <OurStory />
+      <PageWrapper className="lg:mx-20">
+        <OurStory />
 
-      <Stats stats={statsData} />
+        <Stats stats={statsData} />
 
-      <TeamSection
-        members={sampleTeamMembers}
-        title="Meet Our Amazing Team"
-        className="bg-gray-50"
-      />
+        <TeamSection
+          members={sampleTeamMembers}
+          title="Meet Our Amazing Team"
+        />
+      </PageWrapper>
     </>
   );
 }

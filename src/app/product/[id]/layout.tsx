@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 
-import Footer from '@/components/ui/Footer/Footer';
-import Navbar from '@/components/ui/Header/Navbar/Navbar';
-import '../globals.css';
+import '../../globals.css';
 
 export const metadata: Metadata = {
   title: 'PCMall',
@@ -14,11 +12,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <Navbar />
-      {children}
-      <Footer />
-    </>
-  );
+  return <>{children}</>;
 }

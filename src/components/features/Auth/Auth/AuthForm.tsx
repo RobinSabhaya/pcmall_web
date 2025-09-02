@@ -25,7 +25,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
             ? 'Don’t have an account? '
             : 'Already have an account? '}
           <Link
-            href={mode === 'sign-in' ? '/sign-up' : '/sign-in'}
+            href={mode === 'sign-in' ? '/auth/sign-up' : '/auth/sign-in'}
             className="underline"
           >
             {mode === 'sign-in' ? 'Sign Up' : 'Sign In'}
@@ -121,11 +121,11 @@ export default function AuthForm({ mode }: AuthFormProps) {
         {mode === 'sign-up' && (
           <p className="text-center text-footnote text-dark-700">
             By signing up, you agree to our{' '}
-            <Link href="#" className="underline">
+            <Link href="/" className="underline">
               Terms of Service
             </Link>{' '}
             and{' '}
-            <Link href="#" className="underline">
+            <Link href="/" className="underline">
               Privacy Policy
             </Link>
           </p>

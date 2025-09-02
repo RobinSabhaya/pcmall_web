@@ -22,7 +22,7 @@ export default function Home() {
         </div>
       </div>
 
-      <PageWrapper className="lg:mx-20">
+      <PageWrapper className="lg:mx-22">
         <ProductSection />
 
         {/* Category browser section */}

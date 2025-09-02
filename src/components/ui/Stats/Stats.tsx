@@ -6,7 +6,7 @@ export default function Stats({ stats }: StatsProps) {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className={`p-8 rounded-lg border text-center ${
+          className={`p-3 rounded-lg border text-center ${
             stat.variant === 'primary'
               ? 'bg-red-500 text-white border-red-500'
               : 'bg-white border-gray-200'
@@ -27,7 +27,7 @@ export default function Stats({ stats }: StatsProps) {
               {stat.icon}
             </div>
           </div>
-          <div className="text-3xl font-bold mb-2">{stat.value}</div>
+          <div className="text-xl font-bold mb-2">{stat.value}</div>
           <div
             className={`text-sm ${
               stat.variant === 'primary' ? 'text-white' : 'text-gray-600'
