@@ -16,7 +16,6 @@ import {
   LogoutIcon,
 } from './DropdownIcons';
 
-
 export const DEFAULT_MENU_ITEMS: UserAccountMenuItem[] = [
   {
     id: 'account',

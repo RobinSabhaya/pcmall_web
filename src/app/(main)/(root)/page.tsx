@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import Image from 'next/image';
 
@@ -9,7 +9,6 @@ import PageWrapper from '@/components/ui/Common/PageWrapper';
 import Sidebar from '@/components/ui/Sidebar';
 import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
-
 
 export default function Home() {
   return (
