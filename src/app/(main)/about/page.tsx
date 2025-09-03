@@ -5,10 +5,9 @@ import {
   sampleTeamMembers,
   TeamSection,
 } from '@/components/features/TeamSection';
+import PageWrapper from '@/components/ui/Common/PageWrapper';
+import Stats from '@/components/ui/Stats';
 import { statsData } from '@/components/ui/Stats/sampleData';
-
-import PageWrapper from '../../components/ui/Common/PageWrapper';
-import Stats from '../../components/ui/Stats';
 
 export default function AboutPage() {
   return (

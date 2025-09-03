@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import type { TeamMemberCardProps, SocialLink } from '../TeamSection.type';
 
@@ -50,7 +51,7 @@ export default function TeamMemberCard({
 
         <div className="flex gap-3">
           {member.socialLinks.map((link, index) => (
-            <a
+            <Link
               key={index}
               href={link.url}
               target="_blank"
@@ -59,7 +60,7 @@ export default function TeamMemberCard({
               aria-label={`${member.name} on ${link.platform}`}
             >
               <SocialIcon platform={link.platform} />
-            </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -1,13 +1,15 @@
+"use client"
+
 import Image from 'next/image';
 
 import CategoryBrowser from '@/components/features/Category';
+import ProductSection from '@/components/features/Product/ProductSection/ProductSection';
 import Services from '@/components/features/Services';
+import PageWrapper from '@/components/ui/Common/PageWrapper';
 import Sidebar from '@/components/ui/Sidebar';
 import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
-import ProductSection from '../../components/features/Product/ProductSection/ProductSection';
-import PageWrapper from '../../components/ui/Common/PageWrapper';
 
 export default function Home() {
   return (

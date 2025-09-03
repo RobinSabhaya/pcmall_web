@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import type { BreadCrumb, BreadCrumbProps } from './BreadCrumb.type';
 
 export default function BreadCrumb({ breadCrumbList }: BreadCrumbProps) {
@@ -6,9 +8,9 @@ export default function BreadCrumb({ breadCrumbList }: BreadCrumbProps) {
       {breadCrumbList.map((item: BreadCrumb, index: number) => (
         <span key={index} className="flex items-center">
           {item.href ? (
-            <a href={item.href} className="hover:text-gray-700">
+            <Link href={item.href} className="hover:text-gray-700">
               {item.label}
-            </a>
+            </Link>
           ) : (
             <span className="text-gray-900">{item.label}</span>
           )}

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
+import Link from 'next/link';
+
 import type {
   UserAccountDropdownProps,
   UserAccountMenuItem,
@@ -13,6 +15,7 @@ import {
   ReviewIcon,
   LogoutIcon,
 } from './DropdownIcons';
+
 
 export const DEFAULT_MENU_ITEMS: UserAccountMenuItem[] = [
   {
@@ -79,15 +82,6 @@ export default function UserAccountDropdown({
     };
   }, [isOpen, onClose]);
 
-  const handleItemClick = (item: UserAccountMenuItem) => {
-    if (item.onClick) {
-      item.onClick();
-    } else if (item.href) {
-      window.location.href = item.href;
-    }
-    onClose();
-  };
-
   if (!isOpen) return null;
 
   return (
@@ -104,9 +98,9 @@ export default function UserAccountDropdown({
         {menuItems.map(item => {
           const Icon = item.icon;
           return (
-            <button
+            <Link
               key={item.id}
-              onClick={() => handleItemClick(item)}
+              href={item.href ?? '#'}
               className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
                 item.variant === 'danger'
                   ? 'text-red-300 hover:bg-red-900/20'
@@ -115,7 +109,7 @@ export default function UserAccountDropdown({
             >
               <Icon className="w-5 h-5 flex-shrink-0" />
               <span className="text-sm font-medium">{item.label}</span>
-            </button>
+            </Link>
           );
         })}
       </div>
