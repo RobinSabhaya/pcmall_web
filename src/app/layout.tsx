@@ -3,6 +3,7 @@ import { Inter, Raleway } from 'next/font/google';
 import type { Metadata } from 'next';
 
 import './globals.css';
+import { QueryProvider } from '../providers/queryProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -29,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${raleway.variable}`}>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }
