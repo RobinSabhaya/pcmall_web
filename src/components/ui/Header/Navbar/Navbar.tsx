@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { UserAccountDropdown, UserIcon } from '../../Dropdown';
 import { DEFAULT_MENU_ITEMS } from '../../Dropdown/Dropdown';
+import Input from '../../Input';
 import TopBanner from '../Banner/TopBanner/TopBanner';
 
 import type { NavbarProps } from './Navbar.type';
@@ -57,7 +58,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
               <div
                 className={`relative transition-all duration-300 ${isSearchFocused ? 'scale-105' : ''}`}
               >
-                <input
+                <Input
                   type="text"
                   placeholder="Search products..."
                   onFocus={() => setIsSearchFocused(true)}
@@ -86,7 +87,11 @@ export default function Navbar({ className = '' }: NavbarProps) {
               </div>
 
               <div className="flex items-center space-x-1">
-                <button className="p-2.5 hover:bg-red-50 rounded-xl transition-all duration-200 hover:scale-110 group">
+                {/* Wishlist Icon  */}
+                <Link
+                  className="p-2.5 hover:bg-red-50 rounded-xl transition-all duration-200 hover:scale-110 group"
+                  href="/"
+                >
                   <svg
                     className="w-5 h-5 text-gray-600 group-hover:text-red-500 transition-colors"
                     fill="none"
@@ -100,9 +105,13 @@ export default function Navbar({ className = '' }: NavbarProps) {
                       d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                     />
                   </svg>
-                </button>
+                </Link>
 
-                <button className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-110 relative">
+                {/* Cart Icon */}
+                <Link
+                  className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-110 relative"
+                  href="/cart"
+                >
                   <svg
                     className="w-5 h-5 text-gray-600"
                     fill="none"
@@ -116,11 +125,12 @@ export default function Navbar({ className = '' }: NavbarProps) {
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8"
                     />
                   </svg>
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     2
                   </span>
-                </button>
+                </Link>
 
+                {/* User Icon */}
                 <button
                   className="p-2.5 hover:bg-blue-50 rounded-xl transition-all duration-200 hover:scale-110"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -132,7 +142,11 @@ export default function Navbar({ className = '' }: NavbarProps) {
 
             {/* Mobile Icons & Menu */}
             <div className="md:hidden flex items-center space-x-2">
-              <button className="p-2 hover:bg-gray-100 rounded-xl transition-all duration-200">
+              {/* Cart Icon */}
+              <Link
+                className="p-2 hover:bg-gray-100 rounded-xl transition-all duration-200"
+                href="/cart"
+              >
                 <svg
                   className="w-5 h-5 text-gray-600"
                   fill="none"
@@ -146,8 +160,8 @@ export default function Navbar({ className = '' }: NavbarProps) {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-              </button>
-
+              </Link>
+              {/*   User Icon */}
               <button
                 className="p-2 hover:bg-blue-50 rounded-xl transition-all duration-200"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -155,6 +169,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
                 <UserIcon />
               </button>
 
+              {/* Hamburger menu */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 hover:bg-gray-100 rounded-xl transition-all duration-200"
@@ -281,8 +296,6 @@ export default function Navbar({ className = '' }: NavbarProps) {
           <UserAccountDropdown
             menuItems={DEFAULT_MENU_ITEMS}
             isOpen={isDropdownOpen}
-            onClose={() => setIsDropdownOpen(false)}
-            onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
           />
         </div>
       </nav>

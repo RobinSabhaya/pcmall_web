@@ -68,7 +68,7 @@ export default function UserAccountDropdown({
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        onClose();
+        if (onClose) onClose();
       }
     };
 

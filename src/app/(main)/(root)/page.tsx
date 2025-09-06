@@ -10,6 +10,8 @@ import Sidebar from '@/components/ui/Sidebar';
 import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
+import NewArrival from '../../../components/ui/NewArrival';
+
 export default function Home() {
   return (
     <>
@@ -36,6 +38,10 @@ export default function Home() {
             alt="music_banner"
             className="aspect-auto border rounded-xl"
           />
+        </div>
+
+        <div>
+          <NewArrival />
         </div>
 
         {/* services */}

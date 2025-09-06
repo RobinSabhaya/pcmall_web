@@ -10,8 +10,8 @@ export interface UserAccountMenuItem {
 export interface UserAccountDropdownProps {
   className?: string;
   isOpen: boolean;
-  onToggle: () => void;
-  onClose: () => void;
+  onToggle?: () => void;
+  onClose?: () => void;
   menuItems?: UserAccountMenuItem[];
 }
 

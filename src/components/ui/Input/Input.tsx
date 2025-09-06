@@ -5,7 +5,7 @@ import type { InputProps } from './Input.type';
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className = '', label, error, ...props }, ref) => {
     return (
-      <div className="space-y-1">
+      <div>
         {label && (
           <label className="block text-sm font-medium text-gray-700">
             {label}
