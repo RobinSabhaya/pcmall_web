@@ -1,36 +1,50 @@
 'use client';
 
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import BreadCrumb from '@/components/ui/BreadCrumb/BreadCrumb';
 import Button from '@/components/ui/Button/Button';
 
+import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
 import CartItem from '../CartItem/CartItem';
 import CartSummary from '../CartSummary/CartSummary';
 
-import { cartData } from './sampleData';
+import type { CartSummaryType } from './Cart.type';
+import { breadcrumbs, calculatePayout } from './utils';
 
 export default function Cart() {
-  const { items } = cartData;
-  // const [couponCode, setCouponCode] = useState('');
+  const initialData: CartSummaryType = {
+    shipping: 0,
+    subtotal: 0,
+    total: 0,
+  };
 
-  const breadcrumbs = [
-    { label: 'Home', href: '/' },
-    { label: 'Cart', href: '/cart' },
-  ];
+  const [isCartItemChange, setIsCartItemChange] = useState<number>(0);
+  const [cartSummaryData, setCartSummaryData] =
+    useState<CartSummaryType>(initialData);
 
-  // const handleApplyCoupon = () => {
-  //   if (couponCode.trim()) {
-  //     // onApplyCoupon(couponCode.trim());
-  //     setCouponCode('');
-  //   }
-  // };
+  const { data } = useGetAllCart();
+  const items = data?.items?.results;
 
-  function onUpdateQuantity() {}
+  useEffect(() => {
+    if (items && items?.length > 0) {
+      const { shipping, subtotal, total } = calculatePayout(items);
 
-  function onUpdateCart() {}
+      setCartSummaryData(() => ({
+        shipping,
+        subtotal,
+        total,
+      }));
+    }
 
-  function onRemoveItem() {}
+    return () => {
+      setCartSummaryData(initialData);
+    };
+  }, [isCartItemChange, items]);
+
+  // TODO: handle cart empty
+
+  // TODO: handle loading state
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -57,12 +71,11 @@ export default function Cart() {
                 </tr>
               </thead>
               <tbody>
-                {items.map(item => (
+                {items?.map(item => (
                   <CartItem
-                    key={item.id}
+                    key={item._id}
                     item={item}
-                    onUpdateQuantity={onUpdateQuantity}
-                    onRemove={onRemoveItem}
+                    setIsCartItemChange={setIsCartItemChange}
                   />
                 ))}
               </tbody>
@@ -77,14 +90,11 @@ export default function Cart() {
             >
               Return To Shop
             </Button>
-            <Button variant="outline" onClick={onUpdateCart} className="flex-1">
-              Update Cart
-            </Button>
           </div>
         </div>
 
         <div>
-          <CartSummary />
+          <CartSummary cartSummaryData={cartSummaryData} />
         </div>
       </div>
     </div>

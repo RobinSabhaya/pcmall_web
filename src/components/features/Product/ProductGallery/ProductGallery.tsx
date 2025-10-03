@@ -12,15 +12,15 @@ export default function ProductGallery({
       <div className="grid grid-cols-4 gap-4">
         {productImages.map((image, index) => (
           <button
-            key={image.id}
+            key={index}
             onClick={() => setSelectedImage(index)}
             className={`aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 ${
               selectedImage === index ? 'border-red-500' : 'border-transparent'
             }`}
           >
             <Image
-              src={image.url}
-              alt={image.alt}
+              src={image}
+              alt={image}
               width={150}
               height={150}
               className="w-full h-full object-cover"

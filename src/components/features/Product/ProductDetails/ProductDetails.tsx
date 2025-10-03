@@ -2,107 +2,58 @@
 
 import { useState } from 'react';
 
-import type { StaticImageData } from 'next/image';
-// eslint-disable-next-line no-duplicate-imports
 import Image from 'next/image';
 
 import { BreadCrumb } from '@/components/ui/BreadCrumb';
-import ProductImage1 from '@/public/images/products/product1.png';
-import ProductImage2 from '@/public/images/products/product2.png';
-import ProductImage3 from '@/public/images/products/product3.png';
-import ProductImage4 from '@/public/images/products/product4.png';
 
+import { useAddToCart } from '../../../../hooks/query/Cart/useCartMutation';
+import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';
+import { calculateDiscount, formatPrice } from '../../../../utils/custom';
 import Button from '../../../ui/Button/Button';
+import Loader from '../../../ui/Loader/Loader';
 import StarRating from '../../../ui/StarRating/StarRating';
 import ProductGallery from '../ProductGallery/ProductGallery';
 
-export default function ProductDetails() {
+interface ProductDetailsProps {
+  productId: number;
+}
+export default function ProductDetails({ productId }: ProductDetailsProps) {
+  const [selectedImage, setSelectedImage] = useState(0);
+  // const [selectedColor, setSelectedColor] = useState(10);
+  // const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
+
+  // Tanstack query
+  const { data, isLoading } = useGetAllProducts({
+    productId: String(productId),
+  });
+  const { mutate: addToCart } = useAddToCart();
+  const productList = data?.productData?.results;
+
+  let product;
+  if (productList && productList?.length > 0) {
+    product = productList[0];
+  }
+
+  const productVariantData = product?.product_variants[0];
+  const productSkuData = product?.product_variants[0]?.product_skus;
+
   const breadCrumbList = [
     { label: 'Home', href: '/' },
     { label: 'product', href: '/product' },
-    { label: 'Havic HV G-92 Gamepad', href: '/' },
+    { label: product?.title as string, href: '/' },
   ];
 
-  const mockProduct = {
-    id: 'havic-hv-g92',
-    name: 'Havic HV G-92 Gamepad',
-    price: 192.0,
-    originalPrice: 240.0,
-    rating: { rating: 4, count: 150 },
-    inStock: true,
-    description:
-      'PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.',
-    images: [
-      {
-        id: 1,
-        url: ProductImage1,
-        alt: 'Havic HV G-92 Gamepad',
-      },
-      {
-        id: 2,
-        url: ProductImage2,
-        alt: 'Havic HV G-92 Gamepad Side View',
-      },
-      {
-        id: 3,
-        url: ProductImage3,
-        alt: 'Havic HV G-92 Gamepad Back View',
-      },
-      {
-        id: 4,
-        url: ProductImage4,
-        alt: 'Havic HV G-92 Gamepad Detail',
-      },
-    ],
-    colors: [
-      { id: 'black', name: 'Black', value: '#000000', available: true },
-      { id: 'red', name: 'Red', value: '#ef4444', available: true },
-    ],
-    sizes: [
-      { id: 'xs', name: 'XS', value: 'XS', available: true },
-      { id: 's', name: 'S', value: 'S', available: true },
-      { id: 'm', name: 'M', value: 'M', available: true },
-      { id: 'l', name: 'L', value: 'L', available: true },
-      { id: 'xl', name: 'XL', value: 'XL', available: true },
-    ],
+  const inStock = true;
 
-    deliveryInfo: [
-      {
-        type: 'free' as const,
-        description: 'Free Delivery',
-        details: 'Enter your postal code for Delivery Availability',
-      },
-      {
-        type: 'paid' as const,
-        description: 'Return Delivery',
-        details: 'Free 30 Days Delivery Returns. Details',
-      },
-    ],
-  };
-
-  const {
-    name,
-    price,
-    originalPrice,
-    rating,
-    inStock,
-    description,
-    images,
-    colors,
-    sizes,
-    deliveryInfo,
-  } = mockProduct;
-
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(colors[0]?.id);
-  const [selectedSize, setSelectedSize] = useState(sizes[0]?.id);
-  const [quantity, setQuantity] = useState(1);
+  if (isLoading) return <Loader />;
 
   const handleAddToCart = () => {
-    // onAddToCart(id, quantity, {
-    //   color: selectedColor as string,
-    //   size: selectedSize as string
-    // })
+    if (productVariantData)
+      addToCart({
+        productVariantId: productVariantData._id,
+        quantity,
+      });
   };
 
   return (
@@ -115,36 +66,40 @@ export default function ProductDetails() {
         <div className="space-y-4">
           {/* Main image */}
           <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-            <Image
-              src={images[selectedImage]?.url as StaticImageData}
-              alt={images[selectedImage]?.alt as string}
-              width={600}
-              height={600}
-              loading="eager"
-              className="w-full h-full object-cover"
-            />
+            {productVariantData?.images[selectedImage] && (
+              <Image
+                src={productVariantData?.images[selectedImage]}
+                alt={productVariantData?.images[selectedImage] as string}
+                width={600}
+                height={600}
+                loading="eager"
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
 
-          <ProductGallery
-            productImages={mockProduct.images}
-            selectedImage={selectedImage}
-            setSelectedImage={setSelectedImage}
-          />
+          {productVariantData?.images && (
+            <ProductGallery
+              productImages={productVariantData?.images}
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+            />
+          )}
         </div>
 
         {/* Product Info */}
         <div className="space-y-6">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{name}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
+              {product?.title}
+            </h1>
 
             {/* Rating */}
             <div className="flex items-center gap-2 mb-4">
               <div className="flex items-center">
-                <StarRating rating={rating.rating} />
+                <StarRating rating={10} />
               </div>
-              <span className="text-sm text-gray-500">
-                ({rating.count} Reviews)
-              </span>
+              <span className="text-sm text-gray-500">({10} Reviews)</span>
               <span
                 className={`text-sm px-2 py-1 rounded ${
                   inStock
@@ -158,21 +113,30 @@ export default function ProductDetails() {
 
             {/* Price */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl font-bold text-gray-900">
-                ${price.toFixed(2)}
-              </span>
-              {originalPrice && (
-                <span className="text-xl text-gray-500 line-through">
-                  ${originalPrice.toFixed(2)}
-                </span>
+              {productSkuData?.price && (
+                <>
+                  <span className="text-3xl font-bold text-gray-900">
+                    ₹{' '}
+                    {formatPrice(
+                      productSkuData?.price -
+                        calculateDiscount(
+                          productSkuData?.price,
+                          productSkuData?.discount
+                        )
+                    )}
+                  </span>
+                  <span className="text-xl text-gray-500 line-through">
+                    ₹ {formatPrice(productSkuData?.price)}
+                  </span>
+                </>
               )}
             </div>
 
-            <p className="text-gray-600 mb-6">{description}</p>
+            <p className="text-gray-600 mb-6">{product?.description}</p>
           </div>
 
           {/* Colors */}
-          {colors.length > 0 && (
+          {/* {colors.length > 0 && (
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">
                 Colours:
@@ -196,10 +160,10 @@ export default function ProductDetails() {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Sizes */}
-          {sizes.length > 0 && (
+          {/* {sizes.length > 0 && (
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">Size:</h3>
               <div className="flex gap-2">
@@ -221,7 +185,7 @@ export default function ProductDetails() {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Quantity & Actions */}
           <div className="flex items-center gap-4">
@@ -272,7 +236,7 @@ export default function ProductDetails() {
           </div>
 
           {/* Delivery Info */}
-          <div className="border border-gray-200 rounded-lg p-4 space-y-4">
+          {/* <div className="border border-gray-200 rounded-lg p-4 space-y-4">
             {deliveryInfo.map((info, index) => (
               <div key={index} className="flex items-start gap-3">
                 <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -316,7 +280,7 @@ export default function ProductDetails() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

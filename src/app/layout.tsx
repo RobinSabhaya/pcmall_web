@@ -1,8 +1,9 @@
 import { Inter, Raleway } from 'next/font/google';
 
 import type { Metadata } from 'next';
-
 import './globals.css';
+
+// import ToasterProvider from '../lib/ToasterProvider';
 import { QueryProvider } from '../providers/queryProvider';
 
 const inter = Inter({
@@ -31,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${raleway.variable}`}>
       <body>
+        {/* <ToasterProvider /> */}
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>

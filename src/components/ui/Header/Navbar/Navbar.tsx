@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Link from 'next/link';
 
+import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { UserAccountDropdown, UserIcon } from '../../Dropdown';
 import { DEFAULT_MENU_ITEMS } from '../../Dropdown/Dropdown';
 import Input from '../../Input';
@@ -12,16 +13,24 @@ import TopBanner from '../Banner/TopBanner/TopBanner';
 import type { NavbarProps } from './Navbar.type';
 
 export default function Navbar({ className = '' }: NavbarProps) {
+  const NAV_ITEMS = useMemo(
+    () => [
+      { label: 'Home', href: '/' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'About', href: '/about' },
+      { label: 'Sign Up', href: '/auth/sign-up' },
+    ],
+    []
+  );
+
+  // Tanstack query
+  const { data } = useGetAllCart();
+  const items = data?.items?.results;
+
+  // state
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
-
-  const NAV_ITEMS = [
-    { label: 'Home', href: '/' },
-    { label: 'Contact', href: '/contact' },
-    { label: 'About', href: '/about' },
-    { label: 'Sign Up', href: '/auth/sign-up' },
-  ];
 
   return (
     <>
@@ -35,7 +44,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
             {/* Logo */}
             <div className="flex-shrink-0 group">
               <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-200">
-                Exclusive
+                PCMall
               </div>
             </div>
 
@@ -56,7 +65,9 @@ export default function Navbar({ className = '' }: NavbarProps) {
             {/* Desktop Search & Icons */}
             <div className="hidden md:flex items-center space-x-3">
               <div
-                className={`relative transition-all duration-300 ${isSearchFocused ? 'scale-105' : ''}`}
+                className={`relative transition-all duration-300 ${
+                  isSearchFocused ? 'scale-105' : ''
+                }`}
               >
                 <Input
                   type="text"
@@ -126,7 +137,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
                     />
                   </svg>
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    2
+                    {items?.length ?? 0}
                   </span>
                 </Link>
 
@@ -207,7 +218,9 @@ export default function Navbar({ className = '' }: NavbarProps) {
 
           {/* Mobile menu */}
           <div
-            className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+            className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+              isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            }`}
           >
             <div className="border-t border-gray-100 bg-gray-50/50 backdrop-blur-sm">
               <div className="px-4 py-4 space-y-2">
@@ -291,7 +304,11 @@ export default function Navbar({ className = '' }: NavbarProps) {
 
         {/* User dropdown */}
         <div
-          className={`absolute right-4 top-full mt-2 z-50 transition-all duration-300 ${isDropdownOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
+          className={`absolute right-4 top-full mt-2 z-50 transition-all duration-300 ${
+            isDropdownOpen
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 -translate-y-2 pointer-events-none'
+          }`}
         >
           <UserAccountDropdown
             menuItems={DEFAULT_MENU_ITEMS}

@@ -7,8 +7,8 @@ import type { OurStoryProps } from './OurStory.type';
 const defaultContent = {
   title: 'Our Story',
   descriptions: [
-    "Launched in 2015, Exclusive is South Asia's premier online shopping marketplace with an active presence in Bangladesh. Supported by wide range of tailored marketing, data and service solutions, Exclusive has 10,500 sellers and 300 brands and serves 3 millions customers across the region.",
-    'Exclusive has more than 1 Million products to offer, growing at a very fast. Exclusive offers a diverse assortment in categories ranging from consumer.',
+    "Launched in 2015, PCMall is South Asia's premier online shopping marketplace with an active presence in Bangladesh. Supported by wide range of tailored marketing, data and service solutions, PCMall has 10,500 sellers and 300 brands and serves 3 millions customers across the region.",
+    'PCMall has more than 1 Million products to offer, growing at a very fast. PCMall offers a diverse assortment in categories ranging from consumer.',
   ],
 };
 

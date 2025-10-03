@@ -10,7 +10,5 @@ export interface ProductCardProps {
   image: string | StaticImageData;
   badge?: string;
   colors?: string[];
-  onAddToCart?: (id: string) => void;
-  onWishlist?: (id: string) => void;
-  onQuickView?: (id: string) => void;
+  productVariantId: string;
 }

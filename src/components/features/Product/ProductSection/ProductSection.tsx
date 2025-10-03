@@ -39,7 +39,9 @@ export default function ProductSection() {
 
       <FlashSales endDate={endDate} className="mx-6" />
       <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-wrap md:justify-start">
-        <ProductList start={currentIndex} end={currentIndex + maxShowItems} />
+        <ProductList
+        // start={currentIndex} end={currentIndex + maxShowItems}
+        />
       </div>
     </>
   );

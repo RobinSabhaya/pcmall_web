@@ -4,25 +4,71 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
+import { useForm } from '@tanstack/react-form';
+
+import { loginSchema, signupSchema } from '@/validations/authSchema';
+
+import {
+  useLogin,
+  useSignup,
+} from '../../../../hooks/query/Auth/useAuthMutations';
+import Input from '../../../ui/Input';
 import SocialProviders from '../../../ui/SocialProvider/SocialProviders';
 
 import type { AuthFormProps } from './AuthForm.type';
 
+export interface FormValue {
+  email: string;
+  password: string;
+  first_name?: string;
+  confirm_password?: string;
+}
+
 export default function AuthForm({ mode }: AuthFormProps) {
   const [show, setShow] = useState(false);
+  const { mutate: signup } = useSignup();
+  const { mutate: login } = useLogin();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // const formData = new FormData(e.currentTarget);
+  const defaultValues = {
+    ...(mode == 'sign-up' && {
+      first_name: '',
+      confirm_password: '',
+    }),
+    email: '',
+    password: '',
   };
+
+  async function onSubmit({ value }: { value: FormValue }) {
+    const payload = {
+      email: value.email,
+      password: value.password,
+    };
+
+    if (mode === 'sign-up') {
+      signup({
+        ...payload,
+        first_name: String(value?.first_name),
+        confirm_password: String(value?.confirm_password),
+      });
+    } else if (mode === 'sign-in') {
+      login(payload);
+    }
+  }
+
+  const form = useForm({
+    defaultValues,
+    validators: {
+      onChange: mode === 'sign-up' ? signupSchema : loginSchema,
+    },
+    onSubmit,
+  });
 
   return (
     <div className="space-y-6">
       <div className="text-center">
         <p className="text-caption text-dark-700">
           {mode === 'sign-in'
-            ? 'Don’t have an account? '
+            ? "Don't have an account? "
             : 'Already have an account? '}
           <Link
             href={mode === 'sign-in' ? '/auth/sign-up' : '/auth/sign-in'}
@@ -51,65 +97,104 @@ export default function AuthForm({ mode }: AuthFormProps) {
 
       <SocialProviders variant={mode} />
 
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form
+        className="space-y-4"
+        onSubmit={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          form.handleSubmit();
+        }}
+      >
         {mode === 'sign-up' && (
-          <div className="space-y-1">
-            <label htmlFor="name" className="text-caption text-dark-900">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Enter your name"
-              className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
-              autoComplete="name"
-            />
-          </div>
+          <form.Field name="first_name">
+            {field => (
+              <div className="space-y-1">
+                <Input
+                  id="first_name"
+                  name="first_name"
+                  type="text"
+                  label={field.name}
+                  placeholder="Enter your name"
+                  className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
+                  autoComplete="first_name"
+                  value={field.state.value}
+                  onChange={e => field.handleChange(e.target.value)}
+                />
+              </div>
+            )}
+          </form.Field>
         )}
 
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-caption text-dark-900">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="johndoe@gmail.com"
-            className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
-            autoComplete="email"
-            required
-          />
-        </div>
+        <form.Field name="email">
+          {field => (
+            <div className="space-y-1">
+              <label htmlFor="email" className="text-caption text-dark-900">
+                {field.name}
+              </label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
+                autoComplete="email"
+                value={field.state.value}
+                onChange={e => field.handleChange(e.target.value)}
+              />
+            </div>
+          )}
+        </form.Field>
 
-        <div className="space-y-1">
-          <label htmlFor="password" className="text-caption text-dark-900">
-            Password
-          </label>
-          <div className="relative">
-            <input
-              id="password"
-              name="password"
-              type={show ? 'text' : 'password'}
-              placeholder="minimum 8 characters"
-              className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 pr-12 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
-              autoComplete={
-                mode === 'sign-in' ? 'current-password' : 'new-password'
-              }
-              minLength={8}
-              required
-            />
-            <button
-              type="button"
-              className="absolute inset-y-0 right-0 px-3 text-caption text-dark-700"
-              onClick={() => setShow(v => !v)}
-              aria-label={show ? 'Hide password' : 'Show password'}
-            >
-              {show ? 'Hide' : 'Show'}
-            </button>
-          </div>
-        </div>
+        <form.Field name="password">
+          {field => (
+            <div className="space-y-1">
+              <div className="relative">
+                <Input
+                  id="password"
+                  name="password"
+                  label={field.name}
+                  type={show ? 'text' : 'password'}
+                  placeholder="minimum 8 characters"
+                  className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 pr-12 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
+                  autoComplete={
+                    mode === 'sign-in' ? 'current-password' : 'new-password'
+                  }
+                  minLength={8}
+                  onChange={e => field.handleChange(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 px-3 text-caption text-dark-700"
+                  onClick={() => setShow(v => !v)}
+                  aria-label={show ? 'Hide password' : 'Show password'}
+                >
+                  {show ? 'Hide' : 'Show'}
+                </button>
+              </div>
+            </div>
+          )}
+        </form.Field>
+
+        {mode === 'sign-up' && (
+          <form.Field name="confirm_password">
+            {field => (
+              <div className="space-y-1">
+                <div className="relative">
+                  <Input
+                    id="confirm_password"
+                    name="confirm_password"
+                    label={field.name}
+                    type={show ? 'text' : 'password'}
+                    placeholder="minimum 8 characters"
+                    className="w-full rounded-xl border border-light-300 bg-light-100 px-4 py-3 pr-12 text-body text-dark-900 placeholder:text-dark-500 focus:outline-none focus:ring-2 focus:ring-dark-900/10"
+                    minLength={8}
+                    onChange={e => field.handleChange(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+          </form.Field>
+        )}
 
         <button
           type="submit"

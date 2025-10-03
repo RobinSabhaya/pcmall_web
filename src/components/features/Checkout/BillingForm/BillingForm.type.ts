@@ -1,15 +1,7 @@
-export interface BillingFormData {
-  firstName: string;
-  companyName?: string;
-  streetAddress: string;
-  apartment?: string;
-  townCity: string;
-  phoneNumber: string;
-  emailAddress: string;
-  saveInfo: boolean;
-}
-
-export interface BillingFormProps {
-  onSubmit: (data: BillingFormData) => void;
-  initialData?: Partial<BillingFormData>;
+export interface BillingFormDetails {
+  line1: string;
+  line2: string;
+  state: string;
+  city: string;
+  country: string;
 }

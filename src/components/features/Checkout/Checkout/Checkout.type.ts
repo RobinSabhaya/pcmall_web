@@ -1,5 +1,5 @@
 import type { CartItem } from '../../Cart/Cart/Cart.type';
-import type { BillingFormData } from '../BillingForm/BillingForm.type';
+import type { BillingFormDetails } from '../BillingForm/BillingForm.type';
 
 export interface PaymentMethod {
   id: 'bank' | 'cash';
@@ -9,7 +9,7 @@ export interface PaymentMethod {
 export interface CheckoutProps {
   cartItems: CartItem[];
   onSubmit: (
-    data: BillingFormData & { paymentMethod: string; couponCode?: string }
+    data: BillingFormDetails & { paymentMethod: string; couponCode?: string }
   ) => void;
   isLoading?: boolean;
 }

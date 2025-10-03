@@ -1,26 +1,19 @@
 'use client';
 
-// import { useState } from 'react';
+import { memo } from 'react';
 
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/ui/Button/Button';
 
-import { cartData } from '../Cart/sampleData';
+import { formatPrice } from '../../../../utils/custom';
 
-export default function CartSummary() {
-  // const [couponCode, setCouponCode] = useState('');
+import type { CartSummaryProps } from './CartSummary.type';
+
+export default memo(function CartSummary({
+  cartSummaryData,
+}: CartSummaryProps) {
   const router = useRouter();
-
-  // const handleApplyCoupon = () => {
-  //   if (couponCode.trim()) {
-  //     // onApplyCoupon(couponCode.trim());
-  //     setCouponCode('');
-  //   }
-  // };
-
-  const { summary } = cartData;
-
   function onProceedToCheckout() {
     router.push('/checkout');
   }
@@ -32,19 +25,23 @@ export default function CartSummary() {
       <div className="space-y-3 mb-6">
         <div className="flex justify-between py-2 border-b border-gray-200">
           <span>Subtotal:</span>
-          <span className="font-medium">${summary.subtotal}</span>
+          <span className="font-medium">
+            ₹ {formatPrice(cartSummaryData.subtotal)}
+          </span>
         </div>
 
         <div className="flex justify-between py-2 border-b border-gray-200">
           <span>Shipping:</span>
           <span className="font-medium">
-            {summary.shipping === 0 ? 'Free' : `$${summary.shipping}`}
+            {cartSummaryData.shipping === 0
+              ? 'Free'
+              : `₹ ${formatPrice(cartSummaryData.shipping)}`}
           </span>
         </div>
 
         <div className="flex justify-between py-2 text-lg font-semibold">
           <span>Total:</span>
-          <span>${summary.total}</span>
+          <span>₹ {formatPrice(cartSummaryData.total)}</span>
         </div>
       </div>
 
@@ -52,9 +49,10 @@ export default function CartSummary() {
         onClick={onProceedToCheckout}
         className="w-full bg-red-500 hover:bg-red-600 text-white"
         size="lg"
+        disabled={!cartSummaryData?.total}
       >
         Proceeds to checkout
       </Button>
     </div>
   );
-}
+});

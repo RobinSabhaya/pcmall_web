@@ -1,87 +1,105 @@
 'use client';
 
-import { useState } from 'react';
+import { useForm } from '@tanstack/react-form';
 
 import Input from '@/components/ui/Input';
 
-import type { BillingFormData, BillingFormProps } from './BillingForm.type';
+import { useUpdateAddress } from '../../../../hooks/query/User/useUserMutations';
+import { billingFormSchema } from '../../../../validations/billingFormSchema';
 
-export default function BillingForm({
-  onSubmit,
-  initialData,
-}: BillingFormProps) {
-  const [formData, setFormData] = useState<BillingFormData>({
-    firstName: initialData?.firstName ?? '',
-    companyName: initialData?.companyName ?? '',
-    streetAddress: initialData?.streetAddress ?? '',
-    apartment: initialData?.apartment ?? '',
-    townCity: initialData?.townCity ?? '',
-    phoneNumber: initialData?.phoneNumber ?? '',
-    emailAddress: initialData?.emailAddress ?? '',
-    saveInfo: initialData?.saveInfo ?? false,
-  });
+import type { BillingFormDetails } from './BillingForm.type';
 
-  const handleChange = (
-    field: keyof BillingFormData,
-    value: string | boolean
-  ) => {
-    const newData = { ...formData, [field]: value };
-    setFormData(newData);
-    onSubmit(newData);
+export default function BillingForm() {
+  // TODO: if user doesn't have address then create new otherwise process with default
+
+  // Tanstack query
+  const { mutate: updateAddress } = useUpdateAddress();
+
+  const defaultValues = {
+    line1: '',
+    line2: '',
+    state: '',
+    city: '',
+    country: '',
   };
 
+  function onSubmit({ value }: { value: BillingFormDetails }) {
+    updateAddress(value);
+  }
+
+  const form = useForm({
+    defaultValues,
+    validators: {
+      onChange: billingFormSchema,
+    },
+    onSubmit,
+  });
+
   return (
-    <div className="space-y-6">
-      <Input
-        label="First Name*"
-        value={formData.firstName}
-        onChange={e => handleChange('firstName', e.target.value)}
-        required
-      />
+    <form
+      onSubmit={async e => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+      className="space-y-6"
+    >
+      <form.Field name="line1">
+        {field => (
+          <Input
+            label="Line1*"
+            placeholder="Enter your line1"
+            value={field.state.value}
+            onChange={e => field.handleChange(e.target.value)}
+          />
+        )}
+      </form.Field>
 
-      <Input
-        label="Company Name"
-        value={formData.companyName}
-        onChange={e => handleChange('companyName', e.target.value)}
-      />
+      <form.Field name="line2">
+        {field => (
+          <Input
+            label="Line2"
+            placeholder="Enter your line2"
+            value={field.state.value}
+            onChange={e => field.handleChange(e.target.value)}
+          />
+        )}
+      </form.Field>
 
-      <Input
-        label="Street Address*"
-        value={formData.streetAddress}
-        onChange={e => handleChange('streetAddress', e.target.value)}
-        required
-      />
+      <form.Field name="state">
+        {field => (
+          <Input
+            label="State*"
+            placeholder="Enter your state"
+            value={field.state.value}
+            onChange={e => field.handleChange(e.target.value)}
+          />
+        )}
+      </form.Field>
 
-      <Input
-        label="Apartment, floor, etc. (optional)"
-        value={formData.apartment}
-        onChange={e => handleChange('apartment', e.target.value)}
-      />
+      <form.Field name="city">
+        {field => (
+          <Input
+            label="City*"
+            placeholder="Enter your city"
+            value={field.state.value}
+            onChange={e => field.handleChange(e.target.value)}
+          />
+        )}
+      </form.Field>
 
-      <Input
-        label="Town/City*"
-        value={formData.townCity}
-        onChange={e => handleChange('townCity', e.target.value)}
-        required
-      />
+      <form.Field name="country">
+        {field => (
+          <Input
+            label="Country*"
+            placeholder="Enter your country"
+            value={field.state.value}
+            onChange={e => field.handleChange(e.target.value)}
+          />
+        )}
+      </form.Field>
 
-      <Input
-        label="Phone Number*"
-        type="tel"
-        value={formData.phoneNumber}
-        onChange={e => handleChange('phoneNumber', e.target.value)}
-        required
-      />
-
-      <Input
-        label="Email Address*"
-        type="email"
-        value={formData.emailAddress}
-        onChange={e => handleChange('emailAddress', e.target.value)}
-        required
-      />
-
-      <label className="flex items-center space-x-3">
+      {/* <label className="flex items-center space-x-3">
         <input
           type="checkbox"
           checked={formData.saveInfo}
@@ -91,7 +109,14 @@ export default function BillingForm({
         <span className="text-sm text-gray-700">
           Save this information for faster check-out next time
         </span>
-      </label>
-    </div>
+      </label> */}
+
+      <button
+        type="submit"
+        className="mt-2 w-full rounded-full bg-dark-900 px-6 py-3 text-body-medium text-light-100 hover:bg-dark-700 focus:outline-none focus:ring-2 focus:ring-dark-900/20"
+      >
+        Add address
+      </button>
+    </form>
   );
 }

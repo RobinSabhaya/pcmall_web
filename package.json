@@ -14,7 +14,8 @@
     "type-check": "tsc --noEmit",
     "audit:security": "npm audit --audit-level=moderate",
     "prepare": "husky",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "generate:types": "openapi-typescript http://localhost:5000/docs/json -o src/types/api/generated.ts"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
@@ -37,12 +38,14 @@
     }
   },
   "dependencies": {
+    "@tanstack/react-form": "^1.23.2",
     "@tanstack/react-query": "^5.87.1",
     "@tanstack/react-query-devtools": "^5.87.1",
     "axios": "^1.11.0",
     "next": "15.5.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",
@@ -63,6 +66,7 @@
     "eslint-plugin-unused-imports": "^4.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.5",
+    "openapi-typescript": "^7.9.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

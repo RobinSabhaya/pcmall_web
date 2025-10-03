@@ -3,50 +3,93 @@
 import { useState } from 'react';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input';
-import ProductImage from '@/public/images/products/product1.png';
 
-import type { OrderSummaryProps } from './OrderSummary.type';
+import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
+import { useCreateCheckout } from '../../../../hooks/query/Checkout/useCheckoutMutations';
+import { formatPrice } from '../../../../utils/custom';
 
-export default function OrderSummary({
-  items,
-  subtotal,
-  shipping,
-  total,
-  onApplyCoupon,
-  paymentMethods,
-  selectedPayment,
-  onPaymentChange,
-  onPlaceOrder,
-  isLoading,
-}: OrderSummaryProps) {
+export default function OrderSummary() {
+  // state
   const [couponCode, setCouponCode] = useState('');
+  const router = useRouter();
+
+  // Tanstack query
+  const { data } = useGetAllCart();
+  const { mutate: createCheckout, data: checkoutData } = useCreateCheckout();
+
+  const items = data?.items?.results;
+
+  const shipping = 0;
+  const subTotal = items?.reduce((acc, item) => {
+    if (item?.product_variants?.product_skus[0]?.price) {
+      return (
+        acc + item?.product_variants?.product_skus[0]?.price * item?.quantity
+      );
+    } else {
+      return acc;
+    }
+  }, 0);
+
+  const total = subTotal ?? 0 + shipping;
+
+  // generate payload
+  const itemsPayload = items?.map(item => ({
+    quantity: item?.quantity,
+    product_name: item?.product?.title,
+    unit_amount: item?.product_variants?.product_skus[0]?.price as number,
+    productVariantId: item?.product_variants?._id,
+  }));
 
   const handleApplyCoupon = () => {
     if (couponCode.trim()) {
-      onApplyCoupon(couponCode.trim());
+      // onApplyCoupon(couponCode.trim());
     }
   };
+
+  function onPlaceOrder() {
+    if (itemsPayload) {
+      const payload = {
+        items: itemsPayload,
+        currency: 'INR',
+        shippingAddress: '68d962017d0f100d31f08757', //TODO: remove static address
+        cartIds: items?.map(item => item._id) ?? [''],
+      };
+
+      // Create checkout
+      createCheckout(payload);
+    }
+  }
+
+  if (checkoutData) router.replace(checkoutData.data.checkoutUrl);
 
   return (
     <div className="space-y-6">
       {/* Order Items */}
       <div className="space-y-4">
-        {items.map(item => (
-          <div key={item.id} className="flex items-center justify-between">
+        {items?.map(item => (
+          <div key={item._id} className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Image
-                src={ProductImage}
-                alt={item.name}
-                width={50}
-                height={50}
-                className="rounded"
-              />
-              <span className="text-sm">{item.name}</span>
+              {item.product_variants.images.length > 0 && (
+                <Image
+                  src={item.product_variants.images[0] as string}
+                  alt={item.product.title}
+                  width={50}
+                  height={50}
+                  className="rounded"
+                />
+              )}
+              <span className="text-sm">{item.product.title}</span>
             </div>
-            <span className="font-medium">${item.price}</span>
+            <span className="font-medium">
+              ₹{' '}
+              {formatPrice(
+                item.product_variants.product_skus[0]?.price as number
+              )}
+            </span>
           </div>
         ))}
       </div>
@@ -55,20 +98,20 @@ export default function OrderSummary({
       <div className="border-t pt-4 space-y-3">
         <div className="flex justify-between">
           <span>Subtotal:</span>
-          <span>${subtotal}</span>
+          <span>₹ {subTotal}</span>
         </div>
         <div className="flex justify-between">
           <span>Shipping:</span>
-          <span>{shipping === 0 ? 'Free' : `$${shipping}`}</span>
+          <span>{shipping === 0 ? 'Free' : `₹ ${shipping}`}</span>
         </div>
         <div className="flex justify-between font-semibold text-lg border-t pt-3">
           <span>Total:</span>
-          <span>${total}</span>
+          <span>₹ {total}</span>
         </div>
       </div>
 
       {/* Payment Methods */}
-      <div className="space-y-3">
+      {/* <div className="space-y-3">
         {paymentMethods.map(method => (
           <label
             key={method.id}
@@ -107,7 +150,7 @@ export default function OrderSummary({
             )}
           </label>
         ))}
-      </div>
+      </div> */}
 
       {/* Coupon Code */}
       <div className="flex space-x-2">
@@ -131,10 +174,10 @@ export default function OrderSummary({
         variant="primary"
         size="lg"
         onClick={onPlaceOrder}
-        disabled={isLoading}
+        // disabled={isLoading}
         className="w-full"
       >
-        {isLoading ? 'Processing...' : 'Place Order'}
+        Place Order
       </Button>
     </div>
   );

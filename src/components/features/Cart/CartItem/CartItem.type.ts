@@ -1,7 +1,11 @@
-import type { CartItem } from '../Cart/Cart.type';
+import type { Dispatch, SetStateAction } from 'react';
+
+import type { paths } from '../../../../types/api/generated';
+
+export type item =
+  paths['/v1/cart/all']['get']['responses']['200']['content']['application/json']['data']['200']['data']['items']['results'][0];
 
 export interface CartItemProps {
-  item: CartItem;
-  onUpdateQuantity: (id: string, quantity: number) => void;
-  onRemove: (id: string) => void;
+  item: item;
+  setIsCartItemChange: Dispatch<SetStateAction<number>>;
 }

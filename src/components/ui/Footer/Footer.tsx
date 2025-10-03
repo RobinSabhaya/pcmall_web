@@ -49,9 +49,9 @@ export default function Footer() {
     <footer className="bg-black text-white py-16 pb-5">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Exclusive Section */}
+          {/* PCMall Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Exclusive</h3>
+            <h3 className="text-xl font-bold mb-4">PCMall</h3>
             <p className="mb-4">Subscribe</p>
             <p className="text-sm text-gray-400 mb-4">
               Get 10% off your first order
