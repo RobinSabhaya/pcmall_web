@@ -1,1 +1,1 @@
-export const queryKeys = {} as const;
+export const paymentQueryKeys = {} as const;

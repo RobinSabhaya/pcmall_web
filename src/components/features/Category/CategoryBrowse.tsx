@@ -3,21 +3,24 @@
 import Title from '@/components/ui/Title/Title';
 import useSlider from '@/hooks/useSlider';
 
-import Slider from '../../ui/Slider';
+import { useGetAllCategories } from '../../../hooks/query/Category/useCategory';
+import Slider from '../../ui/Slider/Slider';
 
 import CategoryList from './CategoryList';
-import { SAMPLE_CATEGORIES } from './SampleData';
 
 export default function CategoryBrowser() {
-  const categories = SAMPLE_CATEGORIES;
+  const { data: categoryData } = useGetAllCategories();
 
   const { currentIndex, maxIndex, next, prev, selectItem, setSelectItem } =
     useSlider({
-      itemsLength: categories.length,
+      itemsLength: categoryData?.categoryData?.length as number,
       maxShowItems: 6,
     });
 
-  const visibleCategories = categories.slice(currentIndex, currentIndex + 6);
+  const visibleCategories = categoryData?.categoryData?.slice(
+    currentIndex,
+    currentIndex + 6
+  );
 
   return (
     <section className="py-8">
@@ -34,13 +37,15 @@ export default function CategoryBrowser() {
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mx-6 lg:grid-cols-6">
-        <CategoryList
-          categoryList={visibleCategories}
-          selectItem={selectItem}
-          setSelectItem={setSelectItem}
-        />
-      </div>
+      {visibleCategories && visibleCategories?.length > 0 && (
+        <div className="grid grid-cols-2 gap-4 mx-6 lg:grid-cols-6">
+          <CategoryList
+            categoryList={visibleCategories}
+            selectItem={selectItem}
+            setSelectItem={setSelectItem}
+          />
+        </div>
+      )}
     </section>
   );
 }

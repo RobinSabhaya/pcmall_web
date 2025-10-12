@@ -3,7 +3,8 @@
 import { useState } from 'react';
 
 import Button from '@/components/ui/Button/Button';
-import Input from '@/components/ui/Input';
+
+import Input from '../../../ui/Input/Input';
 
 import type { ProfileData } from './ProfileForm.type';
 import { initialData } from './sampleData';

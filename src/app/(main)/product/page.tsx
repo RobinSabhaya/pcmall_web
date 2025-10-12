@@ -1,10 +1,29 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+
 import Filters from '@/components/features/Product/ProductFilter/Filters';
 import Sort from '@/components/features/Product/ProductFilter/Sort';
 
-// type SearchParams = Record<string, string | string[] | undefined>;
+import ProductList from '../../../components/features/Product/ProductList/ProductList';
+import ProductCardSkeleton from '../../../components/ui/Skeleton/Card/ProductCardSkeleton';
+import { useGetAllProducts } from '../../../hooks/query/Product/useProductMutations';
 
-export default async function ProductsPage() {
-  const activeBadges = ['men', 'woman'];
+export default function ProductsPage() {
+  // state
+  const searchParams = useSearchParams();
+
+  // Tanstack query
+  const { data, isLoading } = useGetAllProducts({
+    ...(searchParams?.get('category') && {
+      categories: JSON.stringify([searchParams?.get('category') as string]),
+    }),
+    ...(searchParams?.get('gender') && {
+      gender: JSON.stringify([searchParams?.get('gender') as string]),
+    }),
+  });
+
+  const products = data?.productData.results;
 
   return (
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -13,21 +32,20 @@ export default async function ProductsPage() {
         <Sort />
       </header>
 
-      {activeBadges.length > 0 && (
-        <div className="mb-4 flex flex-wrap gap-2">
-          {activeBadges.map((b, i) => (
-            <span
-              key={`${b}-${i}`}
-              className="rounded-full border border-light-300 px-3 py-1 text-caption text-dark-900"
-            >
-              {b}
-            </span>
-          ))}
-        </div>
-      )}
-
-      <section className="grid grid-cols-1 gap-6 md:grid-cols-[240px_1fr]">
+      <section className="flex justify-start items-start gap-5">
         <Filters />
+
+        {isLoading ? (
+          <ProductCardSkeleton count={3} />
+        ) : (
+          <div className="flex flex-wrap justify-start items-center gap-3">
+            {products?.length && products?.length > 0 ? (
+              <ProductList products={products} />
+            ) : (
+              <div>Search product not found!</div>
+            )}
+          </div>
+        )}
       </section>
     </main>
   );

@@ -18,9 +18,9 @@ interface ProductDetailsProps {
   productId: number;
 }
 export default function ProductDetails({ productId }: ProductDetailsProps) {
-  const [selectedImage, setSelectedImage] = useState(0);
-  // const [selectedColor, setSelectedColor] = useState(10);
-  // const [selectedSize, setSelectedSize] = useState('');
+  const [selectedImage, setSelectedImage] = useState<number>(0);
+  const [selectedColor, setSelectedColor] = useState<number>(1);
+  const [selectedSize, setSelectedSize] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
 
   // Tanstack query
@@ -136,56 +136,54 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
           </div>
 
           {/* Colors */}
-          {/* {colors.length > 0 && (
+          {/* TODO: Dynamic colors */}
+          {['red', 'green', 'blue'].length > 0 && (
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">
-                Colours:
+                Colors:
               </h3>
               <div className="flex gap-2">
-                {colors.map(color => (
+                {['red', 'green', 'blue'].map((color, id) => (
                   <button
-                    key={color.id}
-                    onClick={() => setSelectedColor(color.id)}
-                    disabled={!color.available}
+                    key={id}
+                    onClick={() => setSelectedColor(id)}
+                    // disabled={!color.available}
                     className={`w-8 h-8 rounded-full border-2 ${
-                      selectedColor === color.id
+                      selectedColor === id
                         ? 'border-gray-900'
                         : 'border-gray-300'
-                    } ${
-                      !color.available ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
-                    style={{ backgroundColor: color.value }}
-                    title={color.name}
+                    } ${'opacity-50'}`}
+                    style={{ backgroundColor: color }}
+                    title={color}
                   />
                 ))}
               </div>
             </div>
-          )} */}
+          )}
 
           {/* Sizes */}
-          {/* {sizes.length > 0 && (
+          {/* TODO: Dynamic sizes */}
+          {['S', 'M', 'L', 'XL', 'XXL', 'XXXL'].length > 0 && (
             <div>
               <h3 className="text-sm font-medium text-gray-900 mb-3">Size:</h3>
               <div className="flex gap-2">
-                {sizes.map(size => (
+                {['S', 'M', 'L', 'XL', 'XXL', 'XXXL'].map((size, id) => (
                   <button
-                    key={size.id}
-                    onClick={() => setSelectedSize(size.id)}
-                    disabled={!size.available}
+                    key={id}
+                    onClick={() => setSelectedSize(size)}
+                    // disabled={!size.available}
                     className={`px-4 py-2 border rounded-md text-sm font-medium ${
-                      selectedSize === size.id
+                      selectedSize === size
                         ? 'border-red-500 bg-red-500 text-white'
                         : 'border-gray-300 text-gray-700 hover:border-gray-400'
-                    } ${
-                      !size.available ? 'opacity-50 cursor-not-allowed' : ''
-                    }`}
+                    } ${'opacity-50'}`}
                   >
-                    {size.value}
+                    {size}
                   </button>
                 ))}
               </div>
             </div>
-          )} */}
+          )}
 
           {/* Quantity & Actions */}
           <div className="flex items-center gap-4">

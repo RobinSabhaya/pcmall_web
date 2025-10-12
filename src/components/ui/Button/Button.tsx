@@ -1,13 +1,18 @@
 import { forwardRef } from 'react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-}
+import IOSLoader from '../Loader/IOSLoader';
 
+import type { ButtonProps } from './Button.type';
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className = '', variant = 'primary', size = 'md', children, ...props },
+    {
+      className = '',
+      variant = 'primary',
+      size = 'md',
+      children,
+      loading,
+      ...props
+    },
     ref
   ) => {
     const baseClasses =
@@ -32,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {children}
+        {loading ? <IOSLoader /> : children}
       </button>
     );
   }

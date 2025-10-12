@@ -1,2 +1,2 @@
-export { default } from './NotFound';
-export type { NotFoundProps } from './NotFound.type';
+export * from './NotFound';
+export * from './NotFound.type';

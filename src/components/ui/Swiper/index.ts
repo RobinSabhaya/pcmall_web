@@ -1,3 +1,3 @@
-export { default } from './Swiper';
-export type { SwiperProps, SlideData } from './Swiper.type';
-export { SAMPLE_SLIDES } from './sampleData';
+export * from './Swiper';
+export * from './Swiper.type';
+export * from './sampleData';

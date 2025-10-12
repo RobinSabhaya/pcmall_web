@@ -4,6 +4,6 @@ import type { Category } from '../CategoryCard/CategoryCard.type';
 
 export interface CategoryListProps {
   categoryList: Category[];
-  selectItem: number;
-  setSelectItem: Dispatch<SetStateAction<number>>;
+  selectItem: string | unknown;
+  setSelectItem: Dispatch<SetStateAction<string | unknown>>;
 }

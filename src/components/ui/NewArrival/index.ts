@@ -1,3 +1,3 @@
-export { default } from './NewArrival';
-export type { NewArrivalProps, NewArrivalItem } from './NewArrival.type';
-export { newArrivalData } from './sampleData';
+export * from './NewArrival';
+export * from './NewArrival.type';
+export * from './sampleData';

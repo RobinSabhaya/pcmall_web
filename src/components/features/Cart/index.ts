@@ -1,5 +1,5 @@
-export { default as Cart } from './Cart/Cart';
-export { default as CartItem } from './CartItem/CartItem';
-export { default as CartSummary } from './CartSummary/CartSummary';
-export { default as QuantitySelector } from './QuantitySelector/QuantitySelector';
+export * from './Cart/Cart';
+export * from './CartItem/CartItem';
+export * from './CartSummary/CartSummary';
+export * from './QuantitySelector/QuantitySelector';
 export type * from './Cart/Cart.type';

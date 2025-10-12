@@ -1,2 +1,3 @@
-export { default } from './Checkout/Checkout';
-export type * from './Checkout/Checkout.type';
+export * from './BillingForm';
+export * from './Checkout';
+export * from './OrderSummary';

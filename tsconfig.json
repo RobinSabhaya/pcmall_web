@@ -7,7 +7,7 @@
     "moduleResolution": "bundler",
     "jsx": "preserve",
     "jsxImportSource": "react",
-    
+
     // Module Resolution
     "allowJs": false,
     "checkJs": false,
@@ -17,7 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": false,
-    
+
     // Type Checking - Maximum Strictness
     "strict": true,
     "noImplicitAny": true,
@@ -32,7 +32,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "exactOptionalPropertyTypes": true,
-    
+
     // Additional Checks for Large Teams
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -40,7 +40,7 @@
     "allowUnusedLabels": false,
     "noImplicitUseStrict": false,
     "useUnknownInCatchVariables": true,
-    
+
     // Emit
     "noEmit": true,
     "declaration": false,
@@ -50,16 +50,16 @@
     "importHelpers": true,
     "downlevelIteration": true,
     "preserveConstEnums": true,
-    
+
     // Interop Constraints
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "skipDefaultLibCheck": false,
-    
+
     // Performance Optimizations
     "incremental": true,
     "tsBuildInfoFile": ".next/.tsbuildinfo",
     "assumeChangesOnlyAffectDirectDependencies": true,
-    
+
     // Path Mapping
     "baseUrl": ".",
     "paths": {
@@ -80,7 +80,7 @@
       "@/schemas/*": ["./src/schemas/*"],
       "~/test-utils": ["./src/__tests__/utils/index.ts"]
     },
-    
+
     // Next.js Plugin
     "plugins": [
       {
@@ -88,7 +88,7 @@
       }
     ]
   },
-  
+
   // Include patterns - organized for large codebases
   "include": [
     "next-env.d.ts",
@@ -109,7 +109,7 @@
     "cypress/**/*",
     "playwright/**/*"
   ],
-  
+
   // Exclude patterns - optimized for performance
   "exclude": [
     "node_modules",
@@ -134,13 +134,13 @@
     "**/dist",
     "**/build"
   ],
-  
+
   // TypeScript 5.0+ options for enterprise
   "compileOnSave": false,
   "buildOptions": {
     "assumeChangesOnlyAffectDirectDependencies": true
   },
-  
+
   // Watch options for development performance
   "watchOptions": {
     "watchFile": "useFsEvents",
@@ -149,7 +149,7 @@
     "synchronousWatchDirectory": true,
     "excludeDirectories": ["**/node_modules", "**/.git", "**/.next"]
   },
-  
+
   // References for project splitting (optional for monorepos)
   "references": []
 }

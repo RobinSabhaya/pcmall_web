@@ -7,3 +7,11 @@ export const calculateDiscount = (
   originalPrice: number,
   discount: number
 ): number => (originalPrice * discount) / 100;
+
+export const capitalizeString = (str: string): string => {
+  return str.slice(0, 1).toUpperCase() + str.slice(1);
+};
+
+export const formatCategoryName = (categoryName: string) => {
+  return capitalizeString(categoryName).replaceAll('-', ' ');
+};

@@ -1,9 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { BreadCrumb } from '@/components/ui/BreadCrumb';
 
+import { CheckoutProvider } from '../../../../contexts/Checkout/CheckoutContext';
 import BillingForm from '../BillingForm/BillingForm';
 import OrderSummary from '../OrderSummary/OrderSummary';
 
@@ -15,6 +16,9 @@ import OrderSummary from '../OrderSummary/OrderSummary';
 // ];
 
 export default function Checkout() {
+  // state
+  const [selectedAddress, setSelectedAddress] = useState<string>('');
+
   // memorize
   const breadcrumbs = useMemo(
     () => [
@@ -54,9 +58,14 @@ export default function Checkout() {
       <h1 className="text-2xl font-semibold mb-8">Billing Details</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <BillingForm />
+        <BillingForm
+          selectedAddress={selectedAddress}
+          setSelectedAddress={setSelectedAddress}
+        />
 
-        <OrderSummary />
+        <CheckoutProvider value={selectedAddress}>
+          <OrderSummary />
+        </CheckoutProvider>
       </div>
     </div>
   );

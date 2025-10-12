@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
-import TextArea from '@/components/ui/TextArea';
 
+import TextArea from '../../../ui/TextArea/TextArea';
 import type {
   ContactFormData,
   ContactFormProps,

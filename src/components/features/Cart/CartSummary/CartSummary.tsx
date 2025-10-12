@@ -6,8 +6,6 @@ import { useRouter } from 'next/navigation';
 
 import Button from '@/components/ui/Button/Button';
 
-import { formatPrice } from '../../../../utils/custom';
-
 import type { CartSummaryProps } from './CartSummary.type';
 
 export default memo(function CartSummary({
@@ -25,9 +23,7 @@ export default memo(function CartSummary({
       <div className="space-y-3 mb-6">
         <div className="flex justify-between py-2 border-b border-gray-200">
           <span>Subtotal:</span>
-          <span className="font-medium">
-            ₹ {formatPrice(cartSummaryData.subtotal)}
-          </span>
+          <span className="font-medium">₹ {cartSummaryData.subtotal}</span>
         </div>
 
         <div className="flex justify-between py-2 border-b border-gray-200">
@@ -35,13 +31,13 @@ export default memo(function CartSummary({
           <span className="font-medium">
             {cartSummaryData.shipping === 0
               ? 'Free'
-              : `₹ ${formatPrice(cartSummaryData.shipping)}`}
+              : `₹ ${cartSummaryData.shipping}`}
           </span>
         </div>
 
         <div className="flex justify-between py-2 text-lg font-semibold">
           <span>Total:</span>
-          <span>₹ {formatPrice(cartSummaryData.total)}</span>
+          <span>₹ {cartSummaryData.total}</span>
         </div>
       </div>
 

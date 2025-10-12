@@ -1,12 +1,18 @@
 'use client';
 
+import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';
 import useSlider from '../../../../hooks/useSlider';
-import FlashSales from '../../../ui/FlashSale';
-import Slider from '../../../ui/Slider';
+import FlashSales from '../../../ui/FlashSale/FlashSale';
+import ProductCardSkeleton from '../../../ui/Skeleton/Card/ProductCardSkeleton';
+import Slider from '../../../ui/Slider/Slider';
 import Title from '../../../ui/Title/Title';
 import ProductList from '../ProductList/ProductList';
 
 export default function ProductSection() {
+  // Tanstack query
+  const { data, isLoading } = useGetAllProducts();
+  const productList = data?.productData?.results;
+
   const maxShowItems = 4;
 
   const { currentIndex, maxIndex, next, prev } = useSlider({
@@ -39,9 +45,11 @@ export default function ProductSection() {
 
       <FlashSales endDate={endDate} className="mx-6" />
       <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-wrap md:justify-start">
-        <ProductList
-        // start={currentIndex} end={currentIndex + maxShowItems}
-        />
+        {isLoading ? (
+          <ProductCardSkeleton count={10} />
+        ) : (
+          productList?.length && <ProductList products={productList} />
+        )}
       </div>
     </>
   );

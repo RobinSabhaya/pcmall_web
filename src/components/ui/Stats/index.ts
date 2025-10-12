@@ -1,2 +1,2 @@
-export { default } from './Stats';
-export type { StatsProps, StatItem } from './Stats.type';
+export * from './Stats';
+export * from './Stats.type';

@@ -1,3 +1,4 @@
+import { formatPrice } from '../../../../utils/custom';
 import type { item } from '../CartItem/CartItem.type';
 
 export const breadcrumbs = [
@@ -19,8 +20,8 @@ export function calculatePayout(items: item[]) {
     }, 0) ?? 0;
 
   return {
-    shipping,
-    subtotal,
-    total: shipping + subtotal,
+    shipping: formatPrice(shipping),
+    subtotal: formatPrice(subtotal),
+    total: formatPrice(shipping + subtotal),
   };
 }

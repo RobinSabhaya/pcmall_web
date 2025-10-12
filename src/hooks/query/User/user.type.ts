@@ -11,3 +11,8 @@ export type UpdateAddressRequest =
   paths['/v1/user/address/update']['put']['requestBody']['content']['application/json'];
 export type UpdateAddressResponse =
   paths['/v1/user/address/update']['put']['responses']['200']['content']['application/json'];
+
+export type UserDetailsRequest =
+  paths['/v1/user/details']['get']['requestBody'];
+export type UserDetailsResponse =
+  paths['/v1/user/details']['get']['responses']['200']['content']['application/json']['data'];

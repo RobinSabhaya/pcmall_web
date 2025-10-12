@@ -7,41 +7,35 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/ui/Button/Button';
 
 import { useAddToCart } from '../../../../hooks/query/Cart/useCartMutation';
-// import { successMessage } from '../../../../hooks/useToaster';
+import { successMessage } from '../../../../hooks/useToaster';
 import { formatPrice } from '../../../../utils/custom';
 import StarRating from '../../../ui/StarRating/StarRating';
 
 import type { ProductCardProps } from './ProductCard.type';
 
-export default function ProductCard({
-  id,
-  name,
-  price,
-  originalPrice,
-  rating,
-  reviewCount,
-  image,
-  productVariantId,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const router = useRouter();
 
+  const productVariantData = product?.product_variants[0];
+  const productSkuData = productVariantData?.product_skus;
+
   // Tanstack query
-  const { mutate: addToCart } = useAddToCart();
+  const { mutate: addToCart, isPending } = useAddToCart();
 
   async function onAddToCart() {
     addToCart({
-      productVariantId,
+      productVariantId: productVariantData?._id as string,
       quantity: 1,
     });
 
-    // successMessage('Cart added successfully')
+    successMessage('Cart added successfully');
   }
 
   /**
    * Handle redirect to product page
    */
   function handleRedirectToProduct() {
-    router.push(`/product/${id}`);
+    router.push(`/product/${product._id}`);
   }
 
   return (
@@ -99,36 +93,51 @@ export default function ProductCard({
         </div>
 
         <div className="aspect-square mb-4 overflow-hidden rounded-lg bg-gray-100">
-          <Image
-            src={image}
-            alt={name}
-            width={200}
-            height={200}
-            loading="eager"
-            className="object-cover group-hover:scale-105 transition-transform"
-          />
+          {productVariantData?.images &&
+            productVariantData?.images?.length > 0 && (
+              <Image
+                src={productVariantData.images[0] as string}
+                alt={product.title}
+                width={200}
+                height={200}
+                loading="eager"
+                className="object-cover group-hover:scale-105 transition-transform"
+              />
+            )}
         </div>
       </div>
 
       <div className="space-y-2">
-        <h3 className="font-medium text-gray-900 line-clamp-2">{name}</h3>
+        <h3 className="font-medium text-gray-900 line-clamp-2">
+          {product.title ?? 'Product'}
+        </h3>
 
         <div className="flex items-center gap-1">
           {/* Star Rating */}
-          <StarRating rating={rating} />
-          <span className="text-sm text-gray-500">({reviewCount})</span>
+          <StarRating rating={10} />
+          <span className="text-sm text-gray-500">20</span>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-lg font-bold text-gray-900">₹ {price}</span>
-          {originalPrice && (
+          {productSkuData?.price && (
+            <span className="text-lg font-bold text-gray-900">
+              ₹ {formatPrice(productSkuData?.price)}
+            </span>
+          )}
+          {productSkuData?.price && (
             <span className="text-sm text-gray-500 line-through">
-              ₹ {formatPrice(originalPrice)}
+              ₹ {formatPrice(productSkuData?.price)}
             </span>
           )}
         </div>
 
-        <Button onClick={onAddToCart} className="w-full" size="sm">
+        <Button
+          onClick={onAddToCart}
+          className="w-full"
+          size="sm"
+          disabled={productVariantData?.isInCart}
+          loading={isPending}
+        >
           Add To Cart
         </Button>
       </div>

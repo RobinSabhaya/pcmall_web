@@ -1,18 +1,5 @@
-'use client';
-
 import type { SidebarProps } from './Sidebar.type';
-
-const SIDEBAR_ITEMS = [
-  { label: "Woman's Fashion", hasDropdown: true },
-  { label: "Men's Fashion", hasDropdown: true },
-  { label: 'Electronics' },
-  { label: 'Home & Lifestyle' },
-  { label: 'Medicine' },
-  { label: 'Sports & Outdoor' },
-  { label: "Baby's & Toys" },
-  { label: 'Groceries & Pets' },
-  { label: 'Health & Beauty' },
-];
+import { SIDEBAR_ITEMS } from './utils';
 
 export default function Sidebar({ className = '' }: SidebarProps) {
   return (

@@ -1,9 +1,9 @@
-export const queryKeys = {
+export const productQueryKeys = {
   // Products
   products: {
     all: ['products'] as const,
-    lists: () => [...queryKeys.products.all, 'list'] as const,
+    lists: () => [...productQueryKeys.products.all, 'list'] as const,
     list: (filters?: Record<string, unknown>) =>
-      [...queryKeys.products.lists(), filters] as const,
+      [...productQueryKeys.products.lists(), filters] as const,
   },
 } as const;

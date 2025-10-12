@@ -1,8 +1,8 @@
-export const queryKeys = {
+export const orderQueryKeys = {
   orders: {
     all: ['orders'] as const,
-    lists: () => [...queryKeys.orders.all, 'list'] as const,
+    lists: () => [...orderQueryKeys.orders.all, 'list'] as const,
     list: (filters?: Record<string, unknown>) =>
-      [...queryKeys.orders.lists(), filters] as const,
+      [...orderQueryKeys.orders.lists(), filters] as const,
   },
 } as const;

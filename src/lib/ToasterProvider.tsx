@@ -1,9 +1,9 @@
-// 'use client';
+'use client';
 
-// // import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
-// const ToasterProvider = () => {
-//   return <Toaster position="top-center" reverseOrder={false} />;
-// };
+const ToasterProvider = () => {
+  return <Toaster position="top-center" reverseOrder={false} />;
+};
 
-// export default ToasterProvider;
+export default ToasterProvider;

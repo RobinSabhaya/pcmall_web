@@ -11,9 +11,9 @@ export default function CategoryList({
     <>
       {categoryList.map(category => (
         <CategoryCard
-          key={category.id}
+          key={category._id}
           category={category}
-          selectItem={selectItem}
+          selectItem={selectItem as string}
           setSelectItem={setSelectItem}
         />
       ))}

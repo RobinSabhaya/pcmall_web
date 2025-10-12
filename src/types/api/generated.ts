@@ -1269,7 +1269,20 @@ export interface paths {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
+          content: {
+            'application/json': {
+              success: boolean;
+              data: {
+                categoryData: {
+                  _id: string;
+                  categoryName: string;
+                  subCategory: string[];
+                  tags: string[];
+                  deletedAt: string | null;
+                }[];
+              };
+            };
+          };
         };
       };
     };
@@ -1718,7 +1731,48 @@ export interface paths {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
+          content: {
+            'application/json': {
+              /** @default true */
+              success: boolean;
+              message?: string;
+              data: {
+                userData: {
+                  email: string;
+                  phone_number: string;
+                  password: string;
+                  is_verified: boolean;
+                  /** @enum {string} */
+                  account_status: 'ACTIVE' | 'SUSPENDED' | 'DELETED';
+                  roles: string[];
+                  /** @enum {string} */
+                  auth_provider: 'EMAIL' | 'GOOGLE' | 'FACEBOOK' | 'APPLE';
+                  is_active: boolean;
+                  _id: string;
+                  addresses: {
+                    _id: string;
+                    line1: string;
+                    line2?: string;
+                    state: string;
+                    city: string;
+                    country: string;
+                    user: string;
+                    isPrimary: boolean;
+                  }[];
+                  user_profile: {
+                    user: string;
+                    first_name: string;
+                    last_name: string;
+                    dob: string;
+                    gender: string;
+                    profile_picture: string | null;
+                    language: string;
+                    timezone: string;
+                  };
+                };
+              };
+            };
+          };
         };
       };
     };
@@ -2530,7 +2584,7 @@ export interface paths {
     get: {
       parameters: {
         query?: {
-          categories?: string[];
+          categories?: string;
           colors?: string[];
           prices?: Record<string, never>;
           productId?: string;
@@ -2607,6 +2661,7 @@ export interface paths {
                       tax: number;
                       updatedAt: string;
                     };
+                    isInCart: boolean;
                   }[];
                 }[];
                 page: number;

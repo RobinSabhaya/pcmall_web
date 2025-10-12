@@ -1,16 +1,15 @@
-'use client';
-
 import Image from 'next/image';
 
 import CategoryBrowser from '@/components/features/Category';
 import ProductSection from '@/components/features/Product/ProductSection/ProductSection';
-import Services from '@/components/features/Services';
 import PageWrapper from '@/components/ui/Common/PageWrapper';
-import Sidebar from '@/components/ui/Sidebar';
-import Swiper, { SAMPLE_SLIDES } from '@/components/ui/Swiper';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
-import NewArrival from '../../../components/ui/NewArrival';
+import Services from '../../../components/features/Services/Services';
+import NewArrival from '../../../components/ui/NewArrival/NewArrival';
+import Sidebar from '../../../components/ui/Sidebar/Sidebar';
+import { SAMPLE_SLIDES } from '../../../components/ui/Swiper';
+import Swiper from '../../../components/ui/Swiper/Swiper';
 
 export default function Home() {
   return (

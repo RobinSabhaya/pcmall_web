@@ -1,2 +1,2 @@
-export { default } from './Services';
+export * from './Services';
 export * from './Services.type';

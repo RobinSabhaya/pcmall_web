@@ -9,7 +9,7 @@ export default function useSlider({
   itemsLength = 1,
 }: useSliderProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [selectItem, setSelectItem] = useState<number>(1);
+  const [selectItem, setSelectItem] = useState<unknown>(1);
   const maxIndex = Math.max(0, itemsLength - maxShowItems);
 
   const next = () => setCurrentIndex(prev => Math.min(prev + 1, maxIndex));

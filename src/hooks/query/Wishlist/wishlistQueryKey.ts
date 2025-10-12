@@ -1,6 +1,6 @@
-export const queryKeys = {
+export const wishlistQueryKeys = {
   wishlist: {
     all: ['wishlist'] as const,
-    items: () => [...queryKeys.wishlist.all, 'items'] as const,
+    items: () => [...wishlistQueryKeys.wishlist.all, 'items'] as const,
   },
 } as const;

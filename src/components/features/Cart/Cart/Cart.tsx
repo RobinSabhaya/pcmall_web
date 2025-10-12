@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import BreadCrumb from '@/components/ui/BreadCrumb/BreadCrumb';
 import Button from '@/components/ui/Button/Button';
 
@@ -12,17 +14,20 @@ import CartSummary from '../CartSummary/CartSummary';
 import type { CartSummaryType } from './Cart.type';
 import { breadcrumbs, calculatePayout } from './utils';
 
-export default function Cart() {
-  const initialData: CartSummaryType = {
-    shipping: 0,
-    subtotal: 0,
-    total: 0,
-  };
+export const initialData: CartSummaryType = {
+  shipping: 0,
+  subtotal: 0,
+  total: 0,
+};
 
+export default function Cart() {
+  // state
   const [isCartItemChange, setIsCartItemChange] = useState<number>(0);
   const [cartSummaryData, setCartSummaryData] =
     useState<CartSummaryType>(initialData);
+  const router = useRouter();
 
+  // Tanstack query
   const { data } = useGetAllCart();
   const items = data?.items?.results;
 
@@ -85,7 +90,7 @@ export default function Cart() {
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <Button
               variant="outline"
-              onClick={() => window.history.back()}
+              onClick={() => router.replace('/')}
               className="flex-1"
             >
               Return To Shop

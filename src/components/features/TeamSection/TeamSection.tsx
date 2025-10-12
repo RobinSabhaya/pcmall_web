@@ -21,7 +21,7 @@ export default function TeamSection({
   });
 
   const visibleMembers = useMemo(() => {
-    const startIndex = (selectItem - 1) * itemsPerPage;
+    const startIndex = (Number(selectItem) - 1) * itemsPerPage;
     return members.slice(startIndex, startIndex + itemsPerPage);
   }, [members, selectItem, itemsPerPage]);
 

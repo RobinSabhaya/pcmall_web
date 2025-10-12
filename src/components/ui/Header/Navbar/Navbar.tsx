@@ -5,9 +5,11 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
-import { UserAccountDropdown, UserIcon } from '../../Dropdown';
-import { DEFAULT_MENU_ITEMS } from '../../Dropdown/Dropdown';
-import Input from '../../Input';
+import { UserIcon } from '../../Dropdown';
+import UserAccountDropdown, {
+  DEFAULT_MENU_ITEMS,
+} from '../../Dropdown/Dropdown';
+import Input from '../../Input/Input';
 import TopBanner from '../Banner/TopBanner/TopBanner';
 
 import type { NavbarProps } from './Navbar.type';

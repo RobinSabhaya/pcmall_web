@@ -9,17 +9,16 @@ const OPTIONS = [
   { label: 'Price (Low → High)', value: 'price_asc' },
 ] as const;
 
+// TODO: Implement Sort functionality
 export default function Sort() {
   const searchParams = useSearchParams();
   const selected = searchParams.get('sort') ?? 'featured';
 
-  // const onChange = (
-  //   value: string
-  // ) => {
-  //   const withSort = setParam(pathname, search, "sort", value);
-  //   const withPageReset = setParam(pathname, new URL(withSort, "http://dummy").search, "page", "1");
-  //   router.push(withPageReset, { scroll: false });
-  // };
+  const onChange = (_: string) => {
+    // const withSort = setParam(pathname, search, "sort", value);
+    // const withPageReset = setParam(pathname, new URL(withSort, "http://dummy").search, "page", "1");
+    // router.push(withPageReset, { scroll: false });
+  };
 
   return (
     <label className="inline-flex items-center gap-2">
@@ -27,9 +26,7 @@ export default function Sort() {
       <select
         className="rounded-md border border-light-300 bg-light-100 px-3 py-2 text-body"
         value={selected}
-        // onChange={e => onChange(
-        //   e.target.value
-        // )}
+        onChange={e => onChange(e.target.value)}
         aria-label="Sort products"
       >
         {OPTIONS.map(o => (

@@ -1,14 +1,8 @@
-import type { StaticImageData } from 'next/image';
+import type { paths } from '../../../../types/api/generated';
+
+export type productType =
+  paths['/v1/product/all']['get']['responses']['200']['content']['application/json']['productData']['results'][0];
 
 export interface ProductCardProps {
-  id: string;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  rating: number;
-  reviewCount: number;
-  image: string | StaticImageData;
-  badge?: string;
-  colors?: string[];
-  productVariantId: string;
+  product: productType;
 }

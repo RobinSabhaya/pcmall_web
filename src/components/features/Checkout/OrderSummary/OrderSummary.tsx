@@ -1,20 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/ui/Button/Button';
-import Input from '@/components/ui/Input';
 
+import { CheckoutContext } from '../../../../contexts/Checkout/CheckoutContext';
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { useCreateCheckout } from '../../../../hooks/query/Checkout/useCheckoutMutations';
 import { formatPrice } from '../../../../utils/custom';
+import Input from '../../../ui/Input/Input';
+import { initialData } from '../../Cart/Cart/Cart';
+import { calculatePayout } from '../../Cart/Cart/utils';
 
 export default function OrderSummary() {
+  const initialState = { ...initialData };
+
   // state
   const [couponCode, setCouponCode] = useState('');
+  const shippingAddress = useContext(CheckoutContext);
   const router = useRouter();
 
   // Tanstack query
@@ -23,18 +29,13 @@ export default function OrderSummary() {
 
   const items = data?.items?.results;
 
-  const shipping = 0;
-  const subTotal = items?.reduce((acc, item) => {
-    if (item?.product_variants?.product_skus[0]?.price) {
-      return (
-        acc + item?.product_variants?.product_skus[0]?.price * item?.quantity
-      );
-    } else {
-      return acc;
-    }
-  }, 0);
+  if (items && items?.length > 0) {
+    const { shipping, subtotal, total } = calculatePayout(items);
 
-  const total = subTotal ?? 0 + shipping;
+    initialState.shipping = shipping;
+    initialState.subtotal = subtotal;
+    initialState.total = total;
+  }
 
   // generate payload
   const itemsPayload = items?.map(item => ({
@@ -55,7 +56,7 @@ export default function OrderSummary() {
       const payload = {
         items: itemsPayload,
         currency: 'INR',
-        shippingAddress: '68d962017d0f100d31f08757', //TODO: remove static address
+        shippingAddress,
         cartIds: items?.map(item => item._id) ?? [''],
       };
 
@@ -98,15 +99,19 @@ export default function OrderSummary() {
       <div className="border-t pt-4 space-y-3">
         <div className="flex justify-between">
           <span>Subtotal:</span>
-          <span>₹ {subTotal}</span>
+          <span>₹ {initialState.subtotal}</span>
         </div>
         <div className="flex justify-between">
           <span>Shipping:</span>
-          <span>{shipping === 0 ? 'Free' : `₹ ${shipping}`}</span>
+          <span>
+            {initialState.shipping === 0
+              ? 'Free'
+              : `₹ ${initialState.shipping}`}
+          </span>
         </div>
         <div className="flex justify-between font-semibold text-lg border-t pt-3">
           <span>Total:</span>
-          <span>₹ {total}</span>
+          <span>₹ {initialState.total}</span>
         </div>
       </div>
 

@@ -12,7 +12,7 @@ import {
   useLogin,
   useSignup,
 } from '../../../../hooks/query/Auth/useAuthMutations';
-import Input from '../../../ui/Input';
+import Input from '../../../ui/Input/Input';
 import SocialProviders from '../../../ui/SocialProvider/SocialProviders';
 
 import type { AuthFormProps } from './AuthForm.type';

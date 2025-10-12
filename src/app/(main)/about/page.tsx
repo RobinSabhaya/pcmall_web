@@ -1,13 +1,10 @@
-'use client';
-
 import OurStory from '@/components/features/About/OurStory';
-import {
-  sampleTeamMembers,
-  TeamSection,
-} from '@/components/features/TeamSection';
+import { sampleTeamMembers } from '@/components/features/TeamSection';
 import PageWrapper from '@/components/ui/Common/PageWrapper';
-import Stats from '@/components/ui/Stats';
 import { statsData } from '@/components/ui/Stats/sampleData';
+
+import TeamSection from '../../../components/features/TeamSection/TeamSection';
+import Stats from '../../../components/ui/Stats/Stats';
 
 export default function AboutPage() {
   return (

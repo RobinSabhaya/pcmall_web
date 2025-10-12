@@ -1,6 +1,5 @@
-export const queryKeys = {
+export const categoriesQueryKeys = {
   categories: {
     all: ['categories'] as const,
-    lists: () => [...queryKeys.categories.all, 'list'] as const,
   },
 } as const;

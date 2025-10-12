@@ -1,7 +1,6 @@
-export const queryKeys = {
+export const userQueryKeys = {
   users: {
     all: ['users'] as const,
-    details: () => [...queryKeys.users.all, 'detail'] as const,
-    addresses: () => [...queryKeys.users.all, 'addresses'] as const,
+    details: ['detail'] as const,
   },
 } as const;
