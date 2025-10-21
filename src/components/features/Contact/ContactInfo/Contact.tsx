@@ -1,21 +1,10 @@
-import BreadCrumb from '@/components/ui/BreadCrumb/BreadCrumb';
+import BreadCrumb from '@/components/ui/Common/BreadCrumb/BreadCrumb';
 
 import ContactForm from '../ContactForm/ContactForm';
 
 import type { ContactProps } from './Contact.type';
 import ContactInfo from './ContactInfo';
-
-const defaultContactInfo = {
-  phone: '+88016111222222',
-  email: 'customer@exclusive.com',
-  supportEmail: 'support@exclusive.com',
-  availability: 'We are available 24/7, 7 days a week.',
-};
-
-const breadcrumbItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Contact', href: '/' },
-];
+import { breadcrumbItems, defaultContactInfo } from './utils';
 
 export default function Contact({
   contactInfo = defaultContactInfo,

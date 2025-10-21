@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 
-import Button from '@/components/ui/Button/Button';
-import Input from '@/components/ui/Input/Input';
+import Button from '@/components/ui/Common/Button/Button';
+import Input from '@/components/ui/Common/Input/Input';
 
-import TextArea from '../../../ui/TextArea/TextArea';
+import TextArea from '../../../ui/Common/TextArea/TextArea';
 import type {
   ContactFormData,
   ContactFormProps,

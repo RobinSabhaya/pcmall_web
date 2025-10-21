@@ -12,7 +12,7 @@ import {
   useLogin,
   useSignup,
 } from '../../../../hooks/query/Auth/useAuthMutations';
-import Input from '../../../ui/Input/Input';
+import Input from '../../../ui/Common/Input/Input';
 import SocialProviders from '../../../ui/SocialProvider/SocialProviders';
 
 import type { AuthFormProps } from './AuthForm.type';
@@ -25,7 +25,10 @@ export interface FormValue {
 }
 
 export default function AuthForm({ mode }: AuthFormProps) {
+  // state
   const [show, setShow] = useState(false);
+
+  // Tanstack query
   const { mutate: signup } = useSignup();
   const { mutate: login } = useLogin();
 

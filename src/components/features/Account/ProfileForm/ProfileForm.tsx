@@ -1,57 +1,43 @@
 'use client';
 
-import { useState } from 'react';
+import { useForm } from '@tanstack/react-form';
 
-import Button from '@/components/ui/Button/Button';
+import Button from '@/components/ui/Common/Button/Button';
 
-import Input from '../../../ui/Input/Input';
+import { useUserContext } from '../../../../contexts/User/UserContext';
+import { useUpdateUser } from '../../../../hooks';
+import { editProfileSchema } from '../../../../validations/userSchema';
+import Input from '../../../ui/Common/Input/Input';
 
-import type { ProfileData } from './ProfileForm.type';
-import { initialData } from './sampleData';
+interface FormValue {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+}
 
 export default function ProfileForm() {
-  const [formData, setFormData] = useState<ProfileData>(initialData);
-  const [errors, setErrors] = useState<Partial<ProfileData>>({});
+  // Tanstack query
+  const { mutate: updateUserProfile } = useUpdateUser();
+  const data = useUserContext();
 
-  const handleChange =
-    (field: keyof ProfileData) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData(prev => ({ ...prev, [field]: e.target.value }));
-      if (errors[field]) {
-        setErrors(prev => ({ ...prev, [field]: undefined }));
-      }
-    };
-
-  const validateForm = (): boolean => {
-    const newErrors: Partial<ProfileData> = {};
-
-    if (!formData.firstName.trim())
-      newErrors.firstName = 'First name is required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    if (!formData.address.trim()) newErrors.address = 'Address is required';
-
-    if (
-      formData.newPassword &&
-      formData.newPassword !== formData.confirmPassword
-    ) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  // pre-fill form
+  const defaultValues: FormValue = {
+    first_name: data?.user_profile?.first_name ?? '',
+    last_name: data?.user_profile?.last_name ?? '',
+    email: data?.email ?? '',
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // console.log('Form submitted:', formData);
-    }
-  };
+  async function onSubmit({ value }: { value: FormValue }) {
+    updateUserProfile(value);
+  }
 
-  const handleCancel = () => {
-    setFormData(initialData);
-    setErrors({});
-  };
+  const form = useForm({
+    defaultValues,
+    validators: {
+      onChange: editProfileSchema,
+    },
+    onSubmit,
+  });
 
   return (
     <div className="max-w-4xl">
@@ -59,43 +45,57 @@ export default function ProfileForm() {
         Edit Your Profile
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          form.handleSubmit();
+        }}
+        className="space-y-6"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Input
-            label="First Name"
-            value={formData.firstName}
-            onChange={handleChange('firstName')}
-            error={errors.firstName as string}
-            placeholder="Md"
-          />
-          <Input
-            label="Last Name"
-            value={formData.lastName}
-            onChange={handleChange('lastName')}
-            error={errors.lastName as string}
-            placeholder="Rimel"
-          />
+          <form.Field name="first_name">
+            {field => (
+              <Input
+                label="First name"
+                type="text"
+                value={field.state.value}
+                onChange={e => field.handleChange(e.target.value)}
+                placeholder="Enter first name"
+              />
+            )}
+          </form.Field>
+          <form.Field name="last_name">
+            {field => (
+              <Input
+                label="Last name"
+                type="text"
+                value={field.state.value}
+                onChange={e => field.handleChange(e.target.value)}
+                placeholder="Enter last name"
+              />
+            )}
+          </form.Field>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Input
-            label="Email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange('email')}
-            error={errors.email as string}
-            placeholder="rimel1111@gmail.com"
-          />
-          <Input
-            label="Address"
-            value={formData.address}
-            onChange={handleChange('address')}
-            error={errors.address as string}
-            placeholder="Kingston, 5236, United State"
-          />
+          <form.Field name="email">
+            {field => (
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                label="Email"
+                placeholder="Enter your email"
+                autoComplete="email"
+                value={field.state.value}
+                onChange={e => field.handleChange(e.target.value)}
+              />
+            )}
+          </form.Field>
         </div>
 
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           <h3 className="text-lg font-medium text-gray-900">
             Password Changes
           </h3>
@@ -123,10 +123,10 @@ export default function ProfileForm() {
             error={errors.confirmPassword as string}
             placeholder="Confirm New Password"
           />
-        </div>
+        </div> */}
 
         <div className="flex justify-end gap-4 pt-6">
-          <Button type="button" variant="ghost" onClick={handleCancel}>
+          <Button type="button" variant="ghost" onClick={() => {}}>
             Cancel
           </Button>
           <Button type="submit" variant="primary">

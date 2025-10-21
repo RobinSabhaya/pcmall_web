@@ -5,13 +5,13 @@ import { useContext, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import Button from '@/components/ui/Button/Button';
+import Button from '@/components/ui/Common/Button/Button';
 
 import { CheckoutContext } from '../../../../contexts/Checkout/CheckoutContext';
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { useCreateCheckout } from '../../../../hooks/query/Checkout/useCheckoutMutations';
 import { formatPrice } from '../../../../utils/custom';
-import Input from '../../../ui/Input/Input';
+import Input from '../../../ui/Common/Input/Input';
 import { initialData } from '../../Cart/Cart/Cart';
 import { calculatePayout } from '../../Cart/Cart/utils';
 

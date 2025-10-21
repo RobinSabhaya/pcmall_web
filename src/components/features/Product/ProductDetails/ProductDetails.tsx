@@ -4,13 +4,13 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-import { BreadCrumb } from '@/components/ui/BreadCrumb';
+import { BreadCrumb } from '@/components/ui/Common/BreadCrumb';
 
 import { useAddToCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';
 import { calculateDiscount, formatPrice } from '../../../../utils/custom';
-import Button from '../../../ui/Button/Button';
-import Loader from '../../../ui/Loader/Loader';
+import Button from '../../../ui/Common/Button/Button';
+import Loader from '../../../ui/Common/Loader/Loader';
 import StarRating from '../../../ui/StarRating/StarRating';
 import ProductGallery from '../ProductGallery/ProductGallery';
 

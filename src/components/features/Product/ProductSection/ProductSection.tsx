@@ -1,11 +1,12 @@
 'use client';
 
+import Slider from '@/components/ui/Common/Slider';
+
 import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';
 import useSlider from '../../../../hooks/useSlider';
+import Title from '../../../ui/Common/Title/Title';
 import FlashSales from '../../../ui/FlashSale/FlashSale';
 import ProductCardSkeleton from '../../../ui/Skeleton/Card/ProductCardSkeleton';
-import Slider from '../../../ui/Slider/Slider';
-import Title from '../../../ui/Title/Title';
 import ProductList from '../ProductList/ProductList';
 
 export default function ProductSection() {

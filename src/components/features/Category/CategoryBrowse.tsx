@@ -1,10 +1,10 @@
 'use client';
 
-import Title from '@/components/ui/Title/Title';
+import Slider from '@/components/ui/Common/Slider';
+import Title from '@/components/ui/Common/Title/Title';
 import useSlider from '@/hooks/useSlider';
 
 import { useGetAllCategories } from '../../../hooks/query/Category/useCategory';
-import Slider from '../../ui/Slider/Slider';
 
 import CategoryList from './CategoryList';
 

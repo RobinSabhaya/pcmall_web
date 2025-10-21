@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import BreadCrumb from '@/components/ui/BreadCrumb/BreadCrumb';
-import Button from '@/components/ui/Button/Button';
+import BreadCrumb from '@/components/ui/Common/BreadCrumb/BreadCrumb';
+import Button from '@/components/ui/Common/Button/Button';
 
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
 import CartItem from '../CartItem/CartItem';

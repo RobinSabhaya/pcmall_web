@@ -1,30 +1,20 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import Link from 'next/link';
 
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
-import { UserIcon } from '../../Dropdown';
-import UserAccountDropdown, {
-  DEFAULT_MENU_ITEMS,
-} from '../../Dropdown/Dropdown';
-import Input from '../../Input/Input';
+import { UserIcon } from '../../Common/Dropdown';
+import UserAccountDropdown from '../../Common/Dropdown/Dropdown';
+import { DEFAULT_MENU_ITEMS } from '../../Common/Dropdown/utils';
+import Input from '../../Common/Input/Input';
 import TopBanner from '../Banner/TopBanner/TopBanner';
 
 import type { NavbarProps } from './Navbar.type';
+import { NAV_ITEMS } from './utils';
 
 export default function Navbar({ className = '' }: NavbarProps) {
-  const NAV_ITEMS = useMemo(
-    () => [
-      { label: 'Home', href: '/' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'About', href: '/about' },
-      { label: 'Sign Up', href: '/auth/sign-up' },
-    ],
-    []
-  );
-
   // Tanstack query
   const { data } = useGetAllCart();
   const items = data?.items?.results;
@@ -103,7 +93,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
                 {/* Wishlist Icon  */}
                 <Link
                   className="p-2.5 hover:bg-red-50 rounded-xl transition-all duration-200 hover:scale-110 group"
-                  href="/"
+                  href="/wishlist"
                 >
                   <svg
                     className="w-5 h-5 text-gray-600 group-hover:text-red-500 transition-colors"
@@ -315,6 +305,13 @@ export default function Navbar({ className = '' }: NavbarProps) {
           <UserAccountDropdown
             menuItems={DEFAULT_MENU_ITEMS}
             isOpen={isDropdownOpen}
+            onClose={() => {
+              if (isDropdownOpen) {
+                setIsDropdownOpen(true);
+              } else {
+                setIsDropdownOpen(false);
+              }
+            }}
           />
         </div>
       </nav>

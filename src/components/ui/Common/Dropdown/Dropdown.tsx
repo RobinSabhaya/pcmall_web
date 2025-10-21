@@ -4,63 +4,20 @@ import { useEffect, useRef } from 'react';
 
 import Link from 'next/link';
 
-import type {
-  UserAccountDropdownProps,
-  UserAccountMenuItem,
-} from './Dropdown.type';
-import {
-  UserIcon,
-  OrderIcon,
-  CancelIcon,
-  ReviewIcon,
-  LogoutIcon,
-} from './DropdownIcons';
-
-export const DEFAULT_MENU_ITEMS: UserAccountMenuItem[] = [
-  {
-    id: 'account',
-    label: 'Manage My Account',
-    icon: UserIcon,
-    href: '/account',
-  },
-  {
-    id: 'orders',
-    label: 'My Order',
-    icon: OrderIcon,
-    href: '/orders',
-  },
-  {
-    id: 'cancellations',
-    label: 'My Cancellations',
-    icon: CancelIcon,
-    href: '/cancellations',
-  },
-  {
-    id: 'reviews',
-    label: 'My Reviews',
-    icon: ReviewIcon,
-    href: '/reviews',
-  },
-  {
-    id: 'logout',
-    label: 'Logout',
-    icon: LogoutIcon,
-    variant: 'danger' as const,
-    onClick: () => {
-      // Handle logout logic
-      //   console.log('Logout clicked');
-    },
-  },
-];
+import type { UserAccountDropdownProps } from './Dropdown.type';
 
 export default function UserAccountDropdown({
   className = '',
   isOpen,
   onClose,
-  menuItems = DEFAULT_MENU_ITEMS,
+  menuItems,
   ...props
 }: UserAccountDropdownProps) {
+  // state
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Tanstack query
+  // const {mutate : onLogout} = useLogout()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -94,7 +51,7 @@ export default function UserAccountDropdown({
       {...props}
     >
       <div className="py-2">
-        {menuItems.map(item => {
+        {menuItems?.map(item => {
           const Icon = item.icon;
           return (
             <Link
@@ -105,6 +62,13 @@ export default function UserAccountDropdown({
                   ? 'text-red-300 hover:bg-red-900/20'
                   : 'text-white hover:bg-white/10'
               }`}
+              onClick={() => {
+                if (item?.onClick && item.label == 'Logout') {
+                  // onLogout({
+                  //   refreshToken :
+                  // })
+                }
+              }}
             >
               <Icon className="w-5 h-5 flex-shrink-0" />
               <span className="text-sm font-medium">{item.label}</span>

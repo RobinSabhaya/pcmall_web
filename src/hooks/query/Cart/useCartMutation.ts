@@ -1,5 +1,7 @@
 import { queryClient } from '../../../lib/queryClient';
 import { axiosInstance } from '../../../services/api/axios';
+import { successMessage } from '../../useToaster';
+import { productQueryKeys } from '../Product';
 import { useBaseMutation } from '../useBaseMutation';
 import { useBaseQuery } from '../useBaseQuery';
 
@@ -19,7 +21,15 @@ export function useAddToCart() {
   return useBaseMutation<AddToCartResponse, Error, AddToCartRequest>({
     mutationFn: data => axiosInstance.post('/cart/add', data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: cartQueryKeys.cart.all });
+      const keysToInvalidate = [
+        cartQueryKeys.cart.all,
+        productQueryKeys.products.list(),
+      ];
+
+      keysToInvalidate.map(key =>
+        queryClient.invalidateQueries({ queryKey: key })
+      );
+      successMessage('Cart added successfully');
     },
   });
 }
@@ -38,6 +48,7 @@ export function useRemoveToCart() {
     mutationFn: data => axiosInstance.delete(`/cart/remove/${data.cartId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: cartQueryKeys.cart.all });
+      successMessage('Cart removed successfully');
     },
   });
 }

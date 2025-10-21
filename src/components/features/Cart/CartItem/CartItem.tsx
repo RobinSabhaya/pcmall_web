@@ -8,7 +8,6 @@ import {
   useRemoveToCart,
   useUpdateToCart,
 } from '../../../../hooks/query/Cart/useCartMutation';
-import { successMessage } from '../../../../hooks/useToaster';
 import { formatPrice } from '../../../../utils/custom';
 import QuantitySelector from '../QuantitySelector/QuantitySelector';
 
@@ -41,7 +40,6 @@ export default function CartItem({ item, setIsCartItemChange }: CartItemProps) {
     });
 
     setIsCartItemChange(() => quantity);
-    successMessage('Cart removed successfully');
   }
   return (
     <tr className="border-b border-gray-200">

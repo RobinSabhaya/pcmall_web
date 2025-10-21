@@ -11,7 +11,7 @@ import type {
 import { userQueryKeys } from './userQueryKey';
 
 // Mutations
-export function useUpdateAddress() {
+export function useUpdateUser() {
   return useBaseMutation<UpdateUserResponse, Error, UpdateUserRequest>({
     mutationFn: data => axiosInstance.put('/user/update', data),
     onSuccess: () => {

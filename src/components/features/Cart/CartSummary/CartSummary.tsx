@@ -4,7 +4,7 @@ import { memo } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import Button from '@/components/ui/Button/Button';
+import Button from '@/components/ui/Common/Button/Button';
 
 import type { CartSummaryProps } from './CartSummary.type';
 

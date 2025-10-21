@@ -4,13 +4,14 @@ import { useMemo } from 'react';
 
 import { useForm } from '@tanstack/react-form';
 
+import Input from '@/components/ui/Common/Input';
+import Select from '@/components/ui/Common/Select';
+
 import {
-  useUpdateAddress,
+  useUpdateUser,
   useUserDetail,
 } from '../../../../hooks/query/User/useUserMutations';
 import { billingFormSchema } from '../../../../validations/billingFormSchema';
-import Input from '../../../ui/Input/Input';
-import Select from '../../../ui/Select/Select';
 
 import type { BillingFormDetails, BillingFormProps } from './BillingForm.type';
 import { generateAddressFormat } from './utils';
@@ -20,7 +21,7 @@ export default function BillingForm({
   selectedAddress,
 }: BillingFormProps) {
   // Tanstack query
-  const { mutate: updateAddress } = useUpdateAddress();
+  const { mutate: updateAddress } = useUpdateUser();
   const { data: userDetailsData } = useUserDetail();
 
   const isUserPrimaryAddressExists = useMemo(

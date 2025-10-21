@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import { BreadCrumb } from '../BreadCrumb';
 import Button from '../Button/Button';
 
 import type { NotFoundProps } from './NotFound.type';
@@ -11,17 +10,8 @@ export default function NotFound({
   buttonText = 'Back to home page',
   buttonHref = '/',
 }: NotFoundProps) {
-  const breadcrumbItems = [
-    { label: 'Home', href: '/' },
-    { label: '404 Error', href: '/' },
-  ];
-
   return (
     <div className="min-h-screen bg-light-100 max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8">
-        <BreadCrumb breadCrumbList={breadcrumbItems} />
-      </div>
-
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="text-center max-w-md w-full">
           <h1 className="text-[72px] leading-[78px] font-bold text-dark-900 mb-6 font-raleway">

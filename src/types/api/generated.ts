@@ -2663,6 +2663,7 @@ export interface paths {
                     };
                     isInCart: boolean;
                   }[];
+                  isInWishlist: boolean;
                 }[];
                 page: number;
                 limit: number;
