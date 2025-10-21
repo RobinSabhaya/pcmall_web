@@ -1,2 +1,2 @@
-export * from './ComingSoon';
+export { default } from './ComingSoon';
 export * from './ComingSoon.type';

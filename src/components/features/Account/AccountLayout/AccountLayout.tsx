@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { UserProvider } from '../../../../contexts/User/UserContext';
 import { useUserDetail } from '../../../../hooks';
-import { BreadCrumb } from '../../../ui/Common/BreadCrumb';
+import { BreadCrumb } from '../../../ui/Common';
 import AccountSidebar from '../AccountSideBar/AccountSidebar';
 import ProfileForm from '../ProfileForm/ProfileForm';
 
@@ -14,7 +14,7 @@ export default function AccountLayout() {
   const [activeSection, setActiveSection] = useState('profile');
 
   const ActiveComponent =
-    COMPONENTS_MAP[activeSection as keyof typeof COMPONENTS_MAP] || ProfileForm;
+    COMPONENTS_MAP[activeSection as keyof typeof COMPONENTS_MAP] ?? ProfileForm;
 
   // Tanstack query
   const { data } = useUserDetail();

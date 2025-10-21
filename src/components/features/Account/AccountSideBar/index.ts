@@ -1,2 +1,2 @@
-export { default as AccountSidebar } from './AccountSidebar';
+export { default } from './AccountSidebar';
 export * from './AccountSidebar.type';

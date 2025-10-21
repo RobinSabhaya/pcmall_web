@@ -1,1 +1,1 @@
-export { default as AccountLayout } from './AccountLayout';
+export { default } from './AccountLayout';

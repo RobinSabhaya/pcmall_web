@@ -1,2 +1,2 @@
-export * from './NotFound';
+export { default } from './NotFound';
 export * from './NotFound.type';

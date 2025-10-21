@@ -1,2 +1,2 @@
-export * from './SocialProviders';
+export { default as SocialProviders } from './SocialProviders';
 export * from './SocialProvider.type';

@@ -1,2 +1,2 @@
-export { default as ProfileForm } from './ProfileForm';
+export { default } from './ProfileForm';
 export * from './ProfileForm.type';

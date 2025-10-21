@@ -1,2 +1,2 @@
-export * from './ProductGallery';
+export { default } from './ProductGallery';
 export * from './ProductGallery.type';

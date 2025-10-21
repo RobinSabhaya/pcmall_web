@@ -1,2 +1,2 @@
-export * from './FlashSale';
+export { default as FlashSale } from './FlashSale';
 export * from './FlashSale.type';

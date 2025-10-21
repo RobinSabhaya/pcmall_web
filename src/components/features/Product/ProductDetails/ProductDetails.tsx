@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-import { BreadCrumb } from '@/components/ui/Common/BreadCrumb';
+import { BreadCrumb } from '@/components/ui/Common';
 
 import { useAddToCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';

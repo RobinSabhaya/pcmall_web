@@ -1,5 +1,5 @@
 import WishlistSection from '../../Wishlist/WishlistSection';
-import { ProfileForm } from '../ProfileForm';
+import ProfileForm from '../ProfileForm/ProfileForm';
 
 export const COMPONENTS_MAP = {
   profile: ProfileForm,

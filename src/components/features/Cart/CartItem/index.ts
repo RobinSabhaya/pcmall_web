@@ -1,2 +1,2 @@
-export { default as CartItem } from './CartItem';
+export { default } from './CartItem';
 export * from './CartItem.type';

@@ -2,9 +2,8 @@
 
 import { useMemo, useState } from 'react';
 
-import { BreadCrumb } from '@/components/ui/Common/BreadCrumb';
-
 import { CheckoutProvider } from '../../../../contexts/Checkout/CheckoutContext';
+import { BreadCrumb } from '../../../ui/Common';
 import BillingForm from '../BillingForm/BillingForm';
 import OrderSummary from '../OrderSummary/OrderSummary';
 
