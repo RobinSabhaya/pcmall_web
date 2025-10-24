@@ -11,7 +11,13 @@ export default function AuthLayout({
       <section className="hidden lg:flex flex-col justify-between bg-dark-900 text-light-100 p-10">
         <div className="flex items-center">
           <div className="h-8 w-8 rounded-md bg-orange inline-flex items-center justify-center">
-            <Image src={Computer} alt="PCMall" width={20} height={20} />
+            <Image
+              src={Computer}
+              alt="PCMall"
+              width={20}
+              height={20}
+              priority
+            />
           </div>
         </div>
 

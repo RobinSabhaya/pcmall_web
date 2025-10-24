@@ -1417,6 +1417,7 @@ export interface paths {
           page: number;
           limit: number;
           sortBy?: string;
+          status?: string;
         };
         header?: never;
         path?: never;
@@ -1436,26 +1437,59 @@ export interface paths {
               message?: string;
               data: {
                 ordersData: {
-                  user: string;
-                  items: string[];
-                  shippingAddress: string;
-                  paymentId: string;
-                  subtotal: number;
-                  shippingCost: number;
-                  tax: number;
-                  totalAmount: number;
-                  /** @enum {string} */
-                  status:
-                    | 'SUCCESS'
-                    | 'PAID'
-                    | 'FAILED'
-                    | 'EXPIRED'
-                    | 'PENDING'
-                    | 'REFUND_SUCCESS'
-                    | 'REFUND_FAILED';
-                  shipping: string;
-                  metadata: string;
-                  _id: string;
+                  results: {
+                    user: string;
+                    items: {
+                      _id: string;
+                      name: string;
+                      product: string;
+                      images: string[];
+                      attributeCombination: object;
+                      createdAt: string;
+                      updatedAt: string;
+                      product_skus: {
+                        _id: string;
+                        barcode: string;
+                        discount: number;
+                        price: number;
+                        product: string;
+                        seller: string;
+                        skuCode: string;
+                        variant: string;
+                        createdAt: string;
+                        status: string;
+                        tax: number;
+                        updatedAt: string;
+                      };
+                      quantity: number;
+                      totalPrice: number;
+                      unitPrice: number;
+                    }[];
+                    shippingAddress: string;
+                    paymentId: string;
+                    subtotal: number;
+                    shippingCost: number;
+                    tax: number;
+                    totalAmount: number;
+                    /** @enum {string} */
+                    status:
+                      | 'SUCCESS'
+                      | 'PAID'
+                      | 'FAILED'
+                      | 'EXPIRED'
+                      | 'PENDING'
+                      | 'REFUND_SUCCESS'
+                      | 'REFUND_FAILED';
+                    shipping: string;
+                    metadata: string;
+                    _id: string;
+                    createdAt: string;
+                    updatedAt: string;
+                  }[];
+                  page: number;
+                  limit: number;
+                  total: number;
+                  totalPages: number;
                 };
               };
             };
