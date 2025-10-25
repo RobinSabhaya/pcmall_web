@@ -3,6 +3,7 @@ import { Inter, Raleway } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
 
+import { BASE_URL } from '../config';
 import ToasterProvider from '../lib/ToasterProvider';
 import { QueryProvider } from '../providers/queryProvider';
 
@@ -20,8 +21,15 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  title: 'PCMall',
-  description: 'PCmall is an e-commerce platform',
+  title: { default: 'PCMall', template: '%s | PCMall' },
+  description: 'PCMall is an e-commerce platform',
+  metadataBase: new URL(BASE_URL!),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
 };
 
 export default function RootLayout({
