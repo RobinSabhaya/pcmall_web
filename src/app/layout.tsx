@@ -30,6 +30,28 @@ export const metadata: Metadata = {
       'en-US': '/en-US',
     },
   },
+  openGraph: {
+    title: APP_NAME!,
+    description: APP_DESC,
+    url: BASE_URL!,
+    siteName: APP_NAME!,
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/opengraph-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: APP_NAME!,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: APP_NAME!,
+    description: APP_DESC,
+    images: ['/twitter-image.jpg'],
+  },
 };
 
 export default function RootLayout({
