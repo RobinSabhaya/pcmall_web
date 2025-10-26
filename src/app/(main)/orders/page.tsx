@@ -1,6 +1,13 @@
+import type { Metadata } from 'next';
+
 import { OrderList } from '@/components/features/Order';
 import PageWrapper from '@/components/ui/Common/PageWrapper/PageWrapper';
 import Title from '@/components/ui/Common/Title/Title';
+
+// SEO
+export const metadata: Metadata = {
+  title: 'Order',
+};
 
 export default function OrdersPage() {
   return (

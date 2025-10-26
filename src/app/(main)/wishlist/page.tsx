@@ -1,5 +1,12 @@
+import type { Metadata } from 'next';
+
 import WishlistSection from '../../../components/features/Wishlist/WishlistSection';
 import PageWrapper from '../../../components/ui/Common/PageWrapper';
+
+// SEO
+export const metadata: Metadata = {
+  title: 'Wishlist',
+};
 
 const WishlistPage = () => {
   return (

@@ -2,8 +2,6 @@ import Image from 'next/image';
 
 import type { Metadata } from 'next';
 
-import CategoryBrowser from '@/components/features/Category';
-import ProductSection from '@/components/features/Product/ProductSection/ProductSection';
 import PageWrapper from '@/components/ui/Common/PageWrapper';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
@@ -32,10 +30,10 @@ export default function Home() {
       </div>
 
       <PageWrapper className="lg:mx-22">
-        <ProductSection />
+        {/* <ProductSection /> */}
 
         {/* Category browser section */}
-        <CategoryBrowser />
+        {/* <CategoryBrowser /> */}
 
         {/* Banner image */}
         <div className="flex justify-center items-center my-4">

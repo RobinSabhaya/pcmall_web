@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
+
 import ProductDetails from '@/components/features/Product/ProductDetails/ProductDetails';
 
-interface PageProps {
-  id: number;
-}
+import type { PageProps } from './page.type';
+
+// SEO
+export const metadata: Metadata = {
+  title: 'Product',
+};
 
 export default async function ProductPage({
   params,
