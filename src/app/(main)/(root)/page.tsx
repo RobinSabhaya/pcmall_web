@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import type { Metadata } from 'next';
+
 import CategoryBrowser from '@/components/features/Category';
 import ProductSection from '@/components/features/Product/ProductSection/ProductSection';
 import PageWrapper from '@/components/ui/Common/PageWrapper';
@@ -10,6 +12,11 @@ import NewArrival from '../../../components/ui/NewArrival/NewArrival';
 import Sidebar from '../../../components/ui/Sidebar/Sidebar';
 import { SAMPLE_SLIDES } from '../../../components/ui/Swiper';
 import Swiper from '../../../components/ui/Swiper/Swiper';
+
+// SEO
+export const metadata: Metadata = {
+  title: 'Home',
+};
 
 export default function Home() {
   return (

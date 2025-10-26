@@ -84,6 +84,8 @@ export default function Swiper({
                   height={800}
                   width={800}
                   className="max-w-md h-auto object-contain"
+                  fetchPriority="high"
+                  priority
                 />
               </div>
             </div>

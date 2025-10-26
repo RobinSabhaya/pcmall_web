@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow: /private/
+Sitemap: https://pcmall-web.vercel.app/sitemap.xml
