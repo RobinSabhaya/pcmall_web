@@ -5,6 +5,8 @@ import type { Metadata } from 'next';
 import PageWrapper from '@/components/ui/Common/PageWrapper';
 import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
+import CategoryBrowser from '../../../components/features/Category';
+import ProductSection from '../../../components/features/Product/ProductSection';
 import Services from '../../../components/features/Services/Services';
 import NewArrival from '../../../components/ui/NewArrival/NewArrival';
 import Sidebar from '../../../components/ui/Sidebar/Sidebar';
@@ -14,6 +16,7 @@ import Swiper from '../../../components/ui/Swiper/Swiper';
 // SEO
 export const metadata: Metadata = {
   title: 'Home',
+  description: 'Home page',
 };
 
 export default function Home() {
@@ -30,10 +33,10 @@ export default function Home() {
       </div>
 
       <PageWrapper className="lg:mx-22">
-        {/* <ProductSection /> */}
+        <ProductSection />
 
         {/* Category browser section */}
-        {/* <CategoryBrowser /> */}
+        <CategoryBrowser />
 
         {/* Banner image */}
         <div className="flex justify-center items-center my-4">
