@@ -2,19 +2,12 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import type { Metadata } from 'next';
-
 import Filters from '@/components/features/Product/ProductFilter/Filters';
 import Sort from '@/components/features/Product/ProductFilter/Sort';
 
 import ProductList from '../../../components/features/Product/ProductList/ProductList';
 import ProductCardSkeleton from '../../../components/ui/Skeleton/Card/ProductCardSkeleton';
 import { useGetAllProducts } from '../../../hooks/query/Product/useProductMutations';
-
-// SEO
-export const metadata: Metadata = {
-  title: 'Product',
-};
 
 export default function ProductsPage() {
   // state
