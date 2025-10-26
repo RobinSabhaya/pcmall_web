@@ -1,10 +1,12 @@
 import type { MetadataRoute } from 'next';
 
+import { APP_NAME } from '../config';
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'PCMall',
-    short_name: 'PCMall',
-    description: 'PCMall',
+    name: APP_NAME!,
+    short_name: APP_NAME!,
+    description: APP_NAME!,
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',

@@ -1,14 +1,6 @@
-import type { Metadata } from 'next';
-
 import Footer from '@/components/ui/Footer/Footer';
 import Navbar from '@/components/ui/Header/Navbar/Navbar';
 import '../globals.css';
-
-// SEO
-export const metadata: Metadata = {
-  title: { default: 'PCMall', template: '%s | PCMall' },
-  description: 'PCMall is an e-commerce platform',
-};
 
 export default function RootLayout({
   children,

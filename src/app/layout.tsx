@@ -3,7 +3,7 @@ import { Inter, Raleway } from 'next/font/google';
 import type { Metadata } from 'next';
 import './globals.css';
 
-import { BASE_URL } from '../config';
+import { APP_DESC, APP_NAME, BASE_URL } from '../config';
 import ToasterProvider from '../lib/ToasterProvider';
 import { QueryProvider } from '../providers/queryProvider';
 
@@ -21,8 +21,8 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  title: { default: 'PCMall', template: '%s | PCMall' },
-  description: 'PCMall is an e-commerce platform',
+  title: { default: APP_NAME!, template: `%s | ${APP_NAME!}` },
+  description: APP_DESC,
   metadataBase: new URL(BASE_URL!),
   alternates: {
     canonical: '/',

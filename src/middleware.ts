@@ -17,5 +17,7 @@ export function middleware(request: NextRequest) {
 
 // Exclude
 export const config = {
-  matcher: ['/((?!_next|api|favicon.ico).*)'],
+  matcher: [
+    '/((?!_next|api|favicon\\.ico|icon\\.ico|apple-icon\\.ico|open-graph-image|twitter-image|robots\\.txt|sitemap\\.xml).*)',
+  ],
 };
