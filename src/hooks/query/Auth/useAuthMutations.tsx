@@ -30,6 +30,7 @@ export function useLogin() {
     mutationKey: queryKeys.auth.login,
     onSuccess: data => {
       successMessage(data.message ?? 'Login successful');
+      localStorage.setItem('t', data.data.tokens.access.token);
 
       setTimeout(() => {
         router.replace('/');

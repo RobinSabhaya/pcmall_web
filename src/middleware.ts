@@ -8,9 +8,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  if (!accessToken && !pathname.startsWith('/auth')) {
-    return NextResponse.redirect(new URL('/auth/sign-in', request.url));
-  }
+  // if (!accessToken && !pathname.startsWith('/auth')) {
+  //   return NextResponse.redirect(new URL('/auth/sign-in', request.url));
+  // }
 
   return NextResponse.next();
 }
