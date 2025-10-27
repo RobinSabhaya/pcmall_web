@@ -1,3 +1,5 @@
+import { APP_NAME } from '../../../../config';
+
 export default function Loader() {
   return (
     <>
@@ -25,7 +27,7 @@ export default function Loader() {
             {/* Loading Text */}
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-gray-800">
-                Loading PCMall
+                Loading ${APP_NAME ?? 'App Name'}
               </h3>
               <p className="text-sm text-gray-500">
                 Preparing your shopping experience...

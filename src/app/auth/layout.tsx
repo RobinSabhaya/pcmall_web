@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
 import Computer from '@/public/svg/icons/camera.svg';
+
+import { APP_NAME } from '../../config';
 export default function AuthLayout({
   children,
 }: {
@@ -13,7 +15,7 @@ export default function AuthLayout({
           <div className="h-8 w-8 rounded-md bg-orange inline-flex items-center justify-center">
             <Image
               src={Computer}
-              alt="PCMall"
+              alt={`${APP_NAME ?? 'App Name'}`}
               width={20}
               height={20}
               priority
@@ -35,7 +37,8 @@ export default function AuthLayout({
         </div>
 
         <p className="text-footnote text-light-400">
-          © {new Date().getFullYear()} PCMall. All rights reserved.
+          © {new Date().getFullYear()} ${APP_NAME ?? 'App Name'}. All rights
+          reserved.
         </p>
       </section>
 

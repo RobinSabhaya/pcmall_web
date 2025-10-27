@@ -2,13 +2,15 @@ import Image from 'next/image';
 
 import AboutImage from '@/public/images/about/about.png';
 
+import { APP_NAME } from '../../../../config';
+
 import type { OurStoryProps } from './OurStory.type';
 
 const defaultContent = {
   title: 'Our Story',
   descriptions: [
-    "Launched in 2015, PCMall is South Asia's premier online shopping marketplace with an active presence in Bangladesh. Supported by wide range of tailored marketing, data and service solutions, PCMall has 10,500 sellers and 300 brands and serves 3 millions customers across the region.",
-    'PCMall has more than 1 Million products to offer, growing at a very fast. PCMall offers a diverse assortment in categories ranging from consumer.',
+    `Launched in 2015, ${APP_NAME ?? 'App Name'} is South Asia's premier online shopping marketplace with an active presence in Bangladesh. Supported by wide range of tailored marketing, data and service solutions, ${APP_NAME ?? 'App Name'} has 10,500 sellers and 300 brands and serves 3 millions customers across the region.`,
+    `${APP_NAME ?? 'App Name'} has more than 1 Million products to offer, growing at a very fast. ${APP_NAME ?? 'App Name'} offers a diverse assortment in categories ranging from consumer.`,
   ],
 };
 
