@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { APP_NAME } from '../../../config';
+
 import { footerSections } from './utils';
 
 export default function Footer() {
@@ -9,7 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* PCMall Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">PCMall</h3>
+            <h3 className="text-xl font-bold mb-4">{APP_NAME ?? 'App Name'}</h3>
             <p className="mb-4">Subscribe</p>
             <p className="text-sm text-gray-400 mb-4">
               Get 10% off your first order
@@ -94,7 +96,8 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-5 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © Copyright PCMall {new Date().getFullYear()}. All right reserved
+            © Copyright ${APP_NAME ?? 'App Name'} {new Date().getFullYear()}.
+            All right reserved
           </p>
         </div>
       </div>
