@@ -41,7 +41,7 @@ export default function ProductCard({ product }: ProductCardProps) {
    * Handle redirect to product page
    */
   function handleRedirectToProduct() {
-    router.push(`/product/${product._id}`);
+    router.push(`/product/${product.slug}`);
   }
 
   return (

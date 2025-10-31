@@ -1,3 +1,3 @@
 export interface PageProps {
-  id: number;
+  slug: string;
 }
