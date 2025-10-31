@@ -63,6 +63,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${raleway.variable}`}>
+      {/* Google site verification*/}
+      <meta
+        name="google-site-verification"
+        content="QHJzsSbZo4DkEDMOi4Nrd8UYUwhiKEmHfp1Qn6tap14"
+      />
       <body>
         <ToasterProvider />
         <QueryProvider>{children}</QueryProvider>
