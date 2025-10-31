@@ -15,9 +15,9 @@ import StarRating from '../../../ui/StarRating/StarRating';
 import ProductGallery from '../ProductGallery/ProductGallery';
 
 interface ProductDetailsProps {
-  productId: number;
+  slug: string;
 }
-export default function ProductDetails({ productId }: ProductDetailsProps) {
+export default function ProductDetails({ slug }: ProductDetailsProps) {
   const [selectedImage, setSelectedImage] = useState<number>(0);
   const [selectedColor, setSelectedColor] = useState<number>(1);
   const [selectedSize, setSelectedSize] = useState<string>('');
@@ -25,7 +25,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
 
   // Tanstack query
   const { data, isLoading } = useGetAllProducts({
-    productId: String(productId),
+    slug: String(slug),
   });
   const { mutate: addToCart } = useAddToCart();
   const productList = data?.productData?.results;

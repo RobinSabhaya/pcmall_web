@@ -2622,6 +2622,7 @@ export interface paths {
           colors?: string[];
           prices?: Record<string, never>;
           productId?: string;
+          slug?: string;
         };
         header?: never;
         path?: never;
@@ -2650,6 +2651,8 @@ export interface paths {
                   approvalStatus: 'PENDING' | 'APPROVED' | 'REJECTED';
                   createdBy: string;
                   updatedBy: string;
+                  createdAt: string;
+                  updatedAt: string;
                   _id: string;
                   brand: {
                     _id: string;
