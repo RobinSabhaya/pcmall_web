@@ -15,7 +15,7 @@ export default function AuthLayout({
           <div className="h-8 w-8 rounded-md bg-orange inline-flex items-center justify-center">
             <Image
               src={Computer}
-              alt={`${APP_NAME ?? 'App Name'}`}
+              alt={APP_NAME ?? 'App Name'}
               width={20}
               height={20}
               priority
@@ -37,7 +37,7 @@ export default function AuthLayout({
         </div>
 
         <p className="text-footnote text-light-400">
-          © {new Date().getFullYear()} ${APP_NAME ?? 'App Name'}. All rights
+          © {new Date().getFullYear()} {APP_NAME ?? 'App Name'}. All rights
           reserved.
         </p>
       </section>

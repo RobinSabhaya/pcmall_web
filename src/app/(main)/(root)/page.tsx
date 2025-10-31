@@ -44,6 +44,7 @@ export default function Home() {
             src={musicBannerImage}
             alt="music_banner"
             className="aspect-auto border rounded-xl"
+            loading="lazy"
           />
         </div>
 
