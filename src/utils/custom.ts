@@ -15,3 +15,5 @@ export const capitalizeString = (str: string): string => {
 export const formatCategoryName = (categoryName: string) => {
   return capitalizeString(categoryName).replaceAll('-', ' ');
 };
+
+export const calculateCacheTime = (second: number) => second * 60 * 100;

@@ -72,8 +72,9 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
                 alt={productVariantData?.images[selectedImage] as string}
                 width={600}
                 height={600}
-                loading="eager"
                 className="w-full h-full object-cover"
+                fetchPriority="high"
+                priority
               />
             )}
           </div>

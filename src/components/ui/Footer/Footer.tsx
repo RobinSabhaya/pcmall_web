@@ -4,12 +4,14 @@ import { APP_NAME } from '../../../config';
 
 import { footerSections } from './utils';
 
-export default function Footer() {
+export default async function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-black text-white py-16 pb-5">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* PCMall Section */}
+          {/* footer Section */}
           <div>
             <h3 className="text-xl font-bold mb-4">{APP_NAME ?? 'App Name'}</h3>
             <p className="mb-4">Subscribe</p>
@@ -96,8 +98,8 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-5 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © Copyright ${APP_NAME ?? 'App Name'} {new Date().getFullYear()}.
-            All right reserved
+            © Copyright {APP_NAME ?? 'App Name'} {currentYear}. All right
+            reserved
           </p>
         </div>
       </div>

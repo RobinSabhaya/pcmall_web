@@ -114,7 +114,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               alt={product.title}
               width={200}
               height={200}
-              loading="eager"
+              fetchPriority="high"
               className="object-cover group-hover:scale-105 transition-transform"
             />
           )}
