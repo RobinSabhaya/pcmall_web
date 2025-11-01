@@ -66,7 +66,7 @@ export default function RootLayout({
       {/* Google site verification*/}
       <meta
         name="google-site-verification"
-        content="QHJzsSbZo4DkEDMOi4Nrd8UYUwhiKEmHfp1Qn6tap14"
+        content="Dk1IfMfclIzJmxj3ER1CqJnwtt7zkRX9upntn8NeGIk"
       />
       <body>
         <ToasterProvider />
