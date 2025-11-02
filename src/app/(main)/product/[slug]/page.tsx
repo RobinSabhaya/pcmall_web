@@ -12,7 +12,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { slug } = await params;
-  
+
   // fetch data
   const productData = await fetch(`${API_URL}product/all?slug=${slug}`).then(
     res => res.json()
