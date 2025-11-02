@@ -8,9 +8,11 @@ import type { PageProps } from './page.type';
 
 // SEO
 export async function generateMetadata(
-  { slug }: PageProps,
+  { params }: { params: Promise<PageProps> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const { slug } = await params;
+
   // fetch data
   const productData = await fetch(`${API_URL}product/all?slug=${slug}`).then(
     res => res.json()
@@ -21,8 +23,8 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
-    title: product[0].title ?? 'Product',
-    description: product[0].description ?? 'Product description',
+    title: product[0]?.title ?? 'Product',
+    description: product[0]?.description ?? 'Product description',
     openGraph: {
       images: ['/opengraph-image.jpg', ...previousImages],
     },
