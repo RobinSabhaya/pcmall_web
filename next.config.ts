@@ -2,7 +2,18 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [new URL('https://cdn.dummyjson.com/**')],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.dummyjson.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's3.filebase.com',
+        pathname: '/**',
+      },
+    ],
   },
 };
 

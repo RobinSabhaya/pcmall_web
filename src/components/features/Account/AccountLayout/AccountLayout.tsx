@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { UserProvider } from '../../../../contexts/User/UserContext';
 import { useUserDetail } from '../../../../hooks';
-import { BreadCrumb } from '../../../ui/Common';
+import { BreadCrumb, IOSLoader } from '../../../ui/Common';
 import AccountSidebar from '../AccountSideBar/AccountSidebar';
 import ProfileForm from '../ProfileForm/ProfileForm';
 
@@ -50,7 +50,7 @@ export default function AccountLayout() {
               </UserProvider>
             ) : (
               <div className="flex justify-center items-center w-full">
-                Loading...
+                <IOSLoader childClassName="!bg-dark-700" />
               </div>
             )}
           </div>

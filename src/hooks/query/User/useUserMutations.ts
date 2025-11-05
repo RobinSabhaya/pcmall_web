@@ -1,5 +1,6 @@
 import { queryClient } from '../../../lib/queryClient';
 import { axiosInstance } from '../../../services/api/axios';
+import { successMessage } from '../../useToaster';
 import { useBaseMutation } from '../useBaseMutation';
 import { useBaseQuery } from '../useBaseQuery';
 
@@ -14,7 +15,9 @@ import { userQueryKeys } from './userQueryKey';
 export function useUpdateUser() {
   return useBaseMutation<UpdateUserResponse, Error, UpdateUserRequest>({
     mutationFn: data => axiosInstance.put('/user/update', data),
-    onSuccess: () => {
+    onSuccess: ({ message }) => {
+      successMessage(message ?? 'User updated successfully');
+
       queryClient.invalidateQueries({ queryKey: userQueryKeys.users.details });
     },
   });

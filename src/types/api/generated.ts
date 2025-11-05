@@ -1622,6 +1622,7 @@ export interface paths {
             last_name?: string;
             gender?: string;
             language?: string;
+            profile_picture?: string;
           };
         };
       };
@@ -4788,14 +4789,41 @@ export interface paths {
         path?: never;
         cookie?: never;
       };
-      requestBody?: never;
+      requestBody: {
+        content: {
+          'application/json': {
+            productId: string;
+            rating: number;
+            message: string;
+            ratingId?: string;
+            images?: string[];
+          };
+        };
+      };
       responses: {
         /** @description Default Response */
         200: {
           headers: {
             [name: string]: unknown;
           };
-          content?: never;
+          content: {
+            'application/json': {
+              /** @default true */
+              success: boolean;
+              message?: string;
+              data: {
+                ratingData: {
+                  product: string;
+                  rating: number;
+                  user: string;
+                  ip: string;
+                  message: string;
+                  images: string[];
+                  _id: string;
+                };
+              };
+            };
+          };
         };
       };
     };
@@ -4972,6 +5000,8 @@ export interface paths {
                   message: string;
                   images: string[];
                   _id: string;
+                  createdAt: string;
+                  updatedAt: string;
                 }[];
                 page: number;
                 limit: number;
@@ -5099,12 +5129,14 @@ export interface paths {
               message?: string;
               data: {
                 ratingCount: {
-                  product: string;
-                  rating: number;
+                  avg_rating: number;
+                  five_star: number;
+                  four_star: number;
+                  one_star: number;
+                  rating_count: number;
+                  three_star: number;
+                  two_star: number;
                   user: string;
-                  ip: string;
-                  message: string;
-                  images: string[];
                   _id: string;
                 };
               };
@@ -5288,6 +5320,107 @@ export interface paths {
                     | 'REFUND_FAILED';
                   _id: string;
                 };
+              };
+            };
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+      };
+    };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/v1/file/generate-url': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** @description Generate URL  */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody: {
+        content: {
+          'application/json': {
+            fileName: string;
+          };
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default true */
+              success: boolean;
+              message?: string;
+              data: {
+                url: string;
               };
             };
           };

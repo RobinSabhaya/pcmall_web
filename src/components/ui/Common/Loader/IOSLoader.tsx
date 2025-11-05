@@ -3,24 +3,29 @@ import './IOSLoader.css';
 
 interface IOSLoaderProps {
   className?: string;
+  childClassName?: string;
   style?: CSSProperties;
 }
 
-export default function IOSLoader({ className, style }: IOSLoaderProps) {
+export default function IOSLoader({
+  className,
+  childClassName = '',
+  style,
+}: IOSLoaderProps) {
   return (
     <div className={`loader ${className}`} style={style}>
-      <div className="bar1" />
-      <div className="bar2" />
-      <div className="bar3" />
-      <div className="bar4" />
-      <div className="bar5" />
-      <div className="bar6" />
-      <div className="bar7" />
-      <div className="bar8" />
-      <div className="bar9" />
-      <div className="bar10" />
-      <div className="bar11" />
-      <div className="bar12" />
+      <div className={`bar1 ${childClassName}`} />
+      <div className={`bar2 ${childClassName}`} />
+      <div className={`bar3 ${childClassName}`} />
+      <div className={`bar4 ${childClassName}`} />
+      <div className={`bar5 ${childClassName}`} />
+      <div className={`bar6 ${childClassName}`} />
+      <div className={`bar7 ${childClassName}`} />
+      <div className={`bar8 ${childClassName}`} />
+      <div className={`bar9 ${childClassName}`} />
+      <div className={`bar10 ${childClassName}`} />
+      <div className={`bar11 ${childClassName}`} />
+      <div className={`bar12 ${childClassName}`} />
     </div>
   );
 }

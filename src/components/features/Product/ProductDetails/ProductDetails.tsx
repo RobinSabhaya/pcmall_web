@@ -12,6 +12,7 @@ import { calculateDiscount, formatPrice } from '../../../../utils/custom';
 import Button from '../../../ui/Common/Button/Button';
 import Loader from '../../../ui/Common/Loader/Loader';
 import StarRating from '../../../ui/StarRating/StarRating';
+import RatingsReview from '../../RatingsReview';
 import ProductGallery from '../ProductGallery/ProductGallery';
 
 interface ProductDetailsProps {
@@ -281,6 +282,7 @@ export default function ProductDetails({ slug }: ProductDetailsProps) {
             ))}
           </div> */}
         </div>
+        {product?._id && <RatingsReview productId={product._id} />}
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ import type { TextAreaProps } from './TextArea.type';
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ className = '', label, error, ...props }, ref) => {
     return (
-      <div className="space-y-1">
+      <div className="space-y-2">
         {label && (
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-black">
             {label}
           </label>
         )}
