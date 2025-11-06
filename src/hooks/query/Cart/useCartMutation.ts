@@ -1,3 +1,5 @@
+'use client';
+
 import { queryClient } from '../../../lib/queryClient';
 import { axiosInstance } from '../../../services/api/axios';
 import { successMessage } from '../../useToaster';
@@ -57,5 +59,6 @@ export function useGetAllCart() {
   return useBaseQuery<GetCartResponse>({
     queryKey: cartQueryKeys.cart.all,
     queryFn: () => axiosInstance.get(`/cart/all`),
+    enabled: false,
   });
 }
