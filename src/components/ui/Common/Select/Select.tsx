@@ -51,7 +51,7 @@ export default function Select({
           type="button"
           onClick={() => !disabled && setIsOpen(!isOpen)}
           disabled={disabled}
-          className={`w-full px-3 py-2 border rounded-md bg-gray-50 text-left focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent ${
+          className={`w-full px-4 py-2 border rounded-md bg-gray-50 text-left focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent ${
             error ? 'border-red-500' : 'border-gray-300'
           } ${
             disabled
@@ -63,7 +63,7 @@ export default function Select({
             {selectedOption?.label ?? placeholder}
           </span>
           <svg
-            className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-transform ${
+            className={`absolute right-[-1] mr-[3px] top-1/2 -translate-y-1/2 w-4 h-4 transition-transform ${
               isOpen ? 'rotate-180' : ''
             }`}
             fill="none"

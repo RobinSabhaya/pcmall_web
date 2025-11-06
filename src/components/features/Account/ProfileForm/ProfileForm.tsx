@@ -1,23 +1,29 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useForm } from '@tanstack/react-form';
+import axios from 'axios';
 
 import Button from '@/components/ui/Common/Button/Button';
 
 import { useUserContext } from '../../../../contexts/User/UserContext';
 import { useUpdateUser } from '../../../../hooks';
+import { useUploadFile } from '../../../../hooks/query/File/useFileMutations';
 import { editProfileSchema } from '../../../../validations/userSchema';
 import Input from '../../../ui/Common/Input/Input';
+import ProfilePicker from '../../../ui/Common/ProfilePicker/ProfilePicker';
 
-interface FormValue {
-  first_name?: string;
-  last_name?: string;
-  email?: string;
-}
+import type { FormValue } from './ProfileForm.type';
 
+// TODO: implement password change functionality
 export default function ProfileForm() {
+  // state
+  const [file, setFile] = useState<File>();
+
   // Tanstack query
   const { mutate: updateUserProfile } = useUpdateUser();
+  const { mutate: uploadFile, data: fileData } = useUploadFile();
   const data = useUserContext();
 
   // pre-fill form
@@ -28,6 +34,14 @@ export default function ProfileForm() {
   };
 
   async function onSubmit({ value }: { value: FormValue }) {
+    if (fileData) {
+      // Put the image in pre-signed URL
+      const data = await axios.put(fileData.data.url, file);
+
+      if (data.status === 200 && file) {
+        value['profile_picture'] = file.name;
+      }
+    }
     updateUserProfile(value);
   }
 
@@ -41,9 +55,23 @@ export default function ProfileForm() {
 
   return (
     <div className="max-w-4xl">
-      <h2 className="text-xl font-medium text-red-500 mb-8">
+      <h2 className="text-xl font-medium text-red-500 mb-3">
         Edit Your Profile
       </h2>
+
+      <div className="flex justify-center items-center w-full mb-8">
+        <ProfilePicker
+          name={defaultValues.first_name ?? 'User'}
+          currentImage={data?.user_profile?.profile_picture ?? null}
+          onImageChange={file => {
+            uploadFile({
+              fileName: file.name,
+            });
+
+            setFile(file);
+          }}
+        />
+      </div>
 
       <form
         onSubmit={e => {
@@ -126,7 +154,7 @@ export default function ProfileForm() {
         </div> */}
 
         <div className="flex justify-end gap-4 pt-6">
-          <Button type="button" variant="ghost" onClick={() => {}}>
+          <Button type="button" variant="ghost">
             Cancel
           </Button>
           <Button type="submit" variant="primary">
