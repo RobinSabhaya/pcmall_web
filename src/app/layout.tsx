@@ -23,9 +23,9 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  title: { default: APP_NAME!, template: `%s | ${APP_NAME!}` },
+  title: { default: `${APP_NAME}`, template: `%s | ${APP_NAME}` },
   description: APP_DESC,
-  metadataBase: new URL(BASE_URL!),
+  metadataBase: new URL(`${BASE_URL}`),
   alternates: {
     canonical: '/',
     languages: {
@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: APP_NAME!,
+    title: APP_NAME,
     description: APP_DESC,
-    url: BASE_URL!,
-    siteName: APP_NAME!,
+    url: BASE_URL,
+    siteName: APP_NAME,
     locale: 'en_US',
     type: 'website',
     images: [
@@ -44,15 +44,19 @@ export const metadata: Metadata = {
         url: '/opengraph-image.jpg',
         width: 1200,
         height: 630,
-        alt: APP_NAME!,
+        alt: APP_NAME,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: APP_NAME!,
+    title: APP_NAME,
     description: APP_DESC,
     images: ['/twitter-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
