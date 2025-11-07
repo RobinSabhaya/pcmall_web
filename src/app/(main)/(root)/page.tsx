@@ -12,11 +12,12 @@ import NewArrival from '../../../components/ui/NewArrival/NewArrival';
 import Sidebar from '../../../components/ui/Sidebar/Sidebar';
 import { SAMPLE_SLIDES } from '../../../components/ui/Swiper';
 import Swiper from '../../../components/ui/Swiper/Swiper';
+import { APP_NAME } from '../../../config';
 
 // SEO
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Home page',
+  description: `Shop online at ${APP_NAME}, India's trusted e-commerce platform. Explore a wide range of electronics, fashion, and home products at affordable prices with fast delivery and secure checkout.`,
 };
 
 export default function Home() {
