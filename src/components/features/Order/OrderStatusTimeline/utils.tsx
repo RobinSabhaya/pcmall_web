@@ -15,7 +15,7 @@ export const getStatusColor = (status: OrderStatus, completed: boolean) => {
     case 'delivered':
       return 'bg-radium';
     case 'cancelled':
-      return 'bg-red';
+      return 'bg-brand-primary';
     default:
       return 'bg-dark-500';
   }

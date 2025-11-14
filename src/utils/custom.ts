@@ -17,3 +17,6 @@ export const formatCategoryName = (categoryName: string) => {
 };
 
 export const calculateCacheTime = (second: number) => second * 60 * 100;
+
+export const generateNElemArr = (length: number) =>
+  Array.from({ length }, (_, i) => i);

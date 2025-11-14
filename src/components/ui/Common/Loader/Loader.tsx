@@ -11,7 +11,7 @@ export default function Loader() {
             <div className="relative mb-6">
               <div className="w-20 h-20 mx-auto">
                 <svg
-                  className="w-full h-full text-red-500 animate-bounce"
+                  className="w-full h-full text-brand-primary animate-bounce"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -20,8 +20,8 @@ export default function Loader() {
               </div>
 
               {/* Floating dots */}
-              <div className="absolute -top-2 -right-2 w-3 h-3 bg-red rounded-full animate-ping" />
-              <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+              <div className="absolute -top-2 -right-2 w-3 h-3 bg-brand-primary rounded-full animate-ping" />
+              <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-brand-primary rounded-full animate-pulse" />
             </div>
 
             {/* Loading Text */}
@@ -38,7 +38,7 @@ export default function Loader() {
                 {[0, 1, 2].map(i => (
                   <div
                     key={i}
-                    className="w-2 h-2 bg-red rounded-full animate-bounce"
+                    className="w-2 h-2 bg-brand-primary rounded-full animate-bounce"
                     style={{ animationDelay: `${i * 0.2}s` }}
                   />
                 ))}

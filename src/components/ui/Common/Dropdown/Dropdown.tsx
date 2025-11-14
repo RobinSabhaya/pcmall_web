@@ -59,7 +59,7 @@ export default function UserAccountDropdown({
               href={item.href ?? '#'}
               className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
                 item.variant === 'danger'
-                  ? 'text-red-300 hover:bg-red-900/20'
+                  ? 'text-brand-primary-hover hover:bg-brand-primary'
                   : 'text-white hover:bg-white/10'
               }`}
               onClick={() => {

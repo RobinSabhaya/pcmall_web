@@ -128,7 +128,7 @@ export default function OrderSummary() {
               value={method.id}
               checked={selectedPayment === method.id}
               onChange={e => onPaymentChange(e.target.value)}
-              className="w-4 h-4 text-red-500 border-gray-300 focus:ring-red-500"
+              className="w-4 h-4 text-brand-primary border-gray-300 focus:ring-brand-primary"
             />
             <span className="text-sm">{method.label}</span>
             {method.id === 'bank' && (

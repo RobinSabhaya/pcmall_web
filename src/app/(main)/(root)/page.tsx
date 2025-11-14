@@ -1,13 +1,11 @@
-import Image from 'next/image';
-
 import type { Metadata } from 'next';
 
 import PageWrapper from '@/components/ui/Common/PageWrapper';
-import musicBannerImage from '@/public/svg/banners/music_banner.svg';
 
 import CategoryBrowser from '../../../components/features/Category';
 import ProductSection from '../../../components/features/Product/ProductSection';
 import Services from '../../../components/features/Services/Services';
+import HorizontalLine from '../../../components/ui/Common/HorizontalLine';
 import NewArrival from '../../../components/ui/NewArrival/NewArrival';
 import Sidebar from '../../../components/ui/Sidebar/Sidebar';
 import { SAMPLE_SLIDES } from '../../../components/ui/Swiper';
@@ -23,38 +21,32 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <div className="flex justify-center items-center flex-col-reverse my-3 mx-6 lg:flex-row">
+      <div className="flex items-center lg:items-start flex-col-reverse my-4 lg:mx-18 mx-4 lg:flex-row">
         <div className="w-[20%] hidden lg:flex">
           <Sidebar />
         </div>
 
-        <div className="w-[70%]">
+        <div className="md:w-[75%] w-full">
           <Swiper slides={SAMPLE_SLIDES} />
         </div>
       </div>
 
-      <PageWrapper className="lg:mx-22">
+      <PageWrapper className="lg:mx-22 mx-4">
         <ProductSection />
+
+        <HorizontalLine className="mt-10" />
 
         {/* Category browser section */}
         <CategoryBrowser />
 
-        {/* Banner image */}
-        <div className="flex justify-center items-center my-4">
-          <Image
-            src={musicBannerImage}
-            alt="music_banner"
-            className="aspect-auto border rounded-xl"
-            loading="lazy"
-          />
-        </div>
+        <HorizontalLine className="mt-10" />
 
-        <div>
-          <NewArrival />
-        </div>
+        <NewArrival />
+
+        <HorizontalLine className="mt-10" />
 
         {/* services */}
-        <Services className="py-8" />
+        <Services className="py-16 my-5" />
       </PageWrapper>
     </>
   );

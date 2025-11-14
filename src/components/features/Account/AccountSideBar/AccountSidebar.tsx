@@ -34,7 +34,9 @@ export default function AccountSidebar({
       <button
         onClick={() => handleItemClick(item)}
         className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${
-          activeItem === item.id ? 'text-red-500 font-medium' : 'text-gray-700'
+          activeItem === item.id
+            ? 'text-brand-primary font-medium'
+            : 'text-gray-700'
         } ${level > 0 ? 'pl-8' : ''}`}
       >
         {item.label}

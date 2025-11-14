@@ -1,11 +1,12 @@
 import type { NewArrivalItem } from './NewArrival.type';
+const BASE_PATH = '/svg/new_arrival';
 
 export const newArrivalData: NewArrivalItem[] = [
   {
     id: '1',
     title: 'PlayStation 5',
     subtitle: 'Black and White version of the PS5 coming out on sale.',
-    image: '/images/products/ps5.jpg',
+    image: `${BASE_PATH}/playstation.svg`,
     link: '/products/playstation-5',
     size: 'large',
     theme: 'dark',
@@ -14,7 +15,7 @@ export const newArrivalData: NewArrivalItem[] = [
     id: '2',
     title: "Women's Collections",
     subtitle: 'Featured woman collections that give you another vibe.',
-    image: '/images/products/womens-collection.jpg',
+    image: `${BASE_PATH}/woman_hat.svg`,
     link: '/collections/womens',
     size: 'medium',
     theme: 'dark',
@@ -23,7 +24,7 @@ export const newArrivalData: NewArrivalItem[] = [
     id: '3',
     title: 'Speakers',
     subtitle: 'Amazon wireless speakers',
-    image: '/images/products/speakers.jpg',
+    image: `${BASE_PATH}/speaker.svg`,
     link: '/products/speakers',
     size: 'small',
     theme: 'dark',
@@ -32,7 +33,7 @@ export const newArrivalData: NewArrivalItem[] = [
     id: '4',
     title: 'Perfume',
     subtitle: 'GUCCI INTENSE OUD EDP',
-    image: '/images/products/perfume.jpg',
+    image: `${BASE_PATH}/perfume.svg`,
     link: '/products/perfume',
     size: 'small',
     theme: 'dark',

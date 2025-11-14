@@ -58,7 +58,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           className="p-2 bg-white rounded-full shadow-md hover:bg-gray-50"
         >
           {product.isInWishlist ? (
-            <CustomSVG fillColor="red" viewBox="0 0 24 24">
+            <CustomSVG fillColor="brand-primary" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

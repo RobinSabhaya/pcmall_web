@@ -10,13 +10,13 @@ export default function RatingSummary({ ratingCountData }: RatingSummaryProps) {
     <div className="bg-light-200 rounded-lg p-6">
       <div className="flex flex-col md:flex-row gap-6">
         <div className="text-center md:text-left">
-          <div className="text-4xl font-bold text-black">
+          <div className="text-4xl font-bold text-brand-secondary">
             {averageRating?.toFixed(1)}
           </div>
           <div className="flex items-center justify-center md:justify-start gap-1 mt-1">
             {averageRating && <StarRating rating={Math.round(averageRating)} />}
           </div>
-          <div className="text-black mt-1">
+          <div className="text-brand-secondary mt-1">
             {ratingCountData?.rating_count ?? 0} reviews
           </div>
         </div>
@@ -34,7 +34,9 @@ export default function RatingSummary({ ratingCountData }: RatingSummaryProps) {
                     style={{ width: `${percentage}%` }}
                   />
                 </div>
-                <span className="text-sm text-black w-8">{count}</span>
+                <span className="text-sm text-brand-secondary w-8">
+                  {count}
+                </span>
               </div>
             ))}
           </div>

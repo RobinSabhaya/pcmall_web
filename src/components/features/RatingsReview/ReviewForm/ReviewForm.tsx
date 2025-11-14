@@ -51,7 +51,9 @@ export default function ReviewForm({ productId, setShowForm }: ReviewFormProp) {
         }}
       >
         <div className="space-y-3">
-          <label className="text-sm font-medium text-black">Rating</label>
+          <label className="text-sm font-medium text-brand-secondary">
+            Rating
+          </label>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map(star => (
               <button

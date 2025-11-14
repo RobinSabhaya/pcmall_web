@@ -1,12 +1,6 @@
 export interface SlideData {
-  id: string;
-  title: string;
-  subtitle?: string;
-  description: string;
-  buttonText: string;
-  buttonLink: string;
   image: string;
-  backgroundColor?: string;
+  link?: string;
 }
 
 export interface SwiperProps {

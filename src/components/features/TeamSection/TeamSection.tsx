@@ -54,7 +54,7 @@ export default function TeamSection({
                 onClick={() => handleDotClick(index)}
                 className={`w-3 h-3 rounded-full transition-colors ${
                   selectItem === index + 1
-                    ? 'bg-red-500'
+                    ? 'bg-brand-primary'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
                 aria-label={`Go to page ${index + 1}`}

@@ -8,7 +8,7 @@ export default function Stats({ stats }: StatsProps) {
           key={index}
           className={`p-3 rounded-lg border text-center ${
             stat.variant === 'primary'
-              ? 'bg-red-500 text-white border-red-500'
+              ? 'bg-brand-primary text-white border-brand-primary'
               : 'bg-white border-gray-200'
           }`}
         >
@@ -20,7 +20,7 @@ export default function Stats({ stats }: StatsProps) {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 stat.variant === 'primary'
-                  ? 'bg-white text-red-500'
+                  ? 'bg-white text-brand-primary'
                   : 'bg-white'
               }`}
             >

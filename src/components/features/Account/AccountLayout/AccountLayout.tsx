@@ -30,7 +30,7 @@ export default function AccountLayout() {
             <div />
             <p className="text-sm text-gray-600">
               Welcome!{' '}
-              <span className="text-red-500 font-medium">
+              <span className="text-brand-primary font-medium">
                 {data?.userData.user_profile.first_name}
               </span>
             </p>

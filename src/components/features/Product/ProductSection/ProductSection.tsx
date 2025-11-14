@@ -44,8 +44,8 @@ export default function ProductSection() {
         />
       </div>
 
-      <FlashSales endDate={endDate} className="mx-6" />
-      <div className="flex justify-center items-center gap-4 mx-6 my-4 flex-wrap md:justify-start">
+      <FlashSales endDate={endDate} />
+      <div className="flex justify-center items-center gap-4 my-4 flex-wrap md:justify-start">
         {isLoading ? (
           <ProductCardSkeleton count={10} />
         ) : (
