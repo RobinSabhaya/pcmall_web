@@ -11,11 +11,13 @@ export default function UserAccountButton({
     <button
       onClick={onClick}
       className={`relative p-2 rounded-full transition-colors ${
-        isActive ? 'bg-red-500 text-white' : 'text-gray-700 hover:text-red-500'
+        isActive
+          ? 'bg-brand-primary text-white'
+          : 'text-gray-700 hover:text-brand-primary-hover'
       } ${className}`}
       aria-label="User account menu"
     >
-      <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+      <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
         <svg
           className="w-5 h-5 text-white"
           fill="none"

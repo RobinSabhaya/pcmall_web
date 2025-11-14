@@ -106,7 +106,7 @@ export default function ProductDetails({ slug }: ProductDetailsProps) {
                 className={`text-sm px-2 py-1 rounded ${
                   inStock
                     ? 'bg-green-100 text-green-800'
-                    : 'bg-red-100 text-red-800'
+                    : 'bg-brand-primary-hover text-brand-primary'
                 }`}
               >
                 {inStock ? 'In Stock' : 'Out of Stock'}
@@ -176,7 +176,7 @@ export default function ProductDetails({ slug }: ProductDetailsProps) {
                     // disabled={!size.available}
                     className={`px-4 py-2 border rounded-md text-sm font-medium ${
                       selectedSize === size
-                        ? 'border-red-500 bg-red-500 text-white'
+                        ? 'border-brand-primary bg-brand-primary text-white'
                         : 'border-gray-300 text-gray-700 hover:border-gray-400'
                     } ${'opacity-50'}`}
                   >

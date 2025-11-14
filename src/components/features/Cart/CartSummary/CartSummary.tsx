@@ -43,7 +43,7 @@ export default memo(function CartSummary({
 
       <Button
         onClick={onProceedToCheckout}
-        className="w-full bg-red-500 hover:bg-red-600 text-white"
+        className="w-full bg-brand-primary hover:bg-brand-primary-hover text-white"
         size="lg"
         disabled={!cartSummaryData?.total}
       >

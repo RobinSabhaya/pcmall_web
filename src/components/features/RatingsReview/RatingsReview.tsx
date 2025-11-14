@@ -59,7 +59,7 @@ export default function RatingsReview({ productId }: RatingsReviewProps) {
       {/* Sort Controls */}
       {reviewList && reviewList?.length > 0 && (
         <div className="flex items-center gap-4">
-          <span className="text-black">Sort by:</span>
+          <span className="text-brand-secondary">Sort by:</span>
           <Select
             options={sortByRating}
             value={sortBy}
@@ -76,7 +76,7 @@ export default function RatingsReview({ productId }: RatingsReviewProps) {
             <ReviewCard key={review._id} review={review} />
           ))
         ) : (
-          <div className="text-center py-8 text-black">
+          <div className="text-center py-8 text-brand-secondary">
             No reviews yet. Be the first to review!
           </div>
         )}

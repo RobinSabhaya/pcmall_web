@@ -6,12 +6,13 @@ import Link from 'next/link';
 
 import { APP_NAME } from '../../../../config';
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
-import { UserIcon } from '../../Common/Dropdown';
+import { PageWrapper } from '../../Common';
 import UserAccountDropdown from '../../Common/Dropdown/Dropdown';
 import { DEFAULT_MENU_ITEMS } from '../../Common/Dropdown/utils';
 import Input from '../../Common/Input/Input';
 import TopBanner from '../Banner/TopBanner/TopBanner';
 
+import { CartIcon, SearchIcon, UserIcon, WishlistIcon } from './Icons';
 import type { NavbarProps } from './Navbar.type';
 import { NAV_ITEMS } from './utils';
 
@@ -32,7 +33,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
       <nav
         className={`bg-white/95 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-50 shadow-sm transition-all duration-300 ${className}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <PageWrapper className="lg:mx-22 mx-4">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0 group">
@@ -74,67 +75,15 @@ export default function Navbar({ className = '' }: NavbarProps) {
                   }`}
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded-lg transition-colors duration-200">
-                  <svg
-                    className="w-5 h-5 text-gray-400 hover:text-blue-600 transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+                  <SearchIcon />
                 </button>
               </div>
 
               <div className="flex items-center space-x-1">
-                {/* Wishlist Icon  */}
-                <Link
-                  className="p-2.5 hover:bg-red-50 rounded-xl transition-all duration-200 hover:scale-110 group"
-                  href="/wishlist"
-                >
-                  <svg
-                    className="w-5 h-5 text-gray-600 group-hover:text-red-500 transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </Link>
+                <WishlistIcon />
 
-                {/* Cart Icon */}
-                <Link
-                  className="p-2.5 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-110 relative"
-                  href="/cart"
-                >
-                  <svg
-                    className="w-5 h-5 text-gray-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8"
-                    />
-                  </svg>
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {items?.length ?? 0}
-                  </span>
-                </Link>
+                <CartIcon count={items?.length ?? 0} />
 
-                {/* User Icon */}
                 <button
                   className="p-2.5 hover:bg-blue-50 rounded-xl transition-all duration-200 hover:scale-110"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -146,33 +95,6 @@ export default function Navbar({ className = '' }: NavbarProps) {
 
             {/* Mobile Icons & Menu */}
             <div className="md:hidden flex items-center space-x-2">
-              {/* Cart Icon */}
-              <Link
-                className="p-2 hover:bg-gray-100 rounded-xl transition-all duration-200"
-                href="/cart"
-              >
-                <svg
-                  className="w-5 h-5 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </Link>
-              {/*   User Icon */}
-              <button
-                className="p-2 hover:bg-blue-50 rounded-xl transition-all duration-200"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
-                <UserIcon />
-              </button>
-
               {/* Hamburger menu */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -239,61 +161,18 @@ export default function Navbar({ className = '' }: NavbarProps) {
                     className="w-full bg-white border-2 border-gray-200 px-4 py-3 pr-12 rounded-xl text-sm focus:outline-none focus:border-blue-400 focus:shadow-lg transition-all duration-300"
                   />
                   <button className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded-lg transition-colors duration-200">
-                    <svg
-                      className="w-5 h-5 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
+                    <SearchIcon />
                   </button>
                 </div>
 
                 <div className="flex justify-center space-x-4 mt-4">
-                  <button className="p-3 hover:bg-red-50 rounded-xl transition-all duration-200 hover:scale-110">
-                    <svg
-                      className="w-6 h-6 text-gray-600 hover:text-red-500 transition-colors"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                  </button>
-                  <button className="p-3 hover:bg-gray-100 rounded-xl transition-all duration-200 hover:scale-110 relative">
-                    <svg
-                      className="w-6 h-6 text-gray-600"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8"
-                      />
-                    </svg>
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      2
-                    </span>
-                  </button>
+                  <WishlistIcon />
+                  <CartIcon count={items?.length ?? 0} />
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </PageWrapper>
 
         {/* User dropdown */}
         <div

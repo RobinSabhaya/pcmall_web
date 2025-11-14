@@ -47,7 +47,7 @@ export default function CartItem({ item, setIsCartItemChange }: CartItemProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => onRemoveToCart()}
-            className="text-red-500 hover:text-red-700 text-sm"
+            className="text-brand-primary hover:text-brand-primary-hover text-sm"
           >
             ✕
           </button>

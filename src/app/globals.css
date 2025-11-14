@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -38,7 +38,12 @@ body {
   --color-green: #007d48;
   --color-red: #d33918;
   --color-orange: #d37918;
-  --color-radium : #00FF66;
+  --color-radium: #00ff66;
+
+  /* Custom colors */
+  --color-brand-primary: #db4444;
+  --color-brand-secondary: #000000;
+  --color-brand-primary-hover: #E07575;
 
   /* Heading sizes */
   --text-heading-1: 72px;

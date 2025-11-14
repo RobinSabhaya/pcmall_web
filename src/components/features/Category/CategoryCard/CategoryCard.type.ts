@@ -4,7 +4,7 @@ export interface Category {
   _id: string;
   categoryName: string;
   subCategory?: string[];
-  icon?: React.ReactNode;
+  icon?: string;
   href?: string;
   isActive?: boolean;
 }

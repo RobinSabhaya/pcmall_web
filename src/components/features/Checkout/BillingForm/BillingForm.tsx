@@ -123,7 +123,7 @@ export default function BillingForm({
       type="checkbox"
       checked={formData.saveInfo}
       onChange={e => handleChange('saveInfo', e.target.checked)}
-      className="w-4 h-4 text-red-500 border-gray-300 rounded focus:ring-red-500"
+      className="w-4 h-4 text-brand-primary border-gray-300 rounded focus:ring-red-500"
     />
     <span className="text-sm text-gray-700">
       Save this information for faster check-out next time

@@ -61,7 +61,7 @@ export default function ProfilePicker({
 
       <button
         onClick={() => fileInputRef.current?.click()}
-        className="absolute -bottom-1 -right-1 w-8 h-8 bg-red-500 hover:bg-red-600 rounded-full flex items-center justify-center shadow-lg transition-colors cursor-pointer"
+        className="absolute -bottom-1 -right-1 w-8 h-8 bg-brand-primary hover:bg-brand-primary-hover rounded-full flex items-center justify-center shadow-lg transition-colors cursor-pointer"
       >
         <svg
           className="w-4 h-4 text-white"

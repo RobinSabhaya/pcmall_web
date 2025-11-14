@@ -55,7 +55,7 @@ export default function ProfileForm() {
 
   return (
     <div className="max-w-4xl">
-      <h2 className="text-xl font-medium text-red-500 mb-3">
+      <h2 className="text-xl font-medium text-brand-primary mb-3">
         Edit Your Profile
       </h2>
 

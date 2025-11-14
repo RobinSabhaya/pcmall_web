@@ -8,7 +8,3 @@ export interface NewArrivalItem {
   size: 'large' | 'medium' | 'small';
   theme: 'dark' | 'light';
 }
-
-export interface NewArrivalProps {
-  className?: string;
-}

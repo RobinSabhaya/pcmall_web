@@ -4,11 +4,11 @@ export const footerSections: FooterSection[] = [
   {
     title: 'Support',
     links: [
-      { label: 'test address,', href: '#' },
-      { label: 'test address', href: '#' },
+      { label: 'address,', href: '#' },
+      { label: 'address', href: '#' },
       {
-        label: 'test_address@gmail.com',
-        href: 'mailto:test_address@gmail.com',
+        label: 'pcmall@gmail.com',
+        href: 'mailto:pcmall@gmail.com',
       },
       { label: '+1234567891', href: 'tel:+1234567891' },
     ],
@@ -17,10 +17,10 @@ export const footerSections: FooterSection[] = [
     title: 'Account',
     links: [
       { label: 'My Account', href: '/account' },
-      { label: 'Login / Register', href: '/auth' },
+      { label: 'Login / Register', href: '/auth/sign-in' },
       { label: 'Cart', href: '/cart' },
       { label: 'Wishlist', href: '/wishlist' },
-      { label: 'Shop', href: '/shop' },
+      { label: 'Shop', href: '/' },
     ],
   },
   {

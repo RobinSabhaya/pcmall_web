@@ -7,7 +7,7 @@ export const getStatusColor = (status: string) => {
     case 'processing':
       return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
     case 'cancelled':
-      return 'bg-red/10 text-red border-red/20';
+      return 'bg-brand-primary text-brand-primary border-brand-primary';
     default:
       return 'bg-light-300 text-dark-700 border-light-400';
   }

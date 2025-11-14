@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { formatCategoryName } from '../../../../utils/custom';
@@ -23,12 +24,22 @@ export default function CategoryCard({
               flex flex-col items-center justify-center p-6 border rounded-lg transition-all hover:shadow-md
               ${
                 category._id === selectItem
-                  ? 'bg-red-500 text-white border-red-500'
+                  ? 'bg-brand-primary text-white border-brand-primary'
                   : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'
               }
             `}
     >
-      <div className="mb-3 text-3xl">{category.icon && category.icon}</div>
+      <div className="mb-3 text-3xl">
+        {category.icon && (
+          <Image
+            src={category.icon}
+            alt={category.categoryName}
+            width={50}
+            height={50}
+          />
+        )}
+      </div>
+
       <span className="text-sm font-medium">
         {formatCategoryName(category.categoryName)}
       </span>

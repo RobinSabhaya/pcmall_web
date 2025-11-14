@@ -15,7 +15,9 @@ export default function ProductGallery({
             key={index}
             onClick={() => setSelectedImage(index)}
             className={`aspect-square bg-gray-100 rounded-lg overflow-hidden border-2 ${
-              selectedImage === index ? 'border-red-500' : 'border-transparent'
+              selectedImage === index
+                ? 'border-brand-primary'
+                : 'border-transparent'
             }`}
           >
             <Image

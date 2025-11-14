@@ -32,7 +32,7 @@ export default function OurStory({
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         {/* Content Section */}
         <div className="space-y-6">
-          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-8">
+          <h2 className="text-4xl lg:text-5xl font-bold text-brand-secondary mb-8">
             {title}
           </h2>
           <div className="space-y-6">
