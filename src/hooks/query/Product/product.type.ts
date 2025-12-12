@@ -6,6 +6,9 @@ export type GetProductsParams =
 export type GetProductsResponse =
   paths['/v1/product/all']['get']['responses']['200']['content']['application/json'];
 
+export type GetProductsResponsePaginated =
+  paths['/v1/product/all']['get']['responses']['200']['content']['application/json']['productData'];
+
 export type CreateProductRequest =
   paths['/v1/product/create-update']['post']['requestBody']['content']['application/json'];
 export type CreateProductResponse =

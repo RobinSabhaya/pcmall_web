@@ -1,3 +1,4 @@
+import type { ViewLayoutProp } from '../../../../app/(main)/product/product.type';
 import type { paths } from '../../../../types/api/generated';
 
 export type productType =
@@ -5,4 +6,7 @@ export type productType =
 
 export interface ProductCardProps {
   product: productType;
+  authenticated: boolean;
+  viewLayout?: ViewLayoutProp;
+  className?: string;
 }

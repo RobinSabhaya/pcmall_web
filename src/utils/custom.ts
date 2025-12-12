@@ -1,3 +1,7 @@
+import { APP_ROUTES } from './routes';
+
+const { account, orders } = APP_ROUTES;
+
 export const formatPrice = (
   price: number,
   fractionDigits: number = 2
@@ -20,3 +24,7 @@ export const calculateCacheTime = (second: number) => second * 60 * 100;
 
 export const generateNElemArr = (length: number) =>
   Array.from({ length }, (_, i) => i);
+
+export const shouldAuthenticatedRoutes = [account, orders].map(
+  route => `/${route}`
+);

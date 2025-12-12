@@ -1,14 +1,17 @@
 import axios from 'axios';
 
 import { API_URL } from '../../config/config';
+import { errorMessage } from '../../hooks/useToaster';
+// eslint-disable-next-line import/no-cycle
+import { authService } from '../auth/auth.service';
 
 // Create Axios instance
 const axiosInstance = axios.create({
-  baseURL: API_URL!,
+  baseURL: String(API_URL),
   headers: {
     'Content-Type': 'application/json',
   },
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 // Request Interceptor: Add access token dynamically
@@ -33,24 +36,36 @@ axiosInstance.interceptors.response.use(
     if (!error.response) {
       console.error('Network Error: ', error.message);
     } else {
+      const {
+        response: {
+          data: { message },
+        },
+      } = error;
       switch (error.response.status) {
         case 400:
-          console.error('Bad Request: ', error.response.data);
+          errorMessage(message);
           break;
-        case 401:
-          console.error('Unauthorized! Redirecting to login...');
+        case 401: {
+          // Refresh token silently
+          const res = await authService.refreshTokens();
+
+          if (!res?.success) {
+            errorMessage('Session expired');
+
+            setTimeout(async () => {
+              await axiosInstance.post('/auth/logout');
+            }, 2000);
+          }
           break;
-        case 403:
-          console.error('Forbidden: ', error.response.data);
-          break;
-        case 404:
-          console.error('Not Found: ', error.response.data);
-          break;
-        case 500:
-          console.error('Internal Server Error: ', error.response.data.message);
-          break;
+        }
+        // case 403:
+        //   break;
+        // case 404:
+        //   break;
+        // case 500:
+        // break;
         default:
-          console.error('Error: ', error.response.data);
+          break;
       }
     }
 

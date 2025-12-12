@@ -12,17 +12,12 @@ import {
   useLogin,
   useSignup,
 } from '../../../../hooks/query/Auth/useAuthMutations';
+import { Button } from '../../../ui/Common';
+import { Error } from '../../../ui/Common/Error';
 import Input from '../../../ui/Common/Input/Input';
 import SocialProviders from '../../../ui/SocialProvider/SocialProviders';
 
-import type { AuthFormProps } from './AuthForm.type';
-
-export interface FormValue {
-  email: string;
-  password: string;
-  first_name?: string;
-  confirm_password?: string;
-}
+import type { AuthFormProps, FormValue } from './AuthForm.type';
 
 export default function AuthForm({ mode }: AuthFormProps) {
   // state
@@ -123,6 +118,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
                   value={field.state.value}
                   onChange={e => field.handleChange(e.target.value)}
                 />
+                <Error field={field} />
               </div>
             )}
           </form.Field>
@@ -144,6 +140,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
                 value={field.state.value}
                 onChange={e => field.handleChange(e.target.value)}
               />
+              <Error field={field} />
             </div>
           )}
         </form.Field>
@@ -174,6 +171,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
                   {show ? 'Hide' : 'Show'}
                 </button>
               </div>
+              <Error field={field} />
             </div>
           )}
         </form.Field>
@@ -194,17 +192,18 @@ export default function AuthForm({ mode }: AuthFormProps) {
                     onChange={e => field.handleChange(e.target.value)}
                   />
                 </div>
+                <Error field={field} />
               </div>
             )}
           </form.Field>
         )}
 
-        <button
+        <Button
           type="submit"
           className="mt-2 w-full rounded-full bg-dark-900 px-6 py-3 text-body-medium text-light-100 hover:bg-dark-700 focus:outline-none focus:ring-2 focus:ring-dark-900/20"
         >
           {mode === 'sign-in' ? 'Sign In' : 'Sign Up'}
-        </button>
+        </Button>
 
         {mode === 'sign-up' && (
           <p className="text-center text-footnote text-dark-700">

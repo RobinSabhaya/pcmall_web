@@ -1,10 +1,13 @@
 import {
+  useInfiniteQuery,
   useQuery,
+  type UseInfiniteQueryOptions,
+  type UseInfiniteQueryResult,
   type UseQueryOptions,
   type UseQueryResult,
 } from '@tanstack/react-query';
 
-import type { ApiResponse, ApiError } from '@/types/api/api';
+import type { ApiError, ApiResponse } from '@/types/api/api';
 
 export function useBaseQuery<TData, TError = ApiError>(
   options: UseQueryOptions<ApiResponse<TData>, TError, TData>
@@ -12,5 +15,13 @@ export function useBaseQuery<TData, TError = ApiError>(
   return useQuery({
     ...options,
     select: data => data.data,
+  });
+}
+
+export function useBaseInfiniteQuery<TData, TError = ApiError>(
+  options: UseInfiniteQueryOptions<ApiResponse<TData>, TError, TData>
+): UseInfiniteQueryResult<TData, TError> {
+  return useInfiniteQuery({
+    ...options,
   });
 }

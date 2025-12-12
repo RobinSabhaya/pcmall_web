@@ -4,17 +4,25 @@ import { useState } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import type { GroupKey } from './Filter.type';
+import { Button } from '../../../ui/Common';
 import {
-  addQuery,
-  COLORS,
-  GENDERS,
-  getArrayParam,
-  PRICES,
-  SIZES,
-} from './utils';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '../../../ui/Common/Shadcn/dialog';
+import { ScrollArea } from '../../../ui/Common/Shadcn/scroll-area';
 
-export default function Filters() {
+import type { FilterProps, GroupKey } from './Filter.type';
+import { Group } from './Group';
+import { COLORS, GENDERS, getArrayParam, PRICES, SIZES } from './utils';
+
+export default function Filters({
+  isOpenFilter,
+  setIsOpenFilter,
+}: FilterProps) {
   const activeCounts = {
     gender: 10,
     size: 20,
@@ -33,182 +41,207 @@ export default function Filters() {
     color: true,
     price: true,
   });
+
+  const initialSelectFilter = {
+    gender: '',
+    size: '',
+    color: '',
+    price: '',
+  };
+  const [selectFilters, setSelectFilters] =
+    useState<Record<GroupKey, string>>(initialSelectFilter);
+
   const onToggle = (key: GroupKey, value: string) => {
-    const path = addQuery(key, value, searchParams, pathname);
-    router.push(path, { scroll: false });
+    setSelectFilters(() => ({ ...selectFilters, [key]: value }));
   };
 
   const clearAll = () => {
-    router.push(`${pathname}?category=${searchParams.get('category')}`, {
+    router.push(pathname, {
       scroll: false,
     });
   };
 
-  const Group = ({
-    title,
-    children,
-    k,
-  }: {
-    title: string;
-    children: import('react').ReactNode;
-    k: GroupKey;
-  }) => (
-    <div className="border-b border-light-300 py-4">
-      <button
-        className="flex w-full items-center justify-between text-body-medium text-dark-900"
-        onClick={() => setExpanded(s => ({ ...s, [k]: !s[k] }))}
-        aria-expanded={expanded[k]}
-        aria-controls={`${k}-section`}
-      >
-        <span>{title}</span>
-        <span className="text-caption text-dark-700">
-          {expanded[k] ? '−' : '+'}
-        </span>
-      </button>
-      <div
-        id={`${k}-section`}
-        className={`${expanded[k] ? 'mt-3 block' : 'hidden'}`}
-      >
-        {children}
-      </div>
-    </div>
-  );
+  const handleClose = () => setIsOpenFilter(false);
+
+  const onApplyFilter = () => {
+    const params = new URLSearchParams();
+
+    Object.keys(selectFilters).map(f => {
+      const filter = selectFilters[f as GroupKey];
+      if (filter) {
+        params.set(f, filter);
+      }
+    });
+
+    router.push(`?${params}`, { scroll: false });
+
+    // Cleanup
+    setIsOpenFilter(false);
+  };
 
   return (
     <>
-      <div className="mb-4 flex items-center justify-between md:hidden">
-        <button
-          className="rounded-md border border-light-300 px-3 py-2 text-body-medium"
-          aria-haspopup="dialog"
-        >
-          Filters
-        </button>
-        <button
-          className="text-caption text-dark-700 underline"
-          onClick={clearAll}
-        >
-          Clear all
-        </button>
-      </div>
+      <Dialog open={isOpenFilter} onOpenChange={handleClose}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="text-body-medium text-dark-900">
+              Filters
+            </DialogTitle>
+            <DialogDescription className="text-body-medium text-dark-900 justify-end">
+              {/* Clear all */}
+              <button
+                className="flex justify-self-end text-caption text-dark-700 underline cursor-pointer"
+                onClick={clearAll}
+              >
+                Clear all
+              </button>
+            </DialogDescription>
+          </DialogHeader>
 
-      <aside className="sticky top-20 hidden h-fit min-w-60 rounded-lg border border-light-300 bg-light-100 p-4 md:block">
-        <div className="mb-2 flex items-center justify-between">
-          <h3 className="text-body-medium text-dark-900">Filters</h3>
-          <button
-            className="text-caption text-dark-700 underline"
-            onClick={clearAll}
-          >
-            Clear all
-          </button>
-        </div>
+          <ScrollArea className="overflow-y-auto max-h-[60vh]">
+            {/* Gender */}
+            <Group
+              title={`Gender ${
+                activeCounts.gender ? `(${activeCounts.gender})` : ''
+              }`}
+              k="gender"
+              expanded={expanded}
+              setExpanded={setExpanded}
+            >
+              <ul className="space-y-2">
+                {GENDERS.map(g => {
+                  const checked =
+                    getArrayParam(searchParams, 'gender', g) ||
+                    selectFilters.gender === g;
+                  return (
+                    <li key={g} className="flex items-center gap-2">
+                      <input
+                        id={`gender-${g}`}
+                        type="checkbox"
+                        className="h-4 w-4 accent-dark-900 cursor-pointer"
+                        checked={checked}
+                        onChange={() => onToggle('gender' as GroupKey, g)}
+                      />
+                      <label
+                        htmlFor={`gender-${g}`}
+                        className="text-body text-dark-900"
+                      >
+                        {g[0]?.toUpperCase() + g.slice(1)}
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Group>
 
-        <Group
-          title={`Gender ${
-            activeCounts.gender ? `(${activeCounts.gender})` : ''
-          }`}
-          k="gender"
-        >
-          <ul className="space-y-2">
-            {GENDERS.map(g => {
-              const checked = getArrayParam(searchParams, g);
-              return (
-                <li key={g} className="flex items-center gap-2">
-                  <input
-                    id={`gender-${g}`}
-                    type="checkbox"
-                    className="h-4 w-4 accent-dark-900"
-                    checked={checked}
-                    onChange={() => onToggle('gender' as GroupKey, g)}
-                  />
-                  <label
-                    htmlFor={`gender-${g}`}
-                    className="text-body text-dark-900"
-                  >
-                    {g[0]?.toUpperCase() + g.slice(1)}
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        </Group>
+            {/* Size */}
+            <Group
+              title={`Size ${
+                activeCounts.size ? `(${activeCounts.size})` : ''
+              }`}
+              k="size"
+              expanded={expanded}
+              setExpanded={setExpanded}
+            >
+              <ul className="grid grid-cols-2 gap-2">
+                {SIZES.map(s => {
+                  const checked =
+                    getArrayParam(searchParams, 'size', s) ||
+                    selectFilters.size === s;
+                  return (
+                    <li key={s}>
+                      <label className="inline-flex items-center gap-2">
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4 accent-dark-900 cursor-pointer"
+                          checked={checked}
+                          onChange={() => onToggle('size', s)}
+                        />
+                        <span className="text-body">{s}</span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Group>
 
-        <Group
-          title={`Size ${activeCounts.size ? `(${activeCounts.size})` : ''}`}
-          k="size"
-        >
-          <ul className="grid grid-cols-5 gap-2">
-            {SIZES.map(s => {
-              const checked = getArrayParam(searchParams, s);
-              return (
-                <li key={s}>
-                  <label className="inline-flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      className="h-4 w-4 accent-dark-900"
-                      checked={checked}
-                      onChange={() => onToggle('size', s)}
-                    />
-                    <span className="text-body">{s}</span>
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        </Group>
+            {/* Color */}
+            <Group
+              title={`Color ${
+                activeCounts.color ? `(${activeCounts.color})` : ''
+              }`}
+              k="color"
+              expanded={expanded}
+              setExpanded={setExpanded}
+            >
+              <ul className="grid grid-cols-2 gap-2">
+                {COLORS.map(c => {
+                  const checked =
+                    getArrayParam(searchParams, 'color', c) ||
+                    selectFilters.color === c;
+                  return (
+                    <li key={c} className="flex items-center gap-2">
+                      <input
+                        id={`color-${c}`}
+                        type="checkbox"
+                        className="h-4 w-4 accent-dark-900 cursor-pointer"
+                        checked={checked}
+                        onChange={() => onToggle('color', c)}
+                      />
+                      <label
+                        htmlFor={`color-${c}`}
+                        className="text-body capitalize"
+                      >
+                        {c}
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Group>
 
-        <Group
-          title={`Color ${activeCounts.color ? `(${activeCounts.color})` : ''}`}
-          k="color"
-        >
-          <ul className="grid grid-cols-2 gap-2">
-            {COLORS.map(c => {
-              const checked = getArrayParam(searchParams, c);
-              return (
-                <li key={c} className="flex items-center gap-2">
-                  <input
-                    id={`color-${c}`}
-                    type="checkbox"
-                    className="h-4 w-4 accent-dark-900"
-                    checked={checked}
-                    onChange={() => onToggle('color', c)}
-                  />
-                  <label
-                    htmlFor={`color-${c}`}
-                    className="text-body capitalize"
-                  >
-                    {c}
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        </Group>
-
-        <Group
-          title={`Price ${activeCounts.price ? `(${activeCounts.price})` : ''}`}
-          k="price"
-        >
-          <ul className="space-y-2">
-            {PRICES.map(p => {
-              // const checked = getArrayParam(searchParams, p);
-              return (
-                <li key={p.id} className="flex items-center gap-2">
-                  <input
-                    id={`price-${p.id}`}
-                    type="checkbox"
-                    className="h-4 w-4 accent-dark-900"
-                    // checked={checked}
-                    onChange={() => onToggle('price', p.id)}
-                  />
-                  <label htmlFor={`price-${p.id}`} className="text-body">
-                    {p.label}
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        </Group>
-      </aside>
+            {/* Price */}
+            <Group
+              title={`Price ${
+                activeCounts.price ? `(${activeCounts.price})` : ''
+              }`}
+              k="price"
+              expanded={expanded}
+              setExpanded={setExpanded}
+            >
+              <ul className="space-y-2">
+                {PRICES.map(p => {
+                  const checked =
+                    getArrayParam(searchParams, 'price', p.id) ||
+                    selectFilters.price === p.id;
+                  return (
+                    <li key={p.id} className="flex items-center gap-2">
+                      <input
+                        id={`price-${p.id}`}
+                        type="checkbox"
+                        className="h-4 w-4 accent-dark-900 cursor-pointer"
+                        checked={checked}
+                        onChange={() => onToggle('price', p.id)}
+                      />
+                      <label htmlFor={`price-${p.id}`} className="text-body">
+                        {p.label}
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Group>
+          </ScrollArea>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={onApplyFilter}>
+              Apply
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -16,7 +16,7 @@ export default function Slider({
       <button
         onClick={prev}
         disabled={currentIndex === 0}
-        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       >
         <Image
           src="/svg/general/arrowLeft.svg"
@@ -29,7 +29,7 @@ export default function Slider({
       <button
         onClick={next}
         disabled={currentIndex >= maxIndex}
-        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       >
         <Image
           src="/svg/general/arrowRight.svg"

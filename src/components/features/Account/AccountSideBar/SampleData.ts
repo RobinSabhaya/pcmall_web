@@ -13,10 +13,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   {
     id: 'orders',
     label: 'My Orders',
-    children: [
-      { id: 'returns', label: 'My Returns' },
-      { id: 'cancellations', label: 'My Cancellations' },
-    ],
+    children: [{ id: 'returns', label: 'My Returns' }],
   },
   { id: 'wishlist', label: 'My WishList' },
 ];

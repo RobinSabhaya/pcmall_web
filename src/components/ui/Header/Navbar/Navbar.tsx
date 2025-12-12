@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState, type ChangeEvent } from 'react';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { APP_NAME } from '../../../../config';
 import { useGetAllCart } from '../../../../hooks/query/Cart/useCartMutation';
+import { useRecentSearches } from '../../../../hooks/useRecentSearches';
+import { APP_ROUTES } from '../../../../utils/routes';
 import { PageWrapper } from '../../Common';
 import UserAccountDropdown from '../../Common/Dropdown/Dropdown';
 import { DEFAULT_MENU_ITEMS } from '../../Common/Dropdown/utils';
@@ -14,9 +17,11 @@ import TopBanner from '../Banner/TopBanner/TopBanner';
 
 import { CartIcon, SearchIcon, UserIcon, WishlistIcon } from './Icons';
 import type { NavbarProps } from './Navbar.type';
+import RecentSearchDropdown from './RecentSearchDropdown';
 import { NAV_ITEMS } from './utils';
 
 export default function Navbar({ className = '' }: NavbarProps) {
+  const router = useRouter();
   // Tanstack query
   const { data } = useGetAllCart();
   const items = data?.items?.results;
@@ -24,7 +29,45 @@ export default function Navbar({ className = '' }: NavbarProps) {
   // state
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isOpenRecentSearchDropdown, setIsOpenRecentSearchDropdown] =
+    useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const params = new URLSearchParams();
+  const { addSearch } = useRecentSearches(searchQuery);
+
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const mobileSearchContainerRef = useRef<HTMLDivElement>(null);
+
+  const handleSearch = (query: string) => {
+    if (!query.trim()) {
+      router.push(`/${APP_ROUTES.product}`);
+      return;
+    }
+
+    addSearch(query.trim());
+
+    setIsOpenRecentSearchDropdown(false);
+
+    params.set('search', query);
+    router.push(`/product/?${params}`);
+  };
+
+  const handleSelectRecentSearch = (query: string) => {
+    setSearchQuery(query => query);
+    handleSearch(query);
+  };
+
+  const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    setSearchQuery(value);
+
+    if (value == '') {
+      return setIsOpenRecentSearchDropdown(false);
+    }
+
+    setIsOpenRecentSearchDropdown(true);
+  };
 
   return (
     <>
@@ -59,24 +102,34 @@ export default function Navbar({ className = '' }: NavbarProps) {
             {/* Desktop Search & Icons */}
             <div className="hidden md:flex items-center space-x-3">
               <div
-                className={`relative transition-all duration-300 ${
-                  isSearchFocused ? 'scale-105' : ''
-                }`}
+                ref={searchContainerRef}
+                className="relative transition-all duration-300 scale-105"
               >
                 <Input
                   type="text"
                   placeholder="Search products..."
-                  onFocus={() => setIsSearchFocused(true)}
-                  onBlur={() => setIsSearchFocused(false)}
-                  className={`bg-gray-50 border-2 px-4 py-2.5 pr-12 rounded-xl text-sm w-72 transition-all duration-300 focus:outline-none focus:bg-white ${
-                    isSearchFocused
-                      ? 'border-blue-400 shadow-lg shadow-blue-100'
-                      : 'border-transparent hover:border-gray-200'
-                  }`}
+                  value={searchQuery}
+                  onChange={onChangeSearch}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                      handleSearch(searchQuery);
+                    }
+                  }}
+                  onClick={() => setIsOpenRecentSearchDropdown(true)}
+                  className="bg-gray-50 border-2 px-4 py-2.5 pr-12 rounded-xl text-sm w-72 transition-all duration-300 focus:outline-none focus:bg-white border-blue-400"
                 />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+                <button
+                  onClick={() => handleSearch(searchQuery)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+                >
                   <SearchIcon />
                 </button>
+                <RecentSearchDropdown
+                  isOpen={isOpenRecentSearchDropdown}
+                  onSelect={query => handleSelectRecentSearch(query)}
+                  searchQuery={searchQuery}
+                  onClose={() => setIsOpenRecentSearchDropdown(false)}
+                />
               </div>
 
               <div className="flex items-center space-x-1">
@@ -154,15 +207,31 @@ export default function Navbar({ className = '' }: NavbarProps) {
 
               {/* Mobile search */}
               <div className="px-4 pb-4">
-                <div className="relative">
+                <div ref={mobileSearchContainerRef} className="relative">
                   <input
                     type="text"
                     placeholder="Search products..."
-                    className="w-full bg-white border-2 border-gray-200 px-4 py-3 pr-12 rounded-xl text-sm focus:outline-none focus:border-blue-400 focus:shadow-lg transition-all duration-300"
+                    value={searchQuery}
+                    onChange={onChangeSearch}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        handleSearch(searchQuery);
+                      }
+                    }}
+                    className="w-full bg-white border-2 px-4 py-3 pr-12 rounded-xl text-sm transition-all duration-300 focus:outline-none border-blue-400 shadow-lg shadow-blue-100"
                   />
-                  <button className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+                  <button
+                    onClick={() => handleSearch(searchQuery)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+                  >
                     <SearchIcon />
                   </button>
+                  <RecentSearchDropdown
+                    isOpen={isOpenRecentSearchDropdown}
+                    onSelect={query => handleSelectRecentSearch(query)}
+                    searchQuery={searchQuery}
+                    onClose={() => setIsOpenRecentSearchDropdown(false)}
+                  />
                 </div>
 
                 <div className="flex justify-center space-x-4 mt-4">
@@ -185,13 +254,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
           <UserAccountDropdown
             menuItems={DEFAULT_MENU_ITEMS}
             isOpen={isDropdownOpen}
-            onClose={() => {
-              if (isDropdownOpen) {
-                setIsDropdownOpen(true);
-              } else {
-                setIsDropdownOpen(false);
-              }
-            }}
+            onToggle={() => setIsDropdownOpen(!isDropdownOpen)}
           />
         </div>
       </nav>

@@ -16,3 +16,8 @@ export type UserDetailsRequest =
   paths['/v1/user/details']['get']['requestBody'];
 export type UserDetailsResponse =
   paths['/v1/user/details']['get']['responses']['200']['content']['application/json']['data'];
+
+export type DeleteAddressParams =
+  paths['/v1/user/address/delete']['delete']['parameters']['query'];
+export type DeleteAddressResponse =
+  paths['/v1/user/address/delete']['delete']['responses']['200']['content']['application/json'];

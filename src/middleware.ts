@@ -1,5 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
+import { shouldAuthenticatedRoutes } from './utils';
+
 export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get('t');
   const { pathname } = request.nextUrl;
@@ -8,9 +10,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // if (!accessToken && !pathname.startsWith('/auth')) {
-  //   return NextResponse.redirect(new URL('/auth/sign-in', request.url));
-  // }
+  if (!accessToken && shouldAuthenticatedRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL('/auth/sign-in', request.url));
+  }
 
   return NextResponse.next();
 }

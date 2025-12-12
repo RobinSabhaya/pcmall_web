@@ -2,22 +2,30 @@
 
 import { useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import {
   useGetAllRatingCount,
   useGetAllRatings,
 } from '../../../hooks/query/Rating/useRatingMutations';
+import { useAuth } from '../../../hooks/useAuth';
+import { APP_ROUTES } from '../../../utils/routes';
 import { Button, Select } from '../../ui/Common';
+import { Spinner } from '../../ui/Common/Shadcn/spinner';
 
 import type { RatingsReviewProps } from './RatingsReview.type';
 import RatingSummary from './RatingSummary/RatingSummary';
 import ReviewCard from './ReviewCard/ReviewCard';
 import ReviewForm from './ReviewForm/ReviewForm';
 import { sortByRating } from './utils';
+const { auth } = APP_ROUTES;
 
 export default function RatingsReview({ productId }: RatingsReviewProps) {
   // state
   const [showForm, setShowForm] = useState(false);
   const [sortBy, setSortBy] = useState<string>('newest');
+  const router = useRouter();
+  const { authenticated } = useAuth();
 
   // Tanstack query
   const { data: ratingData, isLoading } = useGetAllRatings({
@@ -30,7 +38,12 @@ export default function RatingsReview({ productId }: RatingsReviewProps) {
 
   const reviewList = ratingData?.results;
 
-  if (isLoading) return 'Loading.......';
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className="space-y-6">
@@ -47,7 +60,13 @@ export default function RatingsReview({ productId }: RatingsReviewProps) {
         <Button
           variant="primary"
           size="sm"
-          onClick={() => setShowForm(!showForm)}
+          onClick={async () => {
+            if (!authenticated) {
+              router.push(`/${auth}/${APP_ROUTES['sign-in']}`);
+            } else {
+              setShowForm(!showForm);
+            }
+          }}
         >
           {showForm ? 'Cancel' : 'Write Review'}
         </Button>

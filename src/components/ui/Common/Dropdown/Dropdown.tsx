@@ -1,42 +1,29 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import Link from 'next/link';
+
+import { useLogout } from '../../../../hooks';
+import { useAuth } from '../../../../hooks/useAuth';
+import { useOutSideClose } from '../../../../hooks/useCommon';
 
 import type { UserAccountDropdownProps } from './Dropdown.type';
 
 export default function UserAccountDropdown({
   className = '',
   isOpen,
-  onClose,
+  onToggle,
   menuItems,
   ...props
 }: UserAccountDropdownProps) {
   // state
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { data } = useAuth();
+  useOutSideClose({ ref: dropdownRef, onClose: onToggle });
 
   // Tanstack query
-  // const {mutate : onLogout} = useLogout()
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        if (onClose) onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, onClose]);
+  const { mutate: onLogout } = useLogout();
 
   if (!isOpen) return null;
 
@@ -64,9 +51,11 @@ export default function UserAccountDropdown({
               }`}
               onClick={() => {
                 if (item?.onClick && item.label == 'Logout') {
-                  // onLogout({
-                  //   refreshToken :
-                  // })
+                  onLogout({
+                    refreshToken: data?.rt,
+                  });
+                } else {
+                  onToggle?.();
                 }
               }}
             >
