@@ -1,1 +1,3 @@
-export const paymentQueryKeys = {} as const;
+export const paymentQueryKeys = {
+  details: ['details'],
+} as const;

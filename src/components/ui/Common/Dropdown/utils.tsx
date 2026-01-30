@@ -1,11 +1,5 @@
 import type { UserAccountMenuItem } from './Dropdown.type';
-import {
-  CancelIcon,
-  LogoutIcon,
-  OrderIcon,
-  ReviewIcon,
-  UserIcon,
-} from './DropdownIcons';
+import { LogoutIcon, OrderIcon, ReviewIcon, UserIcon } from './DropdownIcons';
 
 export const DEFAULT_MENU_ITEMS: UserAccountMenuItem[] = [
   {
@@ -19,12 +13,6 @@ export const DEFAULT_MENU_ITEMS: UserAccountMenuItem[] = [
     label: 'My Order',
     icon: OrderIcon,
     href: '/orders',
-  },
-  {
-    id: 'cancellations',
-    label: 'My Cancellations',
-    icon: CancelIcon,
-    href: '/cancellations',
   },
   {
     id: 'reviews',

@@ -6,11 +6,11 @@ import Image from 'next/image';
 
 import { BreadCrumb } from '@/components/ui/Common';
 
+import Loading from '../../../../app/(main)/loading';
 import { useAddToCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';
 import { calculateDiscount, formatPrice } from '../../../../utils/custom';
 import Button from '../../../ui/Common/Button/Button';
-import Loader from '../../../ui/Common/Loader/Loader';
 import StarRating from '../../../ui/StarRating/StarRating';
 import RatingsReview from '../../RatingsReview';
 import ProductGallery from '../ProductGallery/ProductGallery';
@@ -41,13 +41,11 @@ export default function ProductDetails({ slug }: ProductDetailsProps) {
 
   const breadCrumbList = [
     { label: 'Home', href: '/' },
-    { label: 'product', href: '/product' },
+    { label: 'Product', href: '/product' },
     { label: product?.title as string, href: '/' },
   ];
 
   const inStock = true;
-
-  if (isLoading) return <Loader />;
 
   const handleAddToCart = () => {
     if (productVariantData)
@@ -56,6 +54,8 @@ export default function ProductDetails({ slug }: ProductDetailsProps) {
         quantity,
       });
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -219,19 +219,12 @@ export default function ProductDetails({ slug }: ProductDetailsProps) {
               // onClick={() => onWishlist(id)}
               className="p-3 border border-gray-300 rounded-md hover:bg-gray-50"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
+              <Image
+                src="/svg/general/like.svg"
+                alt="Like"
+                height={30}
+                width={30}
+              />
             </button>
           </div>
 

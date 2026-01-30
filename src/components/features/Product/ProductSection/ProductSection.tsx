@@ -1,25 +1,47 @@
 'use client';
 
+import { useState } from 'react';
+
 import Slider from '@/components/ui/Common/Slider';
 
-import { useGetAllProducts } from '../../../../hooks/query/Product/useProductMutations';
+import { useGetAllProducts } from '../../../../hooks';
 import useSlider from '../../../../hooks/useSlider';
 import Title from '../../../ui/Common/Title/Title';
 import FlashSales from '../../../ui/FlashSale/FlashSale';
-import ProductCardSkeleton from '../../../ui/Skeleton/Card/ProductCardSkeleton';
-import ProductList from '../ProductList/ProductList';
+import ProductCardSkeleton from '../../../ui/Skeleton/Card';
+import ProductList from '../ProductList';
 
 export default function ProductSection() {
+  // state
+  const [page, setPage] = useState<number>(1);
+
   // Tanstack query
-  const { data, isLoading } = useGetAllProducts();
+  const { data, isLoading } = useGetAllProducts({
+    page,
+  });
   const productList = data?.productData?.results;
 
-  const maxShowItems = 4;
+  const maxShowItems = 10;
 
-  const { currentIndex, maxIndex, next, prev } = useSlider({
-    itemsLength: 4,
+  const {
+    currentIndex,
+    maxIndex,
+    prev: prevPage,
+    next: nextPage,
+  } = useSlider({
+    itemsLength: data?.productData?.total ?? 194,
     maxShowItems,
   });
+
+  function prev() {
+    setPage(prevPage => prevPage - 1);
+    prevPage();
+  }
+
+  function next() {
+    setPage(prevPage => prevPage + 1);
+    nextPage();
+  }
 
   const endDate = new Date(
     Date.now() +
@@ -35,7 +57,7 @@ export default function ProductSection() {
       <div className="flex items-center justify-between">
         <Title title="All Products" />
 
-        {/* Category slider */}
+        {/* Product slider */}
         <Slider
           currentIndex={currentIndex}
           maxIndex={maxIndex}
@@ -48,9 +70,9 @@ export default function ProductSection() {
       <div className="flex justify-center items-center gap-4 my-4 flex-wrap md:justify-start">
         {isLoading ? (
           <ProductCardSkeleton count={10} />
-        ) : (
-          productList?.length && <ProductList products={productList} />
-        )}
+        ) : productList && productList?.length > 0 ? (
+          <ProductList products={productList} />
+        ) : null}
       </div>
     </>
   );

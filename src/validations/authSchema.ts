@@ -1,16 +1,15 @@
 import { z } from 'zod';
 
-export type SignupSchema = z.infer<typeof signupSchema>;
-export type LoginSchema = z.infer<typeof loginSchema>;
+import { emailSchema, passwordSchema } from './commonSchema';
 
 export const signupSchema = z.object({
-  first_name: z.string().nonempty(),
-  email: z.email().nonempty(),
-  password: z.string().min(8).nonempty(),
-  confirm_password: z.string().min(8).nonempty(),
+  first_name: z.string().nonempty('First name is required'),
+  email: emailSchema,
+  password: passwordSchema,
+  confirm_password: passwordSchema,
 });
 
 export const loginSchema = z.object({
-  email: z.email().nonempty(),
-  password: z.string().min(8).nonempty(),
+  email: emailSchema,
+  password: passwordSchema,
 });

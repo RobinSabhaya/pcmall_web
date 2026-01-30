@@ -23,7 +23,7 @@ const FilterTab = ({
           }}
           className={`${
             selectFilter === key
-              ? 'bg-green text-white shadow-sm'
+              ? 'text-white shadow-sm'
               : 'text-dark-700 hover:text-dark-900 hover:bg-light-100'
           } transition-all duration-200`}
         >

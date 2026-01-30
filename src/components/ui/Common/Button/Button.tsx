@@ -1,9 +1,10 @@
 import { forwardRef } from 'react';
 
-import IOSLoader from '../Loader/IOSLoader';
+import { Spinner } from '../Shadcn/spinner';
 
 import type { ButtonProps } from './Button.type';
 import { baseClasses, sizes, variants } from './utils';
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -18,11 +19,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     return (
       <button
-        className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`}
+        className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${className} disabled:cursor-not-allowed`}
         ref={ref}
         {...props}
       >
-        {loading ? <IOSLoader /> : children}
+        {loading ? <Spinner /> : children}
       </button>
     );
   }

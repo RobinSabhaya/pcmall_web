@@ -25,7 +25,11 @@ export default function OrderSummary() {
 
   // Tanstack query
   const { data } = useGetAllCart();
-  const { mutate: createCheckout, data: checkoutData } = useCreateCheckout();
+  const {
+    mutate: createCheckout,
+    data: checkoutData,
+    isPending,
+  } = useCreateCheckout();
 
   const items = data?.items?.results;
 
@@ -41,7 +45,10 @@ export default function OrderSummary() {
   const itemsPayload = items?.map(item => ({
     quantity: item?.quantity,
     product_name: item?.product?.title,
-    unit_amount: item?.product_variants?.product_skus[0]?.price as number,
+    unit_amount: formatPrice(
+      item?.product_variants?.product_skus[0]?.price as number,
+      2
+    ),
     productVariantId: item?.product_variants?._id,
   }));
 
@@ -179,7 +186,7 @@ export default function OrderSummary() {
         variant="primary"
         size="lg"
         onClick={onPlaceOrder}
-        // disabled={isLoading}
+        disabled={isPending}
         className="w-full"
       >
         Place Order

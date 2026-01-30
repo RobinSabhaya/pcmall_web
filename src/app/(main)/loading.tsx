@@ -1,5 +1,9 @@
-import Loader from '../../components/ui/Common/Loader/Loader';
+import { Spinner } from '../../components/ui/Common/Shadcn/spinner';
 
 export default function Loading() {
-  return <Loader />;
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <Spinner className="size-7" />
+    </div>
+  );
 }

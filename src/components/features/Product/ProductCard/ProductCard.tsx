@@ -9,12 +9,18 @@ import Button from '@/components/ui/Common/Button/Button';
 import { useAddToCart } from '../../../../hooks/query/Cart/useCartMutation';
 import { useCreateWishlist } from '../../../../hooks/query/Wishlist/useWishlistMutations';
 import { formatPrice } from '../../../../utils/custom';
+import { APP_ROUTES } from '../../../../utils/routes';
 import StarRating from '../../../ui/StarRating/StarRating';
 import CustomSVG from '../../../ui/SVG/CustomSVG';
 
 import type { ProductCardProps } from './ProductCard.type';
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  authenticated,
+  viewLayout = 'grid',
+  className = '',
+}: ProductCardProps) {
   const router = useRouter();
 
   const productVariantData = product?.product_variants[0];
@@ -25,6 +31,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { mutate: addWishlist } = useCreateWishlist();
 
   async function onAddToCart() {
+    // Check authentication
+    if (!authenticated) {
+      return router.push(`/${APP_ROUTES.auth}/${APP_ROUTES['sign-in']}`);
+    }
+
     addToCart({
       productVariantId: productVariantData?._id as string,
       quantity: 1,
@@ -32,6 +43,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   async function onAddWishlist() {
+    // Check authentication
+    if (!authenticated) {
+      return router.push(`/${APP_ROUTES.auth}/${APP_ROUTES['sign-in']}`);
+    }
+
     addWishlist({
       productId: product._id,
     });
@@ -45,7 +61,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <div className="flex justify-center items-center flex-col group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 h-1/4 gap-2 w-fit">
+    <div
+      className={`flex justify-center items-center flex-col group relative bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-4 h-1/4 gap-5 w-64 md:w-fit ${
+        viewLayout === 'list'
+          ? '!justify-start !items-start !w-full !flex-row'
+          : ''
+      } ${className}`}
+    >
       <div className="absolute top-2 left-2 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <p className="px-2 py-1 bg-radium rounded-md shadow-md text-white text-sm">
           New
@@ -55,10 +77,10 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute top-2 right-2 z-10 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
           onClick={onAddWishlist}
-          className="p-2 bg-white rounded-full shadow-md hover:bg-gray-50"
+          className="p-2 bg-white rounded-full shadow-md hover:bg-gray-50 flex items-center justify-center"
         >
           {product.isInWishlist ? (
-            <CustomSVG fillColor="brand-primary" viewBox="0 0 24 24">
+            <CustomSVG fillColor="red" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -78,28 +100,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </button>
         <Link
-          href="/product"
-          className="p-2 bg-white rounded-full shadow-md hover:bg-gray-50"
+          href={`/product/${product.slug}`}
+          className="p-2 bg-white rounded-full shadow-md hover:bg-gray-50 flex items-center justify-center"
         >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-            />
-          </svg>
+          <Image src="/svg/general/eye.svg" alt="Eye" height={20} width={20} />
         </Link>
       </div>
 
@@ -120,10 +124,17 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
       </button>
 
+      {/* Product details */}
       <div className="space-y-2">
-        <h3 className="font-medium text-gray-900 line-clamp-2">
+        <h3 className="font-medium text-gray-900 line-clamp-2 break-words break-all">
           {product.title ?? 'Product'}
         </h3>
+
+        {viewLayout === 'list' && (
+          <p className="font-normal text-black line-clamp-2">
+            {product.description}
+          </p>
+        )}
 
         <div className="flex items-center gap-1">
           {/* Star Rating */}

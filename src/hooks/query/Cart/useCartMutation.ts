@@ -59,6 +59,5 @@ export function useGetAllCart() {
   return useBaseQuery<GetCartResponse>({
     queryKey: cartQueryKeys.cart.all,
     queryFn: () => axiosInstance.get(`/cart/all`),
-    enabled: false,
   });
 }

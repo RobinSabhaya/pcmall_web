@@ -11,6 +11,7 @@ import { useUserContext } from '../../../../contexts/User/UserContext';
 import { useUpdateUser } from '../../../../hooks';
 import { useUploadFile } from '../../../../hooks/query/File/useFileMutations';
 import { editProfileSchema } from '../../../../validations/userSchema';
+import { Error } from '../../../ui/Common/Error';
 import Input from '../../../ui/Common/Input/Input';
 import ProfilePicker from '../../../ui/Common/ProfilePicker/ProfilePicker';
 
@@ -84,24 +85,30 @@ export default function ProfileForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <form.Field name="first_name">
             {field => (
-              <Input
-                label="First name"
-                type="text"
-                value={field.state.value}
-                onChange={e => field.handleChange(e.target.value)}
-                placeholder="Enter first name"
-              />
+              <div>
+                <Input
+                  label="First name"
+                  type="text"
+                  value={field.state.value}
+                  onChange={e => field.handleChange(e.target.value)}
+                  placeholder="Enter first name"
+                />
+                <Error field={field} />
+              </div>
             )}
           </form.Field>
           <form.Field name="last_name">
             {field => (
-              <Input
-                label="Last name"
-                type="text"
-                value={field.state.value}
-                onChange={e => field.handleChange(e.target.value)}
-                placeholder="Enter last name"
-              />
+              <div>
+                <Input
+                  label="Last name"
+                  type="text"
+                  value={field.state.value}
+                  onChange={e => field.handleChange(e.target.value)}
+                  placeholder="Enter last name"
+                />
+                <Error field={field} />
+              </div>
             )}
           </form.Field>
         </div>
@@ -109,16 +116,19 @@ export default function ProfileForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <form.Field name="email">
             {field => (
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                label="Email"
-                placeholder="Enter your email"
-                autoComplete="email"
-                value={field.state.value}
-                onChange={e => field.handleChange(e.target.value)}
-              />
+              <div>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                  value={field.state.value}
+                  onChange={e => field.handleChange(e.target.value)}
+                />
+                <Error field={field} />
+              </div>
             )}
           </form.Field>
         </div>

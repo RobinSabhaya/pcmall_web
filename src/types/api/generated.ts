@@ -2621,9 +2621,12 @@ export interface paths {
         query?: {
           categories?: string;
           colors?: string[];
-          prices?: Record<string, never>;
+          prices?: string;
           productId?: string;
           slug?: string;
+          page?: number;
+          search?: string;
+          sortBy?: string;
         };
         header?: never;
         path?: never;
@@ -5378,6 +5381,113 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/v1/payment/details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description Get product rating count */
+    get: {
+      parameters: {
+        query?: {
+          sessionId?: string;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description Default Response */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default true */
+              success: boolean;
+              message?: string;
+              data: {
+                paymentDetails: {
+                  _id: string;
+                  orderId: string;
+                  amount: number;
+                  provider: string;
+                  sessionId: string;
+                  currency: string;
+                  createdAt: string;
+                  status: string;
+                  updatedAt: string;
+                };
+              };
+            };
+          };
+        };
+        /** @description Default Response */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        401: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        404: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+        /** @description Default Response */
+        500: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'application/json': {
+              /** @default false */
+              success: boolean;
+              message: string;
+            };
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
     delete?: never;
     options?: never;
     head?: never;
